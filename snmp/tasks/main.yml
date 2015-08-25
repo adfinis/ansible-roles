@@ -39,3 +39,11 @@
     owner: 'root'
     group: 'root'
     mode: '0755'
+
+- name: Install snmpd extension scripts
+  copy:
+    src: 'usr/local/lib/snmpd/'
+    dest: '{{ snmpd_extension_scripts + "/" }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
