@@ -2,3 +2,7 @@
 
 # SNMP related packages
 snmpd_packages: [ 'lm-sensors' ]
+
+# String with ``snmpd`` log-related options, can be used to change log
+# verbosity for debugging.
+snmpd_logging_options: '-LScd'

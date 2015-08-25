@@ -14,3 +14,12 @@
   args:
     creates: '/etc/snmp/snmpd.conf.dpkg-divert'
   notify: [ 'Restart snmpd' ]
+
+- name: Configure snmpd daemon variables
+  template:
+    src: 'etc/default/snmpd.j2'
+    dest: '/etc/default/snmpd'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: [ 'Restart snmpd' ]
