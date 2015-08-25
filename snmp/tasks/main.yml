@@ -8,3 +8,9 @@
   with_flattened:
     - [ 'snmp', 'snmpd' ]
     - snmpd_packages
+
+- name: Divert default configuration file
+  command: dpkg-divert --quiet --local --divert /etc/snmp/snmpd.conf.dpkg-divert --rename /etc/snmp/snmpd.conf
+  args:
+    creates: '/etc/snmp/snmpd.conf.dpkg-divert'
+  notify: [ 'Restart snmpd' ]
