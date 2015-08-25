@@ -7,6 +7,9 @@ snmpd_packages: [ 'lm-sensors' ]
 # verbosity for debugging.
 snmpd_logging_options: '-LScd'
 
+# Path on the remote host where extension scripts are stored
+snmpd_extension_scripts: '/usr/local/lib/snmpd'
+
 # Create a local account
 snmpd_account_local_username: ''
 snmpd_account_local_password: ''
