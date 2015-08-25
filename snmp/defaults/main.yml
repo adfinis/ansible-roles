@@ -1,0 +1,4 @@
+---
+
+# SNMP related packages
+snmpd_packages: [ 'lm-sensors' ]

@@ -1,0 +1,10 @@
+---
+
+- name: Install snmp related packages
+  apt:
+    name: '{{ item }}'
+    state: 'latest'
+    install_recommends: false
+  with_flattened:
+    - [ 'snmp', 'snmpd' ]
+    - snmpd_packages
