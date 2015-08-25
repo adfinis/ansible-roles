@@ -47,3 +47,12 @@
     owner: 'root'
     group: 'root'
     mode: '0755'
+
+- name: Configure snmpd service
+  template:
+    src: 'etc/snmp/snmpd.conf.j2'
+    dest: '/etc/snmp/snmpd.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0600'
+  notify: [ 'Restart snmpd' ]
