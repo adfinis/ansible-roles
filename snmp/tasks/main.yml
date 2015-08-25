@@ -23,3 +23,11 @@
     group: 'root'
     mode: '0644'
   notify: [ 'Restart snmpd' ]
+
+- name: Configure local SNMP credentials
+  template:
+    src: 'etc/snmp/snmp.local.conf.j2'
+    dest: '/etc/snmp/snmp.local.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0600'
