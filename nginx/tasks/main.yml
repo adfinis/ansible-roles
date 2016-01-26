@@ -22,3 +22,12 @@
     group: 'root'
     mode: '0644'
   notify: [ 'Check nginx and reload' ]
+
+- name: Create custom directory
+  file:
+    path: '/etc/nginx/{{ item }}'
+    state: 'directory'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+  with_items: [ 'vhosts.d' ]
