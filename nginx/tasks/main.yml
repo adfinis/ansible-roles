@@ -1,0 +1,11 @@
+---
+
+- name: Install nginx-related packages
+  apt:
+    name: '{{ item }}'
+    state: 'latest'
+    install_recommends: false
+  when: item is defined and item
+  with_items:
+    - 'nginx'
+    - '{{ nginx_packages_extra | d() }}'
