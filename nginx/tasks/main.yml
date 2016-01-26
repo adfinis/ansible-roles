@@ -9,3 +9,7 @@
   with_items:
     - 'nginx'
     - '{{ nginx_packages_extra | d() }}'
+
+- name: Divert nginx.conf
+  command: dpkg-divert --quiet --local --divert /etc/nginx/nginx.conf.dpkg-divert
+           --rename /etc/nginx/nginx.conf creates=/etc/nginx/nginx.conf.dpkg-divert
