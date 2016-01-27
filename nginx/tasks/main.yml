@@ -31,3 +31,14 @@
     group: 'root'
     mode: '0755'
   with_items: [ 'vhosts.d' ]
+
+- name: Create vhosts
+  template:
+    src: 'etc/nginx/vhosts.d/{{ item.type }}.j2'
+    dest: '/etc/nginx/vhosts.d/{{ item.name }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  with_items:
+    - '{{ nginx_vhosts | d([]) }}'
+  notify: [ 'Check nginx and reload' ]
