@@ -1,0 +1,35 @@
+# {{ ansible_managed }}
+
+server {
+    listen 443 ssl default deferred;
+    server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
+
+    ssl_certificate {{ item.ssl_crt|d('/etc/ssl/certs/ssl-cert-snakeoil.pem') }};
+    ssl_certificate_key {{ item.ssl_key|d('/etc/ssl/private/ssl-cert-snakeoil.key') }};
+{% if item.ssl_dhparam|d(False) %}
+
+    ssl_dhparam {{ item.ssl_dhparam }};
+{% endif %}
+{% if item.ssl_stapling|d(False) %}
+
+    ssl_stapling on;
+    ssl_trusted_certificate {{ item.ssl_stapling }};
+{% endif %}
+{% if item.ssl_hsts|d(False) %}
+
+    add_header Strict-Transport-Security "max-age={{ item.ssl_hsts_age | d('31536000') }}; includeSubdomains;";
+{% endif %}
+
+    access_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_access.log;
+    error_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_error.log;
+
+    location / {
+        proxy_pass {{ item.proxy }};
+    }
+}
+
+server {
+    listen 80;
+    server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
+    return 301 https://$host$request_uri;
+}
