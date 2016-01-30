@@ -1,4 +1,5 @@
 # {{ ansible_managed }}
+# vhost for {{ item.name | d(ansible_hostname+'.'+ansible_domain) }}
 
 server {
     listen 443 ssl default deferred;
@@ -23,9 +24,11 @@ server {
     access_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_access.log;
     error_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_error.log;
 
-    location / {
-        proxy_pass {{ item.proxy }};
+{% for proxy in item.proxy %}
+    location {{ proxy.src | d("/") }} {
+        proxy_pass {{ proxy.dest }};
     }
+{% endfor %}
 }
 
 server {
