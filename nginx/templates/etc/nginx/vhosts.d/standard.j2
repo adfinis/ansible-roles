@@ -1,0 +1,67 @@
+# {{ ansible_managed }}
+# vhost for {{ item.name | d(ansible_hostname+'.'+ansible_domain) }}
+
+server {
+    listen 443 ssl default deferred;
+    server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
+
+    ssl_certificate {{ item.ssl_crt|d('/etc/ssl/certs/ssl-cert-snakeoil.pem') }};
+    ssl_certificate_key {{ item.ssl_key|d('/etc/ssl/private/ssl-cert-snakeoil.key') }};
+{% if item.ssl_dhparam|d(False) %}
+
+    ssl_dhparam {{ item.ssl_dhparam }};
+{% endif %}
+{% if item.ssl_stapling|d(False) %}
+
+    ssl_stapling on;
+    ssl_trusted_certificate {{ item.ssl_stapling }};
+{% endif %}
+{% if item.ssl_hsts|d(False) %}
+
+    add_header Strict-Transport-Security "max-age={{ item.ssl_hsts_age | d('31536000') }}; includeSubdomains;";
+{% endif %}
+
+    access_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_access.log;
+    error_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_error.log;
+
+    root {{ item.document_root|d('/var/www/html') }};
+    index index.php index.html index.htm;
+{% if item.php_enabled | d(False) %}
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        fastcgi_index index.php;
+        include fastcgi_params;
+    }
+{% endif %}
+
+    location ~ /\.ht {
+        deny all;
+    }
+{% if item.alias | d(False) %}
+{% for alias in item.alias %}
+
+    location {{ alias.src }} {
+        alias {{ alias.dest }};
+    }
+{% endfor %}
+{% endif %}
+{% if item.cgi_bin | d(False) %}
+{% for cgi_bin in item.cgi_bin %}
+
+    location {{ cgi_bin.location }} {
+        gzip off;
+        root {{ cgi_bin.root }};
+        fastcgi_pass unix:/var/run/fcgiwrap.socket;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME {{ cgi_bin.document_root }}$fastcgi_script_name;
+    }
+{% endfor %}
+{% endif %}
+}
+
+server {
+    listen 80;
+    server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
+    return 301 https://$host$request_uri;
+}
