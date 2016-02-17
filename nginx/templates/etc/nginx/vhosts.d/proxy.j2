@@ -2,7 +2,7 @@
 # vhost for {{ item.name | d(ansible_hostname+'.'+ansible_domain) }}
 
 server {
-    listen 443 ssl default deferred;
+    listen 443 ssl{% if item.default | d(False) %} default{% endif %};
     server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
 
     ssl_certificate {{ item.ssl_crt|d('/etc/ssl/certs/ssl-cert-snakeoil.pem') }};
@@ -32,7 +32,7 @@ server {
 }
 
 server {
-    listen 80;
+    listen 80{% if item.default | d(False) %} default{% endif %};
     server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
     return 301 https://$host$request_uri;
 }
