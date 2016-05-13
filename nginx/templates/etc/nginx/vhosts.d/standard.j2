@@ -25,7 +25,7 @@ server {
     error_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_error.log;
 
     root {{ item.document_root|d('/var/www/html') }};
-    index index.php index.html index.htm;
+    index {{ item.index|d("index.php index.html index.htm") }};
 {% if item.php_enabled | d(False) %}
 
     location ~ \.php$ {
@@ -64,5 +64,14 @@ server {
 server {
     listen 80{% if item.default | d(False) %} default{% endif %};
     server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
-    return 301 https://$host$request_uri;
+
+{% if item.acme|d(False) %}
+    location ~ /.well-known/acme-challenge/ {
+        root /var/www;
+    }
+
+{% endif %}
+    location / {
+        return 301 https://$host$request_uri;
+    }
 }
