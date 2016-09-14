@@ -2,3 +2,7 @@
 
 ntp_packages:
   - ntp
+
+ntp_service: ntpd
+
+ntp_cfg: /etc/ntp.conf

@@ -1,2 +1,14 @@
 ---
 
+- name: configure ntp
+  template:
+    src: etc/ntp.conf.j2
+    dest: '{{ ntp_cfg }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: net_conf_t
+    selevel: s0
+  notify: ['restart ntpd']
