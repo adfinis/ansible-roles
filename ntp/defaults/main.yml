@@ -1,6 +1,7 @@
 ---
 
 ntp_servers:
-  - 0.ntp.adfinis-sygroup.ch
   - 1.ntp.adfinis-sygroup.ch
   - 2.ntp.adfinis-sygroup.ch
+  - 3.ntp.adfinis-sygroup.ch
+  - 4.ntp.adfinis-sygroup.ch
