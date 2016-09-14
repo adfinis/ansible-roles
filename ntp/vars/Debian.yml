@@ -1,0 +1,4 @@
+---
+
+ntp_packages:
+  - ntp
