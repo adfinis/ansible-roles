@@ -1,2 +1,9 @@
 ---
 
+ssh_packages:
+  - openssh-clients
+  - openssh-server
+
+ssh_service: ssh
+
+ssh_daemon_cfg: /etc/ssh/sshd_config
