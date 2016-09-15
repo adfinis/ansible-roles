@@ -21,65 +21,66 @@ HostKey {{ hostkey }}
 UsePrivilegeSeparation yes
 
 # Lifetime and size of ephemeral version 1 server key
-KeyRegenerationInterval 3600
-ServerKeyBits 1024
+#KeyRegenerationInterval 1h
+#ServerKeyBits 1024
+
+# Ciphers and keying
+#RekeyLimit default none
+Ciphers {{ ssh_daemon_ciphers | join(',') }}
+KexAlgorithms {{ ssh_daemon_kex_algorithms | join(',') }}
+MACs {{ ssh_daemon_macs | join(',') }}
+
 
 # Logging
 SyslogFacility AUTH
 LogLevel INFO
 
 # Authentication:
-LoginGraceTime 120
+LoginGraceTime 2m
 PermitRootLogin yes
 StrictModes yes
+#MaxAuthTries 6
+#MaxSessions 10
 
-RSAAuthentication yes
+#RSAAuthentication yes
 PubkeyAuthentication yes
-#AuthorizedKeysFile	%h/.ssh/authorized_keys
 
+# The default is to check both .ssh/authorized_keys and .ssh/authorized_keys2
+# but this is overridden so installations will only check .ssh/authorized_keys
+AuthorizedKeysFile {{ ssh_daemon_authorized_keys | join(' ') }}
+
+#AuthorizedPrincipalsFile none
+
+#AuthorizedKeysCommand none
+#AuthorizedKeysCommandUser nobody
+
+# For this to work you will also need host keys in /etc/ssh/ssh_known_hosts
+#RhostsRSAAuthentication no
+# similar for protocol version 2
+#HostbasedAuthentication no
+# Change to yes if you don't trust ~/.ssh/known_hosts for
+# RhostsRSAAuthentication and HostbasedAuthentication
+#IgnoreUserKnownHosts no
 # Don't read the user's ~/.rhosts and ~/.shosts files
 IgnoreRhosts yes
-# For this to work you will also need host keys in /etc/ssh_known_hosts
-RhostsRSAAuthentication no
-# similar for protocol version 2
-HostbasedAuthentication no
-# Uncomment if you don't trust ~/.ssh/known_hosts for RhostsRSAAuthentication
-#IgnoreUserKnownHosts yes
 
-# To enable empty passwords, change to yes (NOT RECOMMENDED)
+# To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication yes
 PermitEmptyPasswords no
 
 # Change to yes to enable challenge-response passwords (beware issues with
 # some PAM modules and threads)
 ChallengeResponseAuthentication no
 
-# Change to no to disable tunnelled clear text passwords
-#PasswordAuthentication yes
-
 # Kerberos options
 #KerberosAuthentication no
-#KerberosGetAFSToken no
 #KerberosOrLocalPasswd yes
 #KerberosTicketCleanup yes
+#KerberosGetAFSToken no
 
 # GSSAPI options
 #GSSAPIAuthentication no
 #GSSAPICleanupCredentials yes
-
-X11Forwarding yes
-X11DisplayOffset 10
-PrintMotd no
-PrintLastLog yes
-TCPKeepAlive yes
-#UseLogin no
-
-#MaxStartups 10:30:60
-#Banner /etc/issue.net
-
-# Allow client to pass locale environment variables
-AcceptEnv LANG LC_*
-
-Subsystem sftp /usr/lib/openssh/sftp-server
 
 # Set this to 'yes' to enable PAM authentication, account processing,
 # and session processing. If this is enabled, PAM authentication will
@@ -91,4 +92,44 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 # PAM authentication, then enable this but set PasswordAuthentication
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
-UseDNS no
+
+AllowAgentForwarding no
+#AllowTcpForwarding yes
+#GatewayPorts no
+X11Forwarding {{ ssh_daemon_x11_forwarding }}
+#X11DisplayOffset 10
+#X11UseLocalhost yes
+#PermitTTY yes
+PrintMotd no # pam does that
+#PrintLastLog yes
+TCPKeepAlive yes
+#UseLogin no
+#UsePrivilegeSeparation sandbox
+#PermitUserEnvironment no
+#Compression delayed
+#ClientAliveInterval 0
+#ClientAliveCountMax 3
+#UseDNS no
+#PidFile /run/sshd.pid
+#MaxStartups 10:30:100
+#PermitTunnel no
+#ChrootDirectory none
+#VersionAddendum none
+
+# no default banner path
+#Banner none
+
+# Allow client to pass locale environment variables
+AcceptEnv {{ ssh_daemon_accept_env | join(' ') }}
+
+# override default of no subsystems
+Subsystem sftp {{ ssh_sftp_server }}
+
+Match Group sftp-only
+    #AuthorizedKeysFile /etc/ssh/authorized_keys/%u
+    ChrootDirectory %h
+    ForceCommand {{ ssh_sftp_server }} -d %u
+    AllowAgentForwarding no
+    AllowTcpForwarding no
+    X11Forwarding no
+    #PermitTTY no
