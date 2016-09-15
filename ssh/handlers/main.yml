@@ -1,5 +1,9 @@
 ---
 
+- name: check sshd config and restart
+  command: '{{ ssh_daemon_bin }} -t'
+  notify: [ 'restart sshd' ]
+
 - name: restart sshd
   service:
     name: '{{ ssh_service }}'

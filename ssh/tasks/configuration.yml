@@ -1,5 +1,17 @@
 ---
 
+- name: create ssh authorized keys directory
+  file:
+    path: /etc/ssh/authorized_keys
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+    seuser: system_u
+    serole: object_r
+    setype: sshd_key_t
+    selevel: s0
+
 - name: configure ssh
   template:
     src: etc/ssh/sshd_config.j2
@@ -11,4 +23,4 @@
     serole: object_r
     setype: etc_t
     selevel: s0
-  notify: ['restart sshd']
+  notify: [ 'check sshd config and restart' ]
