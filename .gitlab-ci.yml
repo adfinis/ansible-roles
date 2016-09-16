@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+
+stages:
+  - lint
+
+run-lint:
+  stage: lint
+  script:
+    - ansible-lint site.yml
+
+# vim: set ts=2 sw=2 tw=2 :
