@@ -1,5 +1,8 @@
 ---
 
 snmpd_packages:
-  - snmp
-  - snmpd
+  - net-snmp
+
+snmp_cfg: /etc/snmp/snmp.conf
+snmp_daemon_cfg: /etc/snmp/snmpd.conf
+snmp_daemon_env_cfg: /etc/sysconfig/snmpd

@@ -8,11 +8,15 @@
 
 - name: Configure snmpd daemon variables
   template:
-    src: 'etc/default/snmpd.j2'
-    dest: '/etc/default/snmpd'
-    owner: 'root'
-    group: 'root'
-    mode: '0644'
+    src: 'etc/default/snmpd.{{ ansible_os_family }}.j2'
+    dest: '{{ snmp_daemon_env_cfg }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
   notify: [ 'Restart snmpd' ]
 
 - name: Configure local SNMP credentials
