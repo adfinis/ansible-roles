@@ -33,6 +33,19 @@
     selevel: s0
   notify: [ 'Restart snmpd' ]
 
+- name: Configure snmp client connection to localhost
+  template:
+    src: etc/snmp/snmp.local.conf.j2
+    dest: '{{ snmp_local_cfg }}'
+    owner: root
+    group: root
+    mode: 0600
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  notify: [ 'Restart snmpd' ]
+
 - name: Create snmpd extension script directory
   file:
     path: '{{ snmp_extension_scripts }}'
