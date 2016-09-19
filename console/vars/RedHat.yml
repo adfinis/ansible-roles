@@ -1,0 +1,46 @@
+---
+
+console_packages:
+  - acl
+  - at
+  - bind-utils
+  - bzip2
+  - dmidecode
+  - elinks
+  - ftp
+  - git
+  - hdparm
+  - iotop
+  - iproute
+  - iptables
+  - iptraf
+  - less
+  - lftp
+  - lsof
+  - lvm2
+  - mailx
+  - make
+  - man
+  - mc
+  - mlocate
+  - mutt
+  - net-tools
+  - nmap
+  - pciutils
+  - policycoreutils-python
+  - postfix
+  - psmisc
+  - redhat-lsb-core
+  - rsync
+  - screen
+  - strace
+  - sysstat
+  - tar
+  - tcpdump
+  - telnet
+  - util-linux
+  - vim
+  - vim-enhanced
+  - wget
+  - yum-utils
+  - zsh
