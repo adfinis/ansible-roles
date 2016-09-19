@@ -1,10 +1,11 @@
 ---
 
 - name: Divert default configuration file
-  command: dpkg-divert --quiet --local --divert /etc/snmp/snmpd.conf.dpkg-divert --rename /etc/snmp/snmpd.conf
+  command: 'dpkg-divert --quiet --local --divert {{ snmp_daemon_cfg }}.dpkg-divert --rename {{ snmp_daemon_cfg }}'
   args:
-    creates: '/etc/snmp/snmpd.conf.dpkg-divert'
+    creates: '{{ snmp_daemon_cfg }}.dpkg-divert'
   notify: [ 'Restart snmpd' ]
+  when: 'ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"'
 
 - name: Configure snmpd daemon variables
   template:
@@ -19,35 +20,39 @@
     selevel: s0
   notify: [ 'Restart snmpd' ]
 
-- name: Configure local SNMP credentials
+- name: Configure snmpd service
   template:
-    src: 'etc/snmp/snmp.local.conf.j2'
-    dest: '/etc/snmp/snmp.local.conf'
-    owner: 'root'
-    group: 'root'
-    mode: '0600'
+    src: etc/snmp/snmpd.conf.j2
+    dest: '{{ snmp_daemon_cfg }}'
+    owner: root
+    group: root
+    mode: 0600
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  notify: [ 'Restart snmpd' ]
 
 - name: Create snmpd extension script directory
   file:
     path: '{{ snmpd_extension_scripts }}'
-    state: 'directory'
-    owner: 'root'
-    group: 'root'
-    mode: '0755'
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+    seuser: system_u
+    serole: object_r
+    setype: lib_t
+    selevel: s0
 
 - name: Install snmpd extension scripts
   copy:
-    src: 'usr/local/lib/snmpd/'
+    src: usr/local/lib/snmpd/
     dest: '{{ snmpd_extension_scripts + "/" }}'
-    owner: 'root'
-    group: 'root'
-    mode: '0755'
-
-- name: Configure snmpd service
-  template:
-    src: 'etc/snmp/snmpd.conf.j2'
-    dest: '/etc/snmp/snmpd.conf'
-    owner: 'root'
-    group: 'root'
-    mode: '0600'
-  notify: [ 'Restart snmpd' ]
+    owner: root
+    group: root
+    mode: 0755
+    seuser: system_u
+    serole: object_r
+    setype: lib_t
+    selevel: s0
