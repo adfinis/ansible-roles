@@ -6,6 +6,6 @@ stages:
 run-lint:
   stage: lint
   script:
-    - ansible-lint site.yml
+    - for dir in *; do test -d "$dir" && ansible-lint "$dir"; done
 
 # vim: set ts=2 sw=2 tw=2 :
