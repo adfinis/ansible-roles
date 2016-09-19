@@ -2,6 +2,7 @@
 
 ntp_packages:
   - ntp
+  - ntpdate
 
 ntp_service: ntp
 
