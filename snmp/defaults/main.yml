@@ -123,6 +123,21 @@ snmp_load_15min: '{{ (((snmp_load_base | float) *
 
 
 # ------------------------------------------
+#   SNMPv2 communities
+# ------------------------------------------
+
+# Define snmp read only communities
+snmp_rocommunity: []
+#  - passwd: ''
+#    source: ''
+
+# Define snmp read write communities
+snmp_rwcommunity: []
+#  - passwd: ''
+#    source: ''
+
+
+# ------------------------------------------
 #   SNMPv3 accounts
 # ------------------------------------------
 
