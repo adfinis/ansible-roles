@@ -1,0 +1,5 @@
+---
+
+snmpd_packages:
+  - snmp
+  - snmpd

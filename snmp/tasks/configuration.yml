@@ -1,0 +1,49 @@
+---
+
+- name: Divert default configuration file
+  command: dpkg-divert --quiet --local --divert /etc/snmp/snmpd.conf.dpkg-divert --rename /etc/snmp/snmpd.conf
+  args:
+    creates: '/etc/snmp/snmpd.conf.dpkg-divert'
+  notify: [ 'Restart snmpd' ]
+
+- name: Configure snmpd daemon variables
+  template:
+    src: 'etc/default/snmpd.j2'
+    dest: '/etc/default/snmpd'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: [ 'Restart snmpd' ]
+
+- name: Configure local SNMP credentials
+  template:
+    src: 'etc/snmp/snmp.local.conf.j2'
+    dest: '/etc/snmp/snmp.local.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0600'
+
+- name: Create snmpd extension script directory
+  file:
+    path: '{{ snmpd_extension_scripts }}'
+    state: 'directory'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+
+- name: Install snmpd extension scripts
+  copy:
+    src: 'usr/local/lib/snmpd/'
+    dest: '{{ snmpd_extension_scripts + "/" }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+
+- name: Configure snmpd service
+  template:
+    src: 'etc/snmp/snmpd.conf.j2'
+    dest: '/etc/snmp/snmpd.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0600'
+  notify: [ 'Restart snmpd' ]
