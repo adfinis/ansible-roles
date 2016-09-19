@@ -1,0 +1,14 @@
+# {{ ansible_managed }}
+
+# SNMP client configuration
+
+defVersion         v3
+
+defSecurityLevel   authPriv
+defAuthType        SHA
+defPrivType        AES
+{% if snmp_account_local_username is defined and snmp_account_local_username %}
+
+defSecurityName    {{ snmp_account_local_username }}
+defPassphrase      {{ snmp_account_local_password }}
+{% endif %}
