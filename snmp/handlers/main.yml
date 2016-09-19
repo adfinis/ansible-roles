@@ -2,6 +2,6 @@
 
 - name: Restart snmpd
   service:
-    name: 'snmpd'
+    name: '{{ snmp_daemon_service }}'
     enabled: True
-    state: 'restarted'
+    state: restarted

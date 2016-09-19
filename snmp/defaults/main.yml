@@ -1,14 +1,14 @@
 ---
 
 # SNMP related packages (e.g. lm-sensors
-snmpd_additional_packages: []
+snmp_additional_packages: []
 
 # String with ``snmpd`` log-related options, can be used to change log
 # verbosity for debugging. e.g. -LScd
-snmpd_logging_options: ''
+snmp_logging_options: ''
 
 # Path on the remote host where extension scripts are stored
-snmpd_extension_scripts: '/usr/local/lib/snmpd'
+snmp_extension_scripts: '/usr/local/lib/snmpd'
 
 
 # -------------------------------------------
@@ -18,7 +18,7 @@ snmpd_extension_scripts: '/usr/local/lib/snmpd'
 # List of addresses on which to listen for incoming connections. By default
 # ``snmpd`` listens on all interfaces and firewall / TCP wrappers are used to
 # limit what remote hosts can connect.
-snmpd_agent_address:
+snmp_agent_address:
   - 'udp:0.0.0.0:161'
   - 'udp6:[::]:161'
 
@@ -28,26 +28,26 @@ snmpd_agent_address:
 # ---------------------------------------------------
 
 # Organization name used in ``sysLocation`` and ``sysContact`` SNMP variables.
-snmpd_organization: '{{ ansible_domain.split(".") | first | capitalize }}'
+snmp_organization: '{{ ansible_domain.split(".") | first | capitalize }}'
 
 # String set as ``sysLocation`` SNMP variable.
-snmpd_sys_location: '{{ snmpd_organization + " " + snmpd_sys_location_name }}'
+snmp_sys_location: '{{ snmp_organization + " " + snmp_sys_location_name }}'
 
 # Name of the "virtual" location, appended to the organization name derived
 # from DNS domain name.
-snmpd_sys_location_name: 'Data Center'
+snmp_sys_location_name: 'Data Center'
 
 # Contact information for a device set as ``sysContact`` SNMP variable.
-snmpd_sys_contact: '{{ snmpd_sys_contact_name + " <" + snmpd_sys_contact_email + ">" }}'
+snmp_sys_contact: '{{ snmp_sys_contact_name + " <" + snmp_sys_contact_email + ">" }}'
 
 # Name of the contact set as ``sysContact`` variable.
-snmpd_sys_contact_name: '{{ snmpd_organization + " System Administrator" }}'
+snmp_sys_contact_name: '{{ snmp_organization + " System Administrator" }}'
 
 # E-mail address of the contact set as ``sysContact`` variable.
-snmpd_sys_contact_email: 'root@{{ ansible_domain }}'
+snmp_sys_contact_email: 'root@{{ ansible_domain }}'
 
 # Host FQDN set as the ``sysName`` SNMP variable.
-snmpd_sys_name: '{{ ansible_fqdn }}'
+snmp_sys_name: '{{ ansible_fqdn }}'
 
 
 # -------------------------------
@@ -55,24 +55,24 @@ snmpd_sys_name: '{{ ansible_fqdn }}'
 # -------------------------------
 
 # Enable or disable load average monitoring
-snmpd_load: true
+snmp_load: true
 
-# Name of the load average "profile" to use, see ``snmpd_load_percent_map`` and
-# ``snmpd_load_weight_map`` variables for list of profiles.
-snmpd_load_profile: 'default'
+# Name of the load average "profile" to use, see ``snmp_load_percent_map`` and
+# ``snmp_load_weight_map`` variables for list of profiles.
+snmp_load_profile: 'default'
 
 # Name of the profile used to define amount of available CPU power taken into
-# account for load average profile calculation. See ``snmpd_load_percent_map``
+# account for load average profile calculation. See ``snmp_load_percent_map``
 # variable for list of available profiles.
-snmpd_load_percent: '{{ snmpd_load_profile }}'
+snmp_load_percent: '{{ snmp_load_profile }}'
 
 # Name of the profile used to scale the load average profile calculation for
-# different time periods. See ``snmpd_load_percent_map`` variable for list of
+# different time periods. See ``snmp_load_percent_map`` variable for list of
 # available profiles.
-snmpd_load_weight: '{{ snmpd_load_profile }}'
+snmp_load_weight: '{{ snmp_load_profile }}'
 
 # Base value used to calculate load average profiles - number of vCPU cores.
-snmpd_load_base:  '{{ ansible_processor_vcpus }}'
+snmp_load_base:  '{{ ansible_processor_vcpus }}'
 
 # Dict with CPU percentage profiles.
 #
@@ -84,7 +84,7 @@ snmpd_load_base:  '{{ ansible_processor_vcpus }}'
 #
 # Values lower than 100% mean that alerts will be fired earlier, values higher
 # than 100% give processes more time to do the work before firing the alerts.
-snmpd_load_percent_map:
+snmp_load_percent_map:
   'default':
     - '90'
     - '90'
@@ -100,26 +100,26 @@ snmpd_load_percent_map:
 #
 # It's hard to explain, essentially it's another parameter which you can use to
 # tune the load average monitoring.
-snmpd_load_weight_map:
+snmp_load_weight_map:
   'default':
     - '1.5'
     - '1.7'
     - '1.8'
 
 # 1 minute load average value which will trigger a SNMP trap.
-snmpd_load_1min:  '{{ (((snmpd_load_base | float) *
-                        (snmpd_load_percent_map[snmpd_load_percent][0] | float) / 100) | float *
-                         snmpd_load_weight_map[snmpd_load_weight][0] | float) }}'
+snmp_load_1min:  '{{ (((snmp_load_base | float) *
+                        (snmp_load_percent_map[snmp_load_percent][0] | float) / 100) | float *
+                         snmp_load_weight_map[snmp_load_weight][0] | float) }}'
 
 # 5 minute load average value which will trigger a SNMP trap.
-snmpd_load_5min:  '{{ (((snmpd_load_base | float) *
-                        (snmpd_load_percent_map[snmpd_load_percent][1] | float) / 100) | float *
-                         snmpd_load_weight_map[snmpd_load_weight][1] | float) }}'
+snmp_load_5min:  '{{ (((snmp_load_base | float) *
+                        (snmp_load_percent_map[snmp_load_percent][1] | float) / 100) | float *
+                         snmp_load_weight_map[snmp_load_weight][1] | float) }}'
 
 # 15 minute load average value which will trigger a SNMP trap.
-snmpd_load_15min: '{{ (((snmpd_load_base | float) *
-                        (snmpd_load_percent_map[snmpd_load_percent][2] | float) / 100) | float *
-                         snmpd_load_weight_map[snmpd_load_weight][2] | float) }}'
+snmp_load_15min: '{{ (((snmp_load_base | float) *
+                        (snmp_load_percent_map[snmp_load_percent][2] | float) / 100) | float *
+                         snmp_load_weight_map[snmp_load_weight][2] | float) }}'
 
 
 # ------------------------------------------
@@ -127,11 +127,11 @@ snmpd_load_15min: '{{ (((snmpd_load_base | float) *
 # ------------------------------------------
 
 # Create a local account
-snmpd_account_local_username: ''
-snmpd_account_local_password: ''
+snmp_account_local_username: ''
+snmp_account_local_password: ''
 
 # Accounts list
-snmpd_accounts_list: []
+snmp_accounts_list: []
 
 #  - name: 'user1'
 #    authProtocol: '(MD5|SHA)'              # optional

@@ -35,7 +35,7 @@
 
 - name: Create snmpd extension script directory
   file:
-    path: '{{ snmpd_extension_scripts }}'
+    path: '{{ snmp_extension_scripts }}'
     state: directory
     owner: root
     group: root
@@ -48,7 +48,7 @@
 - name: Install snmpd extension scripts
   copy:
     src: usr/local/lib/snmpd/
-    dest: '{{ snmpd_extension_scripts + "/" }}'
+    dest: '{{ snmp_extension_scripts + "/" }}'
     owner: root
     group: root
     mode: 0755

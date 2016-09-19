@@ -4,10 +4,10 @@
   package:
     name: '{{ item }}'
     state: present
-  with_items: '{{ snmpd_packages }}'
+  with_items: '{{ snmp_packages }}'
 
 - name: Install additional snmp related packages
   package:
     name: '{{ item }}'
     state: present
-  with_items: '{{ snmpd_additional_packages }}'
+  with_items: '{{ snmp_additional_packages }}'
