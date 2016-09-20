@@ -5,7 +5,7 @@
   args:
     creates: '{{ snmp_daemon_cfg }}.dpkg-divert'
   notify: [ 'Restart snmpd' ]
-  when: 'ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"'
+  when: 'ansible_os_family == "Debian"
 
 - name: Configure snmpd daemon variables
   template:
