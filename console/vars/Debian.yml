@@ -53,3 +53,6 @@ console_packages:
   - vim
   - wget
   - zsh
+
+console_bashrc: /etc/bash.bashrc
+console_vimrc: /etc/vim/vimrc

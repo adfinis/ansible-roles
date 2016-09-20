@@ -1,2 +1,25 @@
 ---
 
+- name: configure bash
+  template:
+    src: etc/bashrc.j2
+    dest: '{{ console_bashrc }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+
+- name: configure vim
+  template:
+    src: etc/vimrc.j2
+    dest: '{{ console_vimrc }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0

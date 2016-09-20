@@ -44,3 +44,6 @@ console_packages:
   - wget
   - yum-utils
   - zsh
+
+console_bashrc: /etc/bashrc
+console_vimrc: /etc/vimrc
