@@ -1,0 +1,55 @@
+---
+
+console_packages:
+  - acl
+  - apticron
+  - aptitude
+  - bash-completion
+  - bsd-mailx
+  - bzip2
+  - ccze
+  - debian-goodies
+  - dnsutils
+  - dstat
+  - ftp
+  - git
+  - hdparm
+  - htop
+  - iotop
+  - iproute
+  - iptables
+  - iptraf
+  - ldap-utils
+  - less
+  - links
+  - lsof
+  - lvm2
+  - make
+  - mc
+  - mutt
+  - ngrep
+  - nmap
+  - nmon
+  - parted
+  - pciutils
+  - psmisc
+  - pwgen
+  - rsync
+  - rzip
+  - screen
+  - strace
+  - sudo
+  - swaks
+  - sysstat
+  - tar
+  - tcpdump
+  - telnet
+  - tmux
+  - tshark
+  - util-linux
+  - vim
+  - wget
+  - zsh
+
+console_bashrc: /etc/bash.bashrc
+console_vimrc: /etc/vim/vimrc
