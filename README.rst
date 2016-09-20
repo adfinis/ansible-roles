@@ -44,11 +44,17 @@ Roles
 =====
 Currently the repository features the following roles:
 
-+------+-------------------+
-| Role | Description       |
-+======+===================+
-| ntp  | manage ntp server |
-+------+-------------------+
++---------+-----------------------------------------------+
+| Role    | Description                                   |
++=========+===============================================+
+| console | manage adsy standard tooles, bashrc and vimrc |
++---------+-----------------------------------------------+
+| ntp     | manage ntp client and server                  |
++---------+-----------------------------------------------+
+| snmp    | manage snmp server and client                 |
++---------+-----------------------------------------------+
+| ssh     | manage ssh server and client                  |
++---------+-----------------------------------------------+
 
 
 Structure
