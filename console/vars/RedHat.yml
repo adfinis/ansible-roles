@@ -28,7 +28,6 @@ console_packages:
   - nmap
   - pciutils
   - policycoreutils-python
-  - postfix
   - psmisc
   - redhat-lsb-core
   - rsync

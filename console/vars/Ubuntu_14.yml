@@ -15,7 +15,6 @@ console_packages:
   - git
   - hdparm
   - htop
-  - hwinfo
   - iotop
   - iproute
   - iptables
@@ -23,7 +22,6 @@ console_packages:
   - ldap-utils
   - less
   - links
-  - locales-all
   - lsof
   - lvm2
   - make
