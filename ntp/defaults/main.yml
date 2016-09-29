@@ -1,5 +1,6 @@
 ---
 
+# a list of ntp servers
 ntp_servers:
   - 1.ntp.adfinis-sygroup.ch
   - 2.ntp.adfinis-sygroup.ch
