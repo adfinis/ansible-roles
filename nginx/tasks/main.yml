@@ -1,44 +1,10 @@
 ---
 
-- name: Install nginx-related packages
-  apt:
-    name: '{{ item }}'
-    state: 'latest'
-    install_recommends: false
-  when: item is defined and item
-  with_items:
-    - 'nginx'
-    - '{{ nginx_packages_extra | d() }}'
+- name: include os specific vars
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml'
+    - '{{ ansible_os_family }}.yml'
 
-- name: Divert nginx.conf
-  command: dpkg-divert --quiet --local --divert /etc/nginx/nginx.conf.dpkg-divert
-           --rename /etc/nginx/nginx.conf creates=/etc/nginx/nginx.conf.dpkg-divert
-
-- name: Create nginx main configuration
-  template:
-    src: 'etc/nginx/nginx.conf.j2'
-    dest: '/etc/nginx/nginx.conf'
-    owner: 'root'
-    group: 'root'
-    mode: '0644'
-  notify: [ 'Check nginx and reload' ]
-
-- name: Create custom directory
-  file:
-    path: '/etc/nginx/{{ item }}'
-    state: 'directory'
-    owner: 'root'
-    group: 'root'
-    mode: '0755'
-  with_items: [ 'vhosts.d' ]
-
-- name: Create vhosts
-  template:
-    src: 'etc/nginx/vhosts.d/{{ item.type }}.j2'
-    dest: '/etc/nginx/vhosts.d/{{ item.name }}'
-    owner: 'root'
-    group: 'root'
-    mode: '0644'
-  with_items:
-    - '{{ nginx_vhosts | d([]) }}'
-  notify: [ 'Check nginx and reload' ]
+- include: installation.yml
+- include: configuration.yml

@@ -1,0 +1,21 @@
+---
+
+- name: Create nginx main configuration
+  template:
+    src: 'etc/nginx/nginx.conf.j2'
+    dest: '/etc/nginx/nginx.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: [ 'Check nginx and reload' ]
+
+- name: Create vhosts
+  template:
+    src: 'etc/nginx/vhosts.d/{{ item.type }}.j2'
+    dest: '/etc/nginx/vhosts.d/{{ item.name }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  with_items:
+    - '{{ nginx_vhosts | d([]) }}'
+  notify: [ 'Check nginx and reload' ]
