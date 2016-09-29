@@ -1,8 +1,8 @@
 # {{ ansible_managed }}
 
-user www-data;
+user {{ nginx_user | d('www-data') }};
 worker_processes 4;
-pid /run/nginx.pid;
+pid /var/run/nginx.pid;
 
 events {
     worker_connections 768;

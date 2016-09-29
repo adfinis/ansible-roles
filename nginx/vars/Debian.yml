@@ -9,3 +9,6 @@ nginx_cfg_base: /etc/nginx
 
 # directory for vhosts
 nginx_vhosts_dir: '{{ nginx_cfg_base }}/vhosts.d'
+
+# nginx user
+nginx_user: www-data
