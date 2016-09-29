@@ -1,0 +1,11 @@
+---
+
+# packages to install
+nginx_packages:
+  - nginx
+
+# nginx configuration directory base
+nginx_cfg_base: /etc/nginx
+
+# directory for vhosts
+nginx_vhosts_dir: '{{ nginx_cfg_base }}/vhosts.d'
