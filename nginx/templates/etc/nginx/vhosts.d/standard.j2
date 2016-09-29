@@ -14,11 +14,11 @@ server {
 {% if item.ssl_stapling|d(False) %}
 
     ssl_stapling on;
-    ssl_trusted_certificate {{ item.ssl_stapling }};
+    ssl_stapling_verify on;
 {% endif %}
 {% if item.ssl_hsts|d(False) %}
 
-    add_header Strict-Transport-Security "max-age={{ item.ssl_hsts_age | d('31536000') }}; includeSubdomains;";
+    add_header Strict-Transport-Security "max-age={{ item.ssl_hsts_age | d('15768000') }}; includeSubdomains;";
 {% endif %}
 
     access_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_access.log;
