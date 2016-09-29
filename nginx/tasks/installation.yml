@@ -1,7 +1,7 @@
 ---
 
 - name: Install nginx-related packages
-  apt:
+  package:
     name: '{{ item }}'
     state: present
   when: item is defined and item
