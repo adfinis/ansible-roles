@@ -24,4 +24,4 @@ galaxy_info:
   galaxy_tags:
     - snmpd
     - snmp
-	- snmpwalk
+    - snmpwalk
