@@ -1,2 +1,7 @@
 ---
 
+- name: Install packages for ip address and routing management
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ ifconfig_packages }}'

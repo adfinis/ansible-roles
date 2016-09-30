@@ -1,2 +1,6 @@
 ---
 
+ifconfig_packages:
+  - bridge-utils
+  - iproute
+  - vconfig

@@ -1,2 +1,8 @@
 ---
 
+ifconfig_packages:
+  - bridge-utils
+  - ifenslave
+  - iproute2
+  - resolvconf
+  - vlan
