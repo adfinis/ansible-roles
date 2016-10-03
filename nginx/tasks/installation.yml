@@ -1,13 +1,13 @@
 ---
 
-- name: Install nginx-related packages
+- name: install nginx-related packages
   package:
     name: '{{ item }}'
     state: present
   when: item is defined and item
   with_items: '{{ nginx_packages }}'
 
-- name: Create directory for vhosts
+- name: create directory for vhosts
   file:
     path: '{{ nginx_vhosts_dir }}'
     state: directory
