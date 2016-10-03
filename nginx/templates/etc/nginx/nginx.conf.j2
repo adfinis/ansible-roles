@@ -65,6 +65,5 @@ http {
     # Virtual Host Configs
     ##
 
-    include /etc/nginx/conf.d/*.conf;
     include {{ nginx_vhosts_dir }}/*;
 }
