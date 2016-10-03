@@ -1,5 +1,29 @@
 ---
 
+- name: configure upstream nginx apt key
+  apt_key:
+    url: '{{ nginx_upstream_repo_key }}'
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: configure upstream nginx apt repository
+  apt_repository:
+    repo: 'deb {{ nginx_upstream_repo_baseurl }}/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} nginx'
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: configure upstream nginx rpm key
+  rpm_key:
+    key: '{{ nginx_upstream_repo_key }}'
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+- name: configure upstream nginx yum repository
+  template:
+    src: etc/yum.repos.d/nginx.repo.j2
+    dest: /etc/yum.repos.d/nginx.repo
+  when: ansible_os_family == 'RedHat'
+
 - name: install nginx-related packages
   package:
     name: '{{ item }}'

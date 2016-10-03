@@ -1,5 +1,11 @@
 ---
 
+# nginx upstream repository signing key
+nginx_upstream_repo_key: http://nginx.org/keys/nginx_signing.key
+
+# nginx upstream repository
+nginx_upstream_repo_baseurl: http://nginx.org/packages
+
 # number of worker processes of nginx
 # as many cores as your system has, you should start worker processes
 nginx_worker_processes: '{{ ansible_processor_cores }}'
