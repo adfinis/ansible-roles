@@ -4,6 +4,12 @@
 nginx_packages:
   - nginx
 
+# nginx service binary
+nginx_binary: /usr/sbin/nginx
+
+# nginx service
+nginx_service: nginx
+
 # nginx configuration directory base
 nginx_cfg_base: /etc/nginx
 

@@ -1,22 +1,22 @@
 ---
 
 - name: Check nginx
-  command: /usr/sbin/nginx -t
+  command: '{{ nginx_binary }} -t'
 
 - name: Check nginx and reload
-  command: /usr/sbin/nginx -t
+  command: '{{ nginx_binary }} -t'
   notify: [ 'Reload nginx' ]
 
 - name: Check nginx and restart
-  command: /usr/sbin/nginx -t
+  command: '{{ nginx_binary }} -t'
   notify: [ 'Restart nginx' ]
 
 - name: Restart nginx
   service:
-    name: 'nginx'
-    state: 'restarted'
+    name: '{{ nginx_service }}'
+    state: restarted
 
 - name: Reload nginx
   service:
-    name: 'nginx'
-    state: 'reloaded'
+    name: '{{ nginx_service }}'
+    state: reloaded
