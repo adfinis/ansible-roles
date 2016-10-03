@@ -1,5 +1,14 @@
 ---
 
+- name: get maximum number of open file descriptors
+  shell: ulimit -n
+  register: nginx_register_ulimit
+  changed_when: False
+
+- name: set fact nginx_fact_file_descriptors
+  set_fact:
+    nginx_fact_file_descriptors: '{{ nginx_register_ulimit.stdout }}'
+
 - name: create nginx main configuration
   template:
     src: etc/nginx/nginx.conf.j2
