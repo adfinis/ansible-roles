@@ -7,6 +7,7 @@ python:
   - "2.7"
 
 script:
+  - pip install ansible ansible-lint
   - ansible --version
   - ansible-lint --version
   - for dir in *; do test -d "$dir" && ansible-lint "$dir"; done
