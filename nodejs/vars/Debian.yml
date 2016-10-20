@@ -1,0 +1,5 @@
+---
+
+nodejs_upstream_repo_key: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+nodejs_upstream_repo_key_validate_certs: True
+nodejs_upstream_repo_base: 'https://deb.nodesource.com/node_{{ nodejs_version }}.x'
