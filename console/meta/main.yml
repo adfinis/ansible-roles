@@ -3,7 +3,7 @@
 dependencies: []
 
 galaxy_info:
-  author: 'Tobias Rueetschi'
+  author: 'Adfinis SyGroup AG'
   description: 'Install standard system tools and configure rc files'
   company: 'Adfinis SyGroup AG'
   license: 'GNU General Public License v3'

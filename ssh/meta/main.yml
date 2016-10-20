@@ -3,7 +3,7 @@
 dependencies: []
 
 galaxy_info:
-  author: 'Tobias Rueetschi'
+  author: 'Adfinis SyGroup AG'
   description: 'Install and manage ssh and sshd'
   company: 'Adfinis SyGroup AG'
   license: 'GNU General Public License v3'
