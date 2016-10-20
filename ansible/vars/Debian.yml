@@ -1,0 +1,8 @@
+---
+
+ansible_packages:
+  - openssl
+  - openssl-blacklist
+  - openssl-blacklist-extra
+  - ca-certificates
+  - apt-transport-https

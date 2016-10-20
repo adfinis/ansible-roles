@@ -1,0 +1,7 @@
+---
+
+- name: install ansible helper packages
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ ansible_packages }}'
