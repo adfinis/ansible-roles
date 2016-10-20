@@ -44,21 +44,23 @@ Roles
 =====
 Currently the repository features the following roles:
 
-+---------+-----------------------------------------------+
-| Role    | Description                                   |
-+=========+===============================================+
-| console | manage adsy standard tooles, bashrc and vimrc |
-+---------+-----------------------------------------------+
-| nginx   | install and manage nginx                      |
-+---------+-----------------------------------------------+
-| nodejs  | install nodejs on a server                    |
-+---------+-----------------------------------------------+
-| ntp     | manage ntp client and server                  |
-+---------+-----------------------------------------------+
-| snmp    | manage snmp server and client                 |
-+---------+-----------------------------------------------+
-| ssh     | manage ssh server and client                  |
-+---------+-----------------------------------------------+
++---------+----------------------------------------------------+
+| Role    | Description                                        |
++=========+====================================================+
+| ansible | install base packages and ansible related packages |
++---------+----------------------------------------------------+
+| console | manage adsy standard tooles, bashrc and vimrc      |
++---------+----------------------------------------------------+
+| nginx   | install and manage nginx                           |
++---------+----------------------------------------------------+
+| nodejs  | install nodejs on a server                         |
++---------+----------------------------------------------------+
+| ntp     | manage ntp client and server                       |
++---------+----------------------------------------------------+
+| snmp    | manage snmp server and client                      |
++---------+----------------------------------------------------+
+| ssh     | manage ssh server and client                       |
++---------+----------------------------------------------------+
 
 
 Structure
