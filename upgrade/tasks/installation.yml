@@ -1,0 +1,15 @@
+---
+
+- name: upgrade debian based systems
+  apt:
+    update_cache: yes
+    upgrade: dist
+  when: ansible_os_family == 'Debian' and
+        dist_upgrade is defined and dist_upgrade
+
+- name: upgrade redhat based systems
+  yum:
+    name: '*'
+    state: latest
+  when: ansible_os_family == 'RedHat' and
+        dist_upgrade is defined and dist_upgrade
