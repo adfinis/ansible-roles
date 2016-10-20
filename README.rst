@@ -51,6 +51,8 @@ Currently the repository features the following roles:
 +---------+-----------------------------------------------+
 | nginx   | install and manage nginx                      |
 +---------+-----------------------------------------------+
+| nodejs  | install nodejs on a server                    |
++---------+-----------------------------------------------+
 | ntp     | manage ntp client and server                  |
 +---------+-----------------------------------------------+
 | snmp    | manage snmp server and client                 |
