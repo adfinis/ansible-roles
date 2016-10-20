@@ -49,6 +49,8 @@ Currently the repository features the following roles:
 +=========+===============================================+
 | console | manage adsy standard tooles, bashrc and vimrc |
 +---------+-----------------------------------------------+
+| nginx   | install and manage nginx                      |
++---------+-----------------------------------------------+
 | ntp     | manage ntp client and server                  |
 +---------+-----------------------------------------------+
 | snmp    | manage snmp server and client                 |
