@@ -1,2 +1,13 @@
 ---
 
+- name: do not accept ipv6 default routes
+  template:
+    src: etc/sysctl.d/AdfinisSyGroup.conf.j2
+    dest: '{{ ifconfig_config_sysctl_ipv6_ra }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0

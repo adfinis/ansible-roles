@@ -6,3 +6,5 @@ ifconfig_packages:
   - iproute2
   - resolvconf
   - vlan
+
+ifconfig_config_sysctl_ipv6_ra: /etc/sysctl.d/AdfinisSyGroup.conf

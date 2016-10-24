@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+# Do not accept IPv6 default routes on external interfaces
+# Setting "all" and "default" does not help, you need to list
+# all interfaces here!
+
+{% for interface in ansible_interfaces %}
+net.ipv6.conf.{{ interface }}.accept_ra_defrtr=0
+{% endfor %}

@@ -2,7 +2,9 @@
 
 ifconfig_packages:
   - bridge-utils
+  - ifenslave
   - iproute
-  - vconfig
+  - resolvconf
+  - vlan
 
 ifconfig_config_sysctl_ipv6_ra: /etc/sysctl.d/AdfinisSyGroup.conf
