@@ -1,5 +1,7 @@
 ---
 
+# console packages
+# a list of default packages for every system
 console_packages:
   - acl
   - apticron
@@ -51,5 +53,8 @@ console_packages:
   - wget
   - zsh
 
+# system bashrc
 console_bashrc: /etc/bash.bashrc
+
+# system vimrc
 console_vimrc: /etc/vim/vimrc

@@ -1,5 +1,7 @@
 ---
 
+# console packages
+# a list of default packages for every system
 console_packages:
   - acl
   - at
@@ -44,5 +46,8 @@ console_packages:
   - yum-utils
   - zsh
 
+# system bashrc
 console_bashrc: /etc/bashrc
+
+# system vimrc
 console_vimrc: /etc/vimrc
