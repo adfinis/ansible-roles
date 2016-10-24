@@ -1,0 +1,6 @@
+---
+
+# mariadb related packages
+mariadb_packages:
+  - mysql-server
+  - mysql-client
