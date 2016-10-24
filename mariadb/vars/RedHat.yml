@@ -3,3 +3,7 @@
 # mariadb related packages
 mariadb_packages:
   - mariadb
+  - mariadb-server
+
+# mariadb service name
+mariadb_service: mariadb

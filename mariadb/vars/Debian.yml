@@ -4,3 +4,6 @@
 mariadb_packages:
   - mariadb-server
   - mariadb-client
+
+# mariadb service name
+mariadb_service: mysql

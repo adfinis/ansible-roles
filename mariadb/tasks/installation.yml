@@ -5,3 +5,10 @@
     name: '{{ item }}'
     state: present
   with_items: '{{ mariadb_packages }}'
+  notify:
+    - 'restart mariadb'
+
+- name: enable mariadb service
+  service:
+    name: '{{ mariadb_service }}'
+    enabled: yes
