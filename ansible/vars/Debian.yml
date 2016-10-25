@@ -1,5 +1,6 @@
 ---
 
+# by ansible used packages
 ansible_packages:
   - openssl
   - openssl-blacklist
