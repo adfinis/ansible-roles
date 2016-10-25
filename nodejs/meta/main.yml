@@ -1,7 +1,7 @@
 ---
 
 dependencies:
-  - role ansible
+  - role: ansible
 
 galaxy_info:
   author: 'Adfinis SyGroup AG'
