@@ -1,0 +1,24 @@
+---
+
+dependencies:
+  - role ansible
+
+galaxy_info:
+  author: 'Adfinis SyGroup AG'
+  description: 'Install and manage nodejs'
+  company: 'Adfinis SyGroup AG'
+  license: 'GNU General Public License v3'
+  min_ansible_version: '2.0.0'
+  platforms:
+    - name: Debian
+      versions:
+        - jessie
+    - name: Ubuntu
+      versions:
+        - xenial
+    - name: CentOS
+      versions:
+        - 7
+  galaxy_tags:
+    - nodejs
+    - npm

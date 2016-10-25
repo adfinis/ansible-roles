@@ -1,0 +1,28 @@
+---
+
+- name: configure upstream nodejs apt key
+  apt_key:
+    url: '{{ nodejs_upstream_repo_key }}'
+    validate_certs: '{{ nodejs_upstream_repo_key_validate_certs }}'
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: configure upstream nodejs apt repository
+  apt_repository:
+    repo: 'deb {{ nodejs_upstream_repo_base }} {{ ansible_distribution_release }} main'
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: configure upstream nodejs yum repository
+  yum:
+    name: '{{ nodejs_upstream_repo_rpm }}'
+    disable_gpg_check: yes
+    validate_certs: '{{ nodejs_upstream_repo_rpm_validate_certs }}'
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+- name: install nodejs
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ nodejs_packages }}'

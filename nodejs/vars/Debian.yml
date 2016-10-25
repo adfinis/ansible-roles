@@ -1,0 +1,14 @@
+---
+
+# NodeJS package signing key download link
+nodejs_upstream_repo_key: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+
+# NodeJS repository validate ssl certs
+nodejs_upstream_repo_key_validate_certs: True
+
+# NodeJS repository base url
+nodejs_upstream_repo_base: 'https://deb.nodesource.com/node_{{ nodejs_version }}.x'
+
+# NodeJS packages
+nodejs_packages:
+  - nodejs
