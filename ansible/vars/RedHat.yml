@@ -1,0 +1,6 @@
+---
+
+# by ansible used packages
+ansible_packages:
+  - openssl
+  - ca-certificates
