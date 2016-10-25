@@ -12,7 +12,7 @@ nginx_worker_processes: '{{ ansible_processor_cores }}'
 
 # number of worker connections
 # this should be a value around ``ulimit -n``. The nginx default is 768.
-nginx_worker_connections: 1024
+nginx_worker_connections: '{{ nginx_fact_file_descriptors }}'
 
 # gzip compression level
 nginx_gzip_comp_level: 2
