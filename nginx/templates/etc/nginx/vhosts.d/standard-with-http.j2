@@ -16,18 +16,18 @@ server {
     ssl_session_cache shared:SSL:50m;
     ssl_session_timeout 5m;
 
-    ssl_certificate {{ item.ssl_crt|d('/etc/ssl/certs/ssl-cert-snakeoil.pem') }};
-    ssl_certificate_key {{ item.ssl_key|d('/etc/ssl/private/ssl-cert-snakeoil.key') }};
-{% if item.ssl_dhparam|d(False) %}
+    ssl_certificate {{ item.ssl_crt | d('/etc/ssl/certs/ssl-cert-snakeoil.pem') }};
+    ssl_certificate_key {{ item.ssl_key | d('/etc/ssl/private/ssl-cert-snakeoil.key') }};
+{% if item.ssl_dhparam | d(False) %}
 
     ssl_dhparam {{ item.ssl_dhparam }};
 {% endif %}
-{% if item.ssl_stapling|d(False) %}
+{% if item.ssl_stapling | d(False) %}
 
     ssl_stapling on;
     ssl_stapling_verify on;
 {% endif %}
-{% if item.ssl_hsts|d(False) %}
+{% if item.ssl_hsts | d(False) %}
 
     add_header Strict-Transport-Security "max-age={{ item.ssl_hsts_age | d('15768000') }}; includeSubdomains;";
 {% endif %}
@@ -35,8 +35,8 @@ server {
     access_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_ssl_access.log;
     error_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_ssl_error.log;
 
-    root {{ item.document_root|d('/var/www/html') }};
-    index {{ item.index|d("index.php index.html index.htm") }};
+    root {{ item.document_root | d('/var/www/html') }};
+    index {{ item.index | d("index.php index.html index.htm") }};
 {% if item.php_enabled | d(False) %}
 
     location ~ \.php$ {
@@ -79,8 +79,8 @@ server {
     access_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_access.log;
     error_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_error.log;
 
-    root {{ item.document_root|d('/var/www/html') }};
-    index {{ item.index|d("index.php index.html index.htm") }};
+    root {{ item.document_root | d('/var/www/html') }};
+    index {{ item.index | d("index.php index.html index.htm") }};
 {% if item.php_enabled | d(False) %}
 
     location ~ \.php$ {
@@ -114,7 +114,7 @@ server {
     }
 {% endfor %}
 {% endif %}
-{% if item.acme|d(False) %}
+{% if item.acme | d(False) %}
 
     location ~ /.well-known/acme-challenge/ {
         root /var/www;
