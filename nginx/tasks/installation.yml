@@ -28,8 +28,15 @@
   package:
     name: '{{ item }}'
     state: present
+  register: nginx_register_installed
   when: item is defined and item
   with_items: '{{ nginx_packages }}'
+
+- name: remove nginx default vhost
+  file:
+    path: '{{ nginx_default_vhost }}'
+    state: absent
+  when: '{{ nginx_register_installed.changed }}'
 
 - name: create directory for vhosts
   file:
