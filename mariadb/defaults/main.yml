@@ -1,0 +1,7 @@
+---
+
+# mariadb data location
+mariadb_datadir: /var/lib/mysql
+
+# mariadb bind address
+mariadb_bind_address: 127.0.0.1

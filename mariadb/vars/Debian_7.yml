@@ -7,3 +7,18 @@ mariadb_packages:
 
 # mariadb service name
 mariadb_service: mysql
+
+# mariadb server binary
+mariadb_server_bin: /usr/sbin/mysqld
+
+# global mariadb configuration file location
+mariadb_conf: /etc/my.cnf
+
+# mariadb slow log file
+mariadb_log_slow: /var/log/mysql/mysql-slow.log
+
+# mariadb error log file
+mariadb_log_error: /var/log/mysql.log
+
+# mariadb run directory
+mariadb_run_dir: /var/run/mysqld
