@@ -39,11 +39,13 @@ console_packages:
   - tar
   - tcpdump
   - telnet
+  - unzip
   - util-linux
   - vim
   - vim-enhanced
   - wget
   - yum-utils
+  - zip
   - zsh
 
 # system bashrc
