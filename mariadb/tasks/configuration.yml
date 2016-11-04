@@ -13,3 +13,52 @@
     selevel: s0
   notify:
     - 'check mariadb and restart'
+
+- name: check if roots my.cnf exists
+  stat:
+    path: '{{ mariadb_root_mycnf }}'
+  register: mariadb_register_root_mycnf
+
+- name: generate root password
+  command: pwgen -s 24 -N 1
+  register: mariadb_register_root_password
+  when: not mariadb_register_root_mycnf.stat.exists
+
+- name: show root password
+  debug:
+    msg: '{{ mariadb_register_root_password.stdout }}'
+  when: mariadb_register_root_password.stdout is defined and mariadb_register_root_password.stdout
+
+- name: create root password
+  mysql_user:
+    name: root
+    host_all: yes
+    password: '{{ mariadb_register_root_password.stdout }}'
+    update_password: always
+    check_implicit_admin: yes
+    state: present
+  when: mariadb_register_root_password.stdout is defined and mariadb_register_root_password.stdout
+
+- name: create roots my.cnf
+  template:
+    src: root/my.cnf.j2
+    dest: '{{ mariadb_root_mycnf }}'
+    owner: root
+    group: root
+    mode: 0600
+    seuser: system_u
+    serole: object_r
+    setype: admin_home_t
+    selevel: s0
+  when: mariadb_register_root_password.stdout is defined and mariadb_register_root_password.stdout
+
+- name: create users
+  mysql_user:
+    name: '{{ item.name }}'
+    host: '{{ item.host | default("localhost") }}'
+    password: '{{ item.password }}'
+    update_password: always
+    state: present
+  when: item.name is defined and item.name and
+        item.password is defined and item.password
+  with_items: '{{ mariadb_users }}'

@@ -4,6 +4,8 @@
 mariadb_packages:
   - mysql-server
   - mysql-client
+  - python-mysqldb
+  - pwgen
 
 # mariadb service name
 mariadb_service: mysql
@@ -13,6 +15,9 @@ mariadb_server_bin: /usr/sbin/mysqld
 
 # global mariadb configuration file location
 mariadb_conf: /etc/my.cnf
+
+# roots my.cnf
+mariadb_root_mycnf: /root/.my.cnf
 
 # mariadb slow log file
 mariadb_log_slow: /var/log/mysql/mysql-slow.log

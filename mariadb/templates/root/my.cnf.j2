@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+
+[client]
+user=root
+password={{ mariadb_register_root_password.stdout }}

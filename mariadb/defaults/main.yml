@@ -5,3 +5,13 @@ mariadb_datadir: /var/lib/mysql
 
 # mariadb bind address
 mariadb_bind_address: 127.0.0.1
+
+# mariadb user list
+# mariadb_users:
+#   - name: john
+#     host: localhost
+#     password: fixme
+#   - name: hans
+#     host: www.example.com
+#     password: s3cr3t
+mariadb_users: []

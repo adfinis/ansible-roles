@@ -4,6 +4,8 @@
 mariadb_packages:
   - mariadb
   - mariadb-server
+  - MySQL-python
+  - pwgen
 
 # mariadb service name
 mariadb_service: mariadb
@@ -13,6 +15,9 @@ mariadb_server_bin: /usr/libexec/mysqld
 
 # global mariadb configuration file location
 mariadb_conf: /etc/my.cnf
+
+# roots my.cnf
+mariadb_root_mycnf: /root/.my.cnf
 
 # mariadb slow log file
 mariadb_log_slow: /var/log/mariadb/mariadb-slow.log
