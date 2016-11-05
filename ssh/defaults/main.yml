@@ -9,6 +9,13 @@ ssh_host_keys:
 # a list of all ports for sshd to listen on
 ssh_daemon_ports: [ 22 ]
 
+# allow root login
+# choices:
+#   - yes (password and publickey)
+#   - no (not allowed)
+#   - without-password (only allowed with publickey)
+ssh_daemon_permit_root_login: yes
+
 # enable or disable the sshd X11 forwarding
 ssh_daemon_x11_forwarding: 'no'
 

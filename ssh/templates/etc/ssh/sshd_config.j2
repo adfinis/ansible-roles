@@ -37,7 +37,7 @@ LogLevel INFO
 
 # Authentication:
 LoginGraceTime 2m
-PermitRootLogin yes
+PermitRootLogin {{ ssh_daemon_permit_root_login }}
 StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10

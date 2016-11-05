@@ -12,7 +12,7 @@
     setype: sshd_key_t
     selevel: s0
 
-- name: configure ssh
+- name: configure ssh daemon
   template:
     src: etc/ssh/sshd_config.j2
     dest: '{{ ssh_daemon_cfg }}'
