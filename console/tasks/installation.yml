@@ -1,6 +1,6 @@
 ---
 
-- name: install ssh related packages
+- name: install console related packages
   package:
     name: '{{ item }}'
     state: present
