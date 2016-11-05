@@ -13,3 +13,18 @@
     selevel: s0
   tags: [ 'role::telegraf:config' ]
   notify: [ 'check telegraf config and restart' ]
+
+- name: create telegraf plugin configuration
+  template:
+    src: etc/telegraf/telegraf.d/{{ item }}.j2
+    dest: '{{ telegraf_plugin_cfg }}/{{ item }}.conf'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  tags: [ 'role::telegraf:config' ]
+  with_items: '{{ telegraf_plugins }}'
+  notify: [ 'check telegraf config and restart' ]

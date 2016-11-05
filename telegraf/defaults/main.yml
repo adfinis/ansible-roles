@@ -37,3 +37,6 @@ telegraf_input:
 
 # telegraf service input plugins to load
 telegraf_service_input: []
+
+# telegraf plugins
+telegraf_plugins: []

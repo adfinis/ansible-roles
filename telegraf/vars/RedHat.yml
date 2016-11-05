@@ -10,8 +10,14 @@ telegraf_repo_baseurl: https://repos.influxdata.com/rhel/\$releasever/\$basearch
 telegraf_packages:
   - telegraf
 
+# telegraf configuration directory
+telegraf_cfg_dir: /etc/telegraf
+
 # telegraf main configuration file
-telegraf_main_cfg: /etc/telegraf/telegraf.conf
+telegraf_main_cfg: '{{ telegraf_cfg_dir }}/telegraf.conf'
+
+# telegraf plugin configuration directory
+telegraf_plugin_cfg: '{{ telegraf_cfg_dir }}/telegraf.d'
 
 # telegraf binary
 telegraf_daemon_bin: /usr/bin/telegraf
