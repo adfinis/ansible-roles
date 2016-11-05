@@ -1,0 +1,15 @@
+---
+
+- name: create telegraf main configuration
+  template:
+    src: etc/telegraf/telegraf.conf.j2
+    dest: '{{ telegraf_main_cfg }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  tags: [ 'role::telegraf:config' ]
+  notify: [ 'check telegraf config and restart' ]
