@@ -38,7 +38,12 @@ server {
 {% for proxy in item.proxy %}
     location {{ proxy.src | d("/") }} {
         proxy_pass {{ proxy.dest }};
+        proxy_set_header Host $host;
     }
+{% endfor %}
+
+{% for header in item.headers %}
+    add_header {{ header.name }} "{{ header.value }}";
 {% endfor %}
 }
 
