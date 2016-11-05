@@ -1,0 +1,20 @@
+---
+
+# telegraf repository gpg signing key
+telegraf_repo_key: https://repos.influxdata.com/influxdb.key
+
+# telegraf repository
+telegraf_repo_baseurl: https://repos.influxdata.com/
+
+# telegraf related packages
+telegraf_packages:
+  - telegraf
+
+# telegraf main configuration file
+telegraf_main_cfg: /etc/telegraf/telegraf.conf
+
+# telegraf binary
+telegraf_daemon_bin: /usr/bin/telegraf
+
+# telegraf service name
+telegraf_service: telegraf

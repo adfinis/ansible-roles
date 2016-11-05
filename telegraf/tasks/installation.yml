@@ -1,0 +1,35 @@
+---
+
+- name: install apt repository key
+  apt_key:
+    url: '{{ telegraf_repo_key }}'
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: install apt repository
+  apt_repository:
+    repo: 'deb {{ telegraf_repo_baseurl }}/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} stable'
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: install yum repository
+  yum_repository:
+    name: influxdata
+    description: InfluxDB Repository - RHEL \$releasever
+    baseurl: '{{ telegraf_repo_baseurl }}'
+    enabled: True
+    gpgcheck: True
+    gpgkey: '{{ telegraf_repo_key }}'
+  when: ansible_os_family == 'RedHat'
+
+- name: install telegraf related packages
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ telegraf_packages }}'
+
+- name: enable telegraf service
+  service:
+    name: '{{ telegraf_service }}'
+    state: started
+    enabled: True
