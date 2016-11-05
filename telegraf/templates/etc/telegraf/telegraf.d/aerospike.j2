@@ -1,0 +1,8 @@
+## {{ ansible_managed }}
+
+# Read stats from aerospike server(s)
+[[inputs.aerospike]]
+  ## Aerospike servers to connect to (with port)
+  ## This plugin will query all namespaces the aerospike
+  ## server has configured and get stats for them.
+  servers = ["localhost:3000"]

@@ -1,0 +1,7 @@
+## {{ ansible_managed }}
+
+# Read metrics from a LeoFS Server via SNMP
+[[inputs.leofs]]
+  ## An array of URI to gather stats about LeoFS.
+  ## Specify an ip or hostname with port. ie 127.0.0.1:4020
+  servers = ["127.0.0.1:4021"]

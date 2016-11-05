@@ -1,0 +1,19 @@
+## {{ ansible_managed }}
+
+# Query given DNS server and gives statistics
+[[inputs.dns_query]]
+  ## servers to query
+  servers = ["8.8.8.8"] # required
+
+  ## Domains or subdomains to query. "."(root) is default
+  domains = ["."] # optional
+
+  ## Query record type. Default is "A"
+  ## Posible values: A, AAAA, CNAME, MX, NS, PTR, TXT, SOA, SPF, SRV.
+  record_type = "A" # optional
+
+  ## Dns server port. 53 is default
+  port = 53 # optional
+
+  ## Query timeout in seconds. Default is 2 seconds
+  timeout = 2 # optional

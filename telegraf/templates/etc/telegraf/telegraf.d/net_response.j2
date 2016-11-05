@@ -1,0 +1,17 @@
+## {{ ansible_managed }}
+
+# TCP or UDP 'ping' given url and collect response time in seconds
+[[inputs.net_response]]
+  ## Protocol, must be "tcp" or "udp"
+  protocol = "tcp"
+  ## Server address (default localhost)
+  address = "github.com:80"
+  ## Set timeout
+  timeout = "1s"
+
+  ## Optional string sent to the server
+  # send = "ssh"
+  ## Optional expected string in answer
+  # expect = "ssh"
+  ## Set read timeout (only used if expecting a response)
+  read_timeout = "1s"

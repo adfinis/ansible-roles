@@ -1,0 +1,49 @@
+## {{ ansible_managed }}
+
+# Pull Metric Statistics from Amazon CloudWatch
+[[inputs.cloudwatch]]
+  ## Amazon Region
+  region = 'us-east-1'
+
+  ## Amazon Credentials
+  ## Credentials are loaded in the following order
+  ## 1) Assumed credentials via STS if role_arn is specified
+  ## 2) explicit credentials from 'access_key' and 'secret_key'
+  ## 3) shared profile from 'profile'
+  ## 4) environment variables
+  ## 5) shared credentials file
+  ## 6) EC2 Instance Profile
+  #access_key = ""
+  #secret_key = ""
+  #token = ""
+  #role_arn = ""
+  #profile = ""
+  #shared_credential_file = ""
+
+  ## Requested CloudWatch aggregation Period (required - must be a multiple of 60s)
+  period = '1m'
+
+  ## Collection Delay (required - must account for metrics availability via CloudWatch API)
+  delay = '1m'
+
+  ## Recomended: use metric 'interval' that is a multiple of 'period' to avoid
+  ## gaps or overlap in pulled data
+  interval = '1m'
+
+  ## Configure the TTL for the internal cache of metrics.
+  ## Defaults to 1 hr if not specified
+  #cache_ttl = '10m'
+
+  ## Metric Statistic Namespace (required)
+  namespace = 'AWS/ELB'
+
+  ## Metrics to Pull (optional)
+  ## Defaults to all Metrics in Namespace if nothing is provided
+  ## Refreshes Namespace available metrics every 1h
+  #[[inputs.cloudwatch.metrics]]
+  #  names = ['Latency', 'RequestCount']
+  #
+  #  ## Dimension filters for Metric (optional)
+  #  [[inputs.cloudwatch.metrics.dimensions]]
+  #    name = 'LoadBalancerName'
+  #    value = 'p-example'

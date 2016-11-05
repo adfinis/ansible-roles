@@ -1,0 +1,18 @@
+## {{ ansible_managed }}
+
+# Read metrics about network interface usage
+[[inputs.net]]
+  ## By default, telegraf gathers stats from any up interface (excluding loopback)
+  ## Setting interfaces will tell it to gather these explicit interfaces,
+  ## regardless of status.
+  ##
+{% if telegraf_plugin_net | d(False) %}
+  interfaces = [
+{% for interface in telegraf_plugin_net %}
+    "{{ interface }}"{% if not loop.last %},{% endif %}
+
+{% endfor %}
+  ]
+{% else %}
+  # interfaces = ["eth0"]
+{% endif %}

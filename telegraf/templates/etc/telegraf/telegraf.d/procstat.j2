@@ -1,0 +1,21 @@
+## {{ ansible_managed }}
+
+# Monitor process cpu and memory usage
+[[inputs.procstat]]
+  ## Must specify one of: pid_file, exe, or pattern
+  ## PID file to monitor process
+  pid_file = "/var/run/nginx.pid"
+  ## executable name (ie, pgrep <exe>)
+  # exe = "nginx"
+  ## pattern as argument for pgrep (ie, pgrep -f <pattern>)
+  # pattern = "nginx"
+  ## user as argument for pgrep (ie, pgrep -u <user>)
+  # user = "nginx"
+
+  ## override for process_name
+  ## This is optional; default is sourced from /proc/<pid>/status
+  # process_name = "bar"
+  ## Field name prefix
+  prefix = ""
+  ## comment this out if you want raw cpu_time stats
+  fielddrop = ["cpu_time_*"]
