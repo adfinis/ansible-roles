@@ -1,0 +1,10 @@
+---
+
+- name: check telegraf config and restart
+  command: '{{ telegraf_daemon_bin }} -test'
+  notify: [ 'restart telegraf' ]
+
+- name: restart telegraf
+  service:
+    name: '{{ telegraf_service }}'
+    state: restarted
