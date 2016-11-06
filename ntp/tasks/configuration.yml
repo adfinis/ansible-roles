@@ -11,4 +11,8 @@
     serole: object_r
     setype: net_conf_t
     selevel: s0
-  notify: ['restart ntpd']
+  tags:
+    - 'role::ntp'
+    - 'role::ntp:config'
+  notify:
+    - 'restart ntpd'
