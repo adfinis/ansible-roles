@@ -1,0 +1,11 @@
+---
+
+# ntp packages
+ntp_packages:
+  - ntp
+
+# ntp service name
+ntp_service: ntpd
+
+# ntp main configuration
+ntp_cfg: /etc/ntp.conf
