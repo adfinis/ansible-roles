@@ -11,6 +11,7 @@
     serole: object_r
     setype: sshd_key_t
     selevel: s0
+  tags: [ 'role::ssh:config' ]
 
 - name: configure ssh daemon
   template:
@@ -23,6 +24,7 @@
     serole: object_r
     setype: etc_t
     selevel: s0
+  tags: [ 'role::ssh:config' ]
   notify: [ 'check sshd config and restart' ]
 
 - name: configure ssh client
@@ -36,3 +38,4 @@
     serole: object_r
     setype: etc_t
     selevel: s0
+  tags: [ 'role::ssh:config' ]

@@ -38,7 +38,7 @@ Host *
 #   IdentityFile ~/.ssh/id_ed25519
 #   Port 22
     Protocol 2
-    HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-rsa
+    HostKeyAlgorithms {{ ssh_host_key_algorithms | join(',') }}
     Ciphers {{ ssh_daemon_ciphers | join(',') }}
     KexAlgorithms {{ ssh_daemon_kex_algorithms | join(',') }}
     MACs {{ ssh_daemon_macs | join(',') }}
