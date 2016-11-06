@@ -21,8 +21,11 @@ telegraf_output_influxdb:
     - http://localhost:8086
   database: telegraf
 
-# telegraf input plugins to load
-telegraf_input:
+# telegraf service input plugins to load
+telegraf_service_input: []
+
+# telegraf plugins
+telegraf_plugins_global:
   - cpu
   - disk
   - diskio
@@ -34,9 +37,3 @@ telegraf_input:
   - processes
   - swap
   - system
-
-# telegraf service input plugins to load
-telegraf_service_input: []
-
-# telegraf plugins
-telegraf_plugins: []
