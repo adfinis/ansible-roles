@@ -6,13 +6,6 @@
   ## Setting interfaces will tell it to gather these explicit interfaces,
   ## regardless of status.
   ##
-{% if telegraf_plugin_net | d(False) %}
   interfaces = [
-{% for interface in telegraf_plugin_net %}
-    "{{ interface }}"{% if not loop.last %},{% endif %}
-
-{% endfor %}
+    "{{ ansible_interfaces | map('regex_search', '^(eth|eno|enp|ens|br).*') | select('string') | list | join('", "') }}"
   ]
-{% else %}
-  # interfaces = ["eth0"]
-{% endif %}
