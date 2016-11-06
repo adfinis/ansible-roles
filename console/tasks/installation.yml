@@ -4,4 +4,7 @@
   package:
     name: '{{ item }}'
     state: present
+  tags:
+    - 'role::console'
+    - 'role::console:install'
   with_items: '{{ console_packages }}'
