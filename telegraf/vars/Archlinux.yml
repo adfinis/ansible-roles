@@ -1,0 +1,20 @@
+---
+
+# telegraf related packages
+telegraf_packages:
+  - telegraf
+
+# telegraf configuration directory
+telegraf_cfg_dir: /etc/telegraf
+
+# telegraf main configuration file
+telegraf_main_cfg: '{{ telegraf_cfg_dir }}/telegraf.conf'
+
+# telegraf plugin configuration directory
+telegraf_plugin_cfg: '{{ telegraf_cfg_dir }}/telegraf.d'
+
+# telegraf binary
+telegraf_daemon_bin: /usr/bin/telegraf
+
+# telegraf service name
+telegraf_service: telegraf
