@@ -47,6 +47,7 @@ ssh_daemon_macs:
   - hmac-sha2-512
   - hmac-sha2-256
 
+# host key algorithms
 ssh_host_key_algorithms:
   - ssh-ed25519-cert-v01@openssh.com
   - ssh-rsa-cert-v01@openssh.com
