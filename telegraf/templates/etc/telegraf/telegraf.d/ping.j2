@@ -7,10 +7,7 @@
   #
   ## urls to ping
   urls = [
-{% for url in telegraf_plugin_ping.urls %}
-    "{{ url }}"{% if not loop.last %},{% endif %}
-
-{% endfor %}
+    "{{ telegraf_plugin_ping.urls | join('", "') }}"
   ]
   ## number of pings to send per collection (ping -c <COUNT>)
   count = {{ telegraf_plugin_ping.count | default("1") }}
