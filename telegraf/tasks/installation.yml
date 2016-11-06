@@ -4,12 +4,18 @@
   apt_key:
     url: '{{ telegraf_repo_key }}'
     state: present
+  tags:
+    - 'role::telegraf'
+    - 'role::telegraf:install'
   when: ansible_os_family == 'Debian'
 
 - name: install apt repository
   apt_repository:
     repo: 'deb {{ telegraf_repo_baseurl }}/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} stable'
     state: present
+  tags:
+    - 'role::telegraf'
+    - 'role::telegraf:install'
   when: ansible_os_family == 'Debian'
 
 - name: install yum repository
@@ -20,12 +26,18 @@
     enabled: True
     gpgcheck: True
     gpgkey: '{{ telegraf_repo_key }}'
+  tags:
+    - 'role::telegraf'
+    - 'role::telegraf:install'
   when: ansible_os_family == 'RedHat'
 
 - name: install telegraf related packages
   package:
     name: '{{ item }}'
     state: present
+  tags:
+    - 'role::telegraf'
+    - 'role::telegraf:install'
   with_items: '{{ telegraf_packages }}'
 
 - name: enable telegraf service
@@ -33,3 +45,6 @@
     name: '{{ telegraf_service }}'
     state: started
     enabled: True
+  tags:
+    - 'role::telegraf'
+    - 'role::telegraf:install'
