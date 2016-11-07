@@ -9,3 +9,5 @@
   interfaces = [
     "{{ ansible_interfaces | map('regex_search', '^(eth|eno|enp|ens|br).*') | select('string') | list | join('", "') }}"
   ]
+
+# vim: set sw=2 ts=2 et wrap tw=76 :
