@@ -17,9 +17,9 @@
   record_type = "{{ telegraf_plugin_dns_query.record_type | default("A") }}"
 
   ## Dns server port. 53 is default
-  port = "{{ telegraf_plugin_dns_query.port | default("53") }}"
+  port = {{ telegraf_plugin_dns_query.port | default("53") }}
 
   ## Query timeout in seconds. Default is 2 seconds
-  timeout = "{{ telegraf_plugin_dns_query.timeout | default("2") }}"
+  timeout = {{ telegraf_plugin_dns_query.timeout | default("2") }}
 
 # vim: set sw=2 ts=2 et wrap tw=76 :
