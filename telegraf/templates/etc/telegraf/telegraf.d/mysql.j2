@@ -10,49 +10,57 @@
   ##    db_user@tcp(127.0.0.1:3306)/?tls=false
   #
   ## If no servers are specified, then localhost is used as the host.
-  servers = ["tcp(127.0.0.1:3306)/"]
+  servers = [
+    "{{ telegraf_plugin_mysql.servers | default(["tcp(127.0.0.1:3306)/"]) | join('", "') }}"
+  ]
   ## the limits for metrics form perf_events_statements
-  perf_events_statements_digest_text_limit  = 120
-  perf_events_statements_limit              = 250
-  perf_events_statements_time_limit         = 86400
+  perf_events_statements_digest_text_limit  = {{ telegraf_plugin_mysql.perf_events_statements_digest_text_limit | default("120") }}
+  perf_events_statements_limit              = {{ telegraf_plugin_mysql.perf_events_statements_limit | default("250") }}
+  perf_events_statements_time_limit         = {{ telegraf_plugin_mysql.perf_events_statements_time_limit | default("86400") }}
   #
   ## if the list is empty, then metrics are gathered from all databasee tables
+{% if telegraf_plugin_mysql.table_schema_databases | default(False) %}
+  table_schema_databases                    = [
+    "{{ telegraf_plugin_mysql.table_schema_databases | default([]) | join('", "') }}"
+  ]
+{% else %}
   table_schema_databases                    = []
+{% endif %}
   #
   ## gather metrics from INFORMATION_SCHEMA.TABLES for databases provided above list
-  gather_table_schema                       = false
+  gather_table_schema                       = {% if telegraf_plugin_mysql.gather_table_schema | default(False) %}true{% else %}false{% endif %}
   #
   ## gather thread state counts from INFORMATION_SCHEMA.PROCESSLIST
-  gather_process_list                       = true
+  gather_process_list                       = {% if telegraf_plugin_mysql.gather_process_list | default(True) %}true{% else %}false{% endif %}
   #
   ## gather auto_increment columns and max values from information schema
-  gather_info_schema_auto_inc               = true
+  gather_info_schema_auto_inc               = {% if telegraf_plugin_mysql.gather_info_schema_auto_inc | default(True) %}true{% else %}false{% endif %}
   #
   ## gather metrics from SHOW SLAVE STATUS command output
-  gather_slave_status                       = true
+  gather_slave_status                       = {% if telegraf_plugin_mysql.gather_slave_status | default(True) %}true{% else %}false{% endif %}
   #
   ## gather metrics from SHOW BINARY LOGS command output
-  gather_binary_logs                        = false
+  gather_binary_logs                        = {% if telegraf_plugin_mysql.gather_binary_logs | default(False) %}true{% else %}false{% endif %}
   #
   ## gather metrics from PERFORMANCE_SCHEMA.TABLE_IO_WAITS_SUMMART_BY_TABLE
-  gather_table_io_waits                     = false
+  gather_table_io_waits                     = {% if telegraf_plugin_mysql.gather_table_io_waits | default(False) %}true{% else %}false{% endif %}
   #
   ## gather metrics from PERFORMANCE_SCHEMA.TABLE_LOCK_WAITS
-  gather_table_lock_waits                   = false
+  gather_table_lock_waits                   = {% if telegraf_plugin_mysql.gather_table_lock_waits | default(False) %}true{% else %}false{% endif %}
   #
   ## gather metrics from PERFORMANCE_SCHEMA.TABLE_IO_WAITS_SUMMART_BY_INDEX_USAGE
-  gather_index_io_waits                     = false
+  gather_index_io_waits                     = {% if telegraf_plugin_mysql.gather_index_io_waits | default(False) %}true{% else %}false{% endif %}
   #
   ## gather metrics from PERFORMANCE_SCHEMA.EVENT_WAITS
-  gather_event_waits                        = false
+  gather_event_waits                        = {% if telegraf_plugin_mysql.gather_event_waits | default(False) %}true{% else %}false{% endif %}
   #
   ## gather metrics from PERFORMANCE_SCHEMA.FILE_SUMMARY_BY_EVENT_NAME
-  gather_file_events_stats                  = false
+  gather_file_events_stats                  = {% if telegraf_plugin_mysql.gather_file_events_stats | default(False) %}true{% else %}false{% endif %}
   #
   ## gather metrics from PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST
-  gather_perf_events_statements             = false
+  gather_perf_events_statements             = {% if telegraf_plugin_mysql.gather_perf_events_statements | default(False) %}true{% else %}false{% endif %}
   #
   ## Some queries we may want to run less often (such as SHOW GLOBAL VARIABLES)
-  interval_slow                             = "30m"
+  interval_slow                             = "{{ telegraf_plugin_mysql.interval_slow | default("30m") }}"
 
 # vim: set sw=2 ts=2 et wrap tw=76 :
