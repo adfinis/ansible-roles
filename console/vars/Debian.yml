@@ -50,9 +50,11 @@ console_packages:
   - telnet
   - tmux
   - tshark
+  - unzip
   - util-linux
   - vim
   - wget
+  - zip
   - zsh
 
 # system bashrc
