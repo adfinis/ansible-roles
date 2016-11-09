@@ -2,7 +2,5 @@
 
 # by ansible used packages
 ansible_packages:
-  - epel-release
   - openssl
   - ca-certificates
-  - libselinux-python
