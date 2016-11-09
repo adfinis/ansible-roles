@@ -4,4 +4,7 @@
   package:
     name: '{{ item }}'
     state: present
+  tags:
+    - 'role::ssh'
+    - 'role::ssh:install'
   with_items: '{{ ssh_packages }}'

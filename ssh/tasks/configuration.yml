@@ -11,8 +11,11 @@
     serole: object_r
     setype: sshd_key_t
     selevel: s0
+  tags:
+    - 'role::ssh'
+    - 'role::ssh:config'
 
-- name: configure ssh
+- name: configure ssh daemon
   template:
     src: etc/ssh/sshd_config.j2
     dest: '{{ ssh_daemon_cfg }}'
@@ -23,4 +26,22 @@
     serole: object_r
     setype: etc_t
     selevel: s0
+  tags:
+    - 'role::ssh'
+    - 'role::ssh:config'
   notify: [ 'check sshd config and restart' ]
+
+- name: configure ssh client
+  template:
+    src: etc/ssh/ssh_config.j2
+    dest: '{{ ssh_cfg }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  tags:
+    - 'role::ssh'
+    - 'role::ssh:config'

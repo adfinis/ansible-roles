@@ -1,12 +1,11 @@
 ---
 
 ssh_packages:
-  - openssh-clients
-  - openssh-server
+  - openssh
 
 ssh_service: sshd
 ssh_daemon_bin: /usr/sbin/sshd
 
 ssh_cfg: /etc/ssh/ssh_config
 ssh_daemon_cfg: /etc/ssh/sshd_config
-ssh_sftp_server: internal-sftp
+ssh_sftp_server: /usr/lib/ssh/sftp-server

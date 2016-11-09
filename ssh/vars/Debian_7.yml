@@ -1,0 +1,37 @@
+---
+
+ssh_packages:
+  - openssh-client
+  - openssh-server
+
+ssh_service: ssh
+ssh_daemon_bin: /usr/sbin/sshd
+
+ssh_cfg: /etc/ssh/ssh_config
+ssh_daemon_cfg: /etc/ssh/sshd_config
+ssh_sftp_server: /usr/lib/openssh/sftp-server
+
+# a list of all host key files (rsa and ed25519 are recommended)
+# default is only rsa; ed25519 is recommended if supported by sshd
+ssh_host_keys:
+  - /etc/ssh/ssh_host_rsa_key
+
+# a list of ciphers used by sshd
+ssh_daemon_ciphers:
+  - aes256-ctr
+  - aes192-ctr
+  - aes128-ctr
+
+# a list of KexAlgorithms used by sshd
+ssh_daemon_kex_algorithms:
+  - diffie-hellman-group-exchange-sha256
+
+# a list of MACs used by sshd
+ssh_daemon_macs:
+  - hmac-sha2-512
+  - hmac-sha2-256
+
+# host key algorithms
+ssh_host_key_algorithms:
+  - ssh-rsa-cert-v01@openssh.com
+  - ssh-rsa

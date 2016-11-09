@@ -7,5 +7,6 @@ ssh_packages:
 ssh_service: ssh
 ssh_daemon_bin: /usr/sbin/sshd
 
+ssh_cfg: /etc/ssh/ssh_config
 ssh_daemon_cfg: /etc/ssh/sshd_config
-ssh_sftp_server: /usr/lib/openssh/sftp-server
+ssh_sftp_server: internal-sftp
