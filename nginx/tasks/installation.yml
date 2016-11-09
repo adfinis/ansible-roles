@@ -30,6 +30,8 @@
     state: present
   when: item is defined and item
   with_items: '{{ nginx_packages }}'
+  notify:
+    - 'remove nginx default vhost'
 
 - name: create directory for vhosts
   file:

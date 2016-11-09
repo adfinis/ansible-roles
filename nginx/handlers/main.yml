@@ -20,3 +20,8 @@
   service:
     name: '{{ nginx_service }}'
     state: reloaded
+
+- name: remove nginx default vhost
+  file:
+    path: '{{ nginx_default_vhost }}'
+    state: absent
