@@ -2,7 +2,7 @@
 # vhost for {{ item.name | d(ansible_hostname+'.'+ansible_domain) }}
 
 server {
-    listen 443 ssl{% if item.default | d(False) %} default{% endif %};
+    listen 443 ssl http2{% if item.default | d(False) %} default{% endif %};
     server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
 
     ##
