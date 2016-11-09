@@ -4,4 +4,7 @@
   package:
     name: '{{ item }}'
     state: present
+  tags:
+    - 'role::ntp'
+    - 'role::ntp:install'
   with_items: '{{ ntp_packages }}'
