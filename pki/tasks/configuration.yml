@@ -1,0 +1,40 @@
+---
+
+- name: check snakeoil private key
+  stat:
+    path: '{{ pki_snakeoil.pkey }}'
+  register: pki_register_snakeoil_pkey
+  tags:
+    - 'role::pki'
+    - 'role::pki:config'
+
+- name: check snakeoil certificate
+  stat:
+    path: '{{ pki_snakeoil.cert }}'
+  register: pki_register_snakeoil_cert
+  tags:
+    - 'role::pki'
+    - 'role::pki:config'
+
+- name: create snakeoil certificates
+  command: 'openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout {{ pki_snakeoil.pkey }} -days 3650 -out {{ pki_snakeoil.cert }} -subj "/C=/ST=/L=/O=/OU=/CN={{ ansible_fqdn }}"'
+  tags:
+    - 'role::pki'
+    - 'role::pki:config'
+  when: not pki_register_snakeoil_pkey.stat.exists or
+        not pki_register_snakeoil_cert.stat.exists
+
+- name: check dhparam file
+  stat:
+    path: '{{ pki_dhparam_file }}'
+  register: pki_register_dhparam
+  tags:
+    - 'role::pki'
+    - 'role::pki:config'
+
+- name: create dhparam
+  command: 'openssl dhparam -out {{ pki_dhparam_file }} {{ pki_dhparam_bits }}'
+  tags:
+    - 'role::pki'
+    - 'role::pki:config'
+  when: not pki_register_dhparam.stat.exists

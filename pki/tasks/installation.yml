@@ -1,0 +1,26 @@
+---
+
+- name: install pki related packages
+  package:
+    name: '{{ item }}'
+    state: present
+  tags:
+    - 'role::pki'
+    - 'role::pki:install'
+  with_items: '{{ pki_packages }}'
+
+- name: create directory for private keys and certificates
+  file:
+    path: '{{ item.path }}'
+    owner: '{{ item.owner }}'
+    group: '{{ item.group }}'
+    mode: '{{ item.mode }}'
+    seuser: system_u
+    serole: object_r
+    setype: cert_t
+    selevel: s0
+    state: directory
+  tags:
+    - 'role::pki'
+    - 'role::pki:install'
+  with_items: '{{ pki_directories }}'
