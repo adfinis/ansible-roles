@@ -120,4 +120,15 @@ server {
         root /var/www;
     }
 {% endif %}
+{% if item.status | d(False) %}
+
+    location {{ item.status.page }} {
+        stub_status on;
+        access_log off;
+{% for allow in item.status.allows %}
+        allow {{ allow }};
+{% endfor %}
+        deny all;
+    }
+{% endif %}
 }

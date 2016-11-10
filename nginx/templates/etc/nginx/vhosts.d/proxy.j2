@@ -45,5 +45,25 @@ server {
 server {
     listen 80{% if item.default | d(False) %} default{% endif %};
     server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
-    return 301 https://$host$request_uri;
+{% if item.acme | d(False) %}
+
+    location ~ /.well-known/acme-challenge/ {
+        root /var/www;
+    }
+{% endif %}
+{% if item.status | d(False) %}
+
+    location {{ item.status.page }} {
+        stub_status on;
+        access_log off;
+{% for allow in item.status.allows %}
+        allow {{ allow }};
+{% endfor %}
+        deny all;
+    }
+{% endif %}
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
 }

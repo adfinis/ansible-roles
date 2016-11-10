@@ -3,6 +3,7 @@
 # packages to install
 nginx_packages:
   - nginx
+  - openssl
 
 # nginx service binary
 nginx_binary: /usr/sbin/nginx
