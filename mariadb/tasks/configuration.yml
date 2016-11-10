@@ -70,17 +70,31 @@
     - 'role::mariadb:config'
   when: mariadb_register_root_password.stdout is defined and mariadb_register_root_password.stdout
 
+- name: create databases
+  mysql_db:
+    name: '{{ item.name }}'
+    encoding: '{{ item.encoding | default("utf8") }}'
+    login_unix_socket: '{{ mariadb_socket }}'
+    state: present
+  tags:
+    - 'role::mariadb'
+    - 'role::mariadb:config'
+  when: item.name is defined and item.name
+  with_items: '{{ mariadb_databases }}'
+
 - name: create users
   mysql_user:
     name: '{{ item.name }}'
     host: '{{ item.host | default("localhost") }}'
     password: '{{ item.password }}'
     update_password: always
+    priv: '{{ item.priv }}'
     login_unix_socket: '{{ mariadb_socket }}'
     state: present
   tags:
     - 'role::mariadb'
     - 'role::mariadb:config'
   when: item.name is defined and item.name and
-        item.password is defined and item.password
+        item.password is defined and item.password and
+        item.priv is defined and item.priv
   with_items: '{{ mariadb_users }}'
