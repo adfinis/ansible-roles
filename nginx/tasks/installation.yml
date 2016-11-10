@@ -58,3 +58,12 @@
   tags:
     - 'role::nginx'
     - 'role::nginx:install'
+
+- name: enable and start nginx service
+  service:
+    name: '{{ nginx_service }}'
+    state: reloaded
+    enabled: yes
+  tags:
+    - 'role::nginx'
+    - 'role::nginx:install'
