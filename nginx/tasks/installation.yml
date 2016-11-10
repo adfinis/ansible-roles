@@ -62,7 +62,7 @@
 - name: enable and start nginx service
   service:
     name: '{{ nginx_service }}'
-    state: reloaded
+    state: started
     enabled: yes
   tags:
     - 'role::nginx'
