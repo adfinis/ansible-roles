@@ -4,6 +4,8 @@
   shell: ulimit -n
   register: nginx_register_ulimit
   changed_when: False
+  tags:
+    - skip_ansible_lint
 
 - name: set fact nginx_fact_file_descriptors
   set_fact:
