@@ -1,0 +1,22 @@
+---
+
+- name: upgrade debian based systems
+  apt:
+    update_cache: yes
+    upgrade: dist
+  tags:
+    - 'role::upgrade'
+    - 'role::upgrade:install'
+  when: ansible_os_family == 'Debian' and
+        dist_upgrade is defined and dist_upgrade
+
+- name: upgrade redhat based systems
+  yum:
+    name: '*'
+    state: latest
+  tags:
+    - 'role::upgrade'
+    - 'role::upgrade:install'
+    - 'skip_ansible_lint'
+  when: ansible_os_family == 'RedHat' and
+        dist_upgrade is defined and dist_upgrade

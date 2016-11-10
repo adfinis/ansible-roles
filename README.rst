@@ -61,6 +61,8 @@ Currently the repository features the following roles:
 +---------+----------------------------------------------------+
 | ssh     | manage ssh server and client                       |
 +---------+----------------------------------------------------+
+| upgrade | install dist upgrades                              |
++---------+----------------------------------------------------+
 
 
 Structure
