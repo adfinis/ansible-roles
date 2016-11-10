@@ -4,30 +4,45 @@
   apt_key:
     url: '{{ nginx_upstream_repo_key }}'
     state: present
+  tags:
+    - 'role::nginx'
+    - 'role::nginx:install'
   when: ansible_os_family == 'Debian'
 
 - name: configure upstream nginx apt repository
   apt_repository:
     repo: 'deb {{ nginx_upstream_repo_baseurl }}/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} nginx'
     state: present
+  tags:
+    - 'role::nginx'
+    - 'role::nginx:install'
   when: ansible_os_family == 'Debian'
 
 - name: configure upstream nginx rpm key
   rpm_key:
     key: '{{ nginx_upstream_repo_key }}'
     state: present
+  tags:
+    - 'role::nginx'
+    - 'role::nginx:install'
   when: ansible_os_family == 'RedHat'
 
 - name: configure upstream nginx yum repository
   template:
     src: etc/yum.repos.d/nginx.repo.j2
     dest: /etc/yum.repos.d/nginx.repo
+  tags:
+    - 'role::nginx'
+    - 'role::nginx:install'
   when: ansible_os_family == 'RedHat'
 
 - name: install nginx-related packages
   package:
     name: '{{ item }}'
     state: present
+  tags:
+    - 'role::nginx'
+    - 'role::nginx:install'
   when: item is defined and item
   with_items: '{{ nginx_packages }}'
   notify:
@@ -40,3 +55,15 @@
     owner: root
     group: root
     mode: 0755
+  tags:
+    - 'role::nginx'
+    - 'role::nginx:install'
+
+- name: enable and start nginx service
+  service:
+    name: '{{ nginx_service }}'
+    state: started
+    enabled: yes
+  tags:
+    - 'role::nginx'
+    - 'role::nginx:install'
