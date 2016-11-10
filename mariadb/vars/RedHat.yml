@@ -27,3 +27,6 @@ mariadb_log_error: /var/log/mariadb/mariadb.err
 
 # mariadb run directory
 mariadb_run_dir: /var/run/mariadb
+
+# mariadb socket file
+mariadb_socket: '{{ mariadb_run_dir }}/mysqld.sock'

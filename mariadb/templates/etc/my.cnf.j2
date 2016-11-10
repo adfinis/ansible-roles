@@ -19,14 +19,14 @@
 # Remember to edit /etc/mysql/debian.cnf when changing the socket location.
 [client]
 port                    = 3306
-socket                  = {{ mariadb_run_dir }}/mysqld.sock
+socket                  = {{ mariadb_socket }}
 
 # Here is entries for some specific programs
 # The following values assume you have at least 32M ram
 
 # This was formally known as [safe_mysqld]. Both versions are currently parsed.
 [mysqld_safe]
-socket                  = {{ mariadb_run_dir }}/mysqld.sock
+socket                  = {{ mariadb_socket }}
 nice                    = 0
 
 [mysqld]
@@ -35,7 +35,7 @@ nice                    = 0
 #
 user                    = mysql
 pid-file                = {{ mariadb_run_dir }}/mysqld.pid
-socket                  = {{ mariadb_run_dir }}/mysqld.sock
+socket                  = {{ mariadb_socket }}
 port                    = 3306
 basedir                 = /usr
 datadir                 = {{ mariadb_datadir }}
