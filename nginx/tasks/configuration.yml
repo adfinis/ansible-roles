@@ -5,11 +5,16 @@
   register: nginx_register_ulimit
   changed_when: False
   tags:
-    - skip_ansible_lint
+    - 'role::nginx'
+    - 'role::nginx:config'
+    - 'skip_ansible_lint'
 
 - name: set fact nginx_fact_file_descriptors
   set_fact:
     nginx_fact_file_descriptors: '{{ nginx_register_ulimit.stdout }}'
+  tags:
+    - 'role::nginx'
+    - 'role::nginx:config'
 
 - name: create nginx main configuration
   template:
@@ -18,6 +23,9 @@
     owner: root
     group: root
     mode: 0644
+  tags:
+    - 'role::nginx'
+    - 'role::nginx:config'
   notify: [ 'Check nginx and reload' ]
 
 - name: create vhosts
@@ -27,5 +35,8 @@
     owner: root
     group: root
     mode: 0644
+  tags:
+    - 'role::nginx'
+    - 'role::nginx:config'
   with_items: '{{ nginx_vhosts }}'
   notify: [ 'Check nginx and reload' ]
