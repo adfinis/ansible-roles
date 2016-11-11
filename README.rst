@@ -57,6 +57,8 @@ Currently the repository features the following roles:
 +----------+---------------------------------------------------------------------------------------------------+
 | mariadb  | manage a mariadb server and client (if mariadb is not available, mysql will be installed instead) |
 +----------+---------------------------------------------------------------------------------------------------+
+| network  | manage network interfaces and ip addresses and routes                                             |
++----------+---------------------------------------------------------------------------------------------------+
 | nginx    | install and manage nginx                                                                          |
 +----------+---------------------------------------------------------------------------------------------------+
 | nodejs   | install nodejs on a server                                                                        |
