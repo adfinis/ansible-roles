@@ -17,6 +17,15 @@
   notify:
     - 'check mariadb and restart'
 
+- name: enable mariadb service
+  service:
+    name: '{{ mariadb_service }}'
+    state: started
+    enabled: yes
+  tags:
+    - 'role::mariadb'
+    - 'role::mariadb:config'
+
 - name: check if roots my.cnf exists
   stat:
     path: '{{ mariadb_root_mycnf }}'
@@ -69,6 +78,12 @@
     - 'role::mariadb'
     - 'role::mariadb:config'
   when: mariadb_register_root_password.stdout is defined and mariadb_register_root_password.stdout
+
+- name: flush handlers
+  meta: flush_handlers
+  tags:
+    - 'role::mariadb'
+    - 'role::mariadb:config'
 
 - name: create databases
   mysql_db:

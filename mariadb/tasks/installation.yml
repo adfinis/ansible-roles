@@ -10,12 +10,3 @@
   with_items: '{{ mariadb_packages }}'
   notify:
     - 'restart mariadb'
-
-- name: enable mariadb service
-  service:
-    name: '{{ mariadb_service }}'
-    state: started
-    enabled: yes
-  tags:
-    - 'role::mariadb'
-    - 'role::mariadb:install'
