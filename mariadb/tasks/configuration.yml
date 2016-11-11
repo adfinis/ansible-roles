@@ -57,6 +57,7 @@
     password: '{{ mariadb_register_root_password.stdout }}'
     update_password: always
     check_implicit_admin: yes
+    login_unix_socket: '{{ mariadb_socket }}'
     state: present
   tags:
     - 'role::mariadb'
