@@ -1,0 +1,6 @@
+---
+
+# PKI related packages
+pki_packages:
+  - openssl
+  - ca-certificates
