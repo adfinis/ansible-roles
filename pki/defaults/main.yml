@@ -1,7 +1,7 @@
 ---
 
 # dhparam bit size
-pki_dhparam_bits: 2048
+pki_dhparam_bits: 4096
 
 # dhparam file path
 pki_dhparam_file: '/etc/ssl/dh{{ pki_dhparam_bits }}.pem'
