@@ -8,10 +8,10 @@ pki_packages:
   - ca-certificates
 
 # PKI private key directory
-pki_directory_keys: /etc/openssl/private
+pki_directory_keys: /etc/ssl/private
 
 # PKI certificate directory
-pki_directory_certs: /etc/openssl/certs
+pki_directory_certs: /etc/ssl/certs
 
 # snakeoil certificate
 pki_snakeoil:
