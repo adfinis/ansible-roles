@@ -70,6 +70,12 @@ server {
     }
 {% endfor %}
 {% endif %}
+{% if item.headers | d(False) %}
+
+{% for header in item.headers %}
+    add_header {{ header.name }} "{{ header.value }}";
+{% endfor %}
+{% endif %}
 }
 
 server {
