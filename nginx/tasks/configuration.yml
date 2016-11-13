@@ -26,7 +26,8 @@
   tags:
     - 'role::nginx'
     - 'role::nginx:config'
-  notify: [ 'Check nginx and reload' ]
+  notify:
+    - 'check nginx and reload'
 
 - name: create vhosts
   template:
@@ -39,4 +40,5 @@
     - 'role::nginx'
     - 'role::nginx:config'
   with_items: '{{ nginx_vhosts }}'
-  notify: [ 'Check nginx and reload' ]
+  notify:
+    - 'check nginx and reload'

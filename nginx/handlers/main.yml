@@ -1,22 +1,24 @@
 ---
 
-- name: Check nginx
+- name: check nginx
   command: '{{ nginx_binary }} -t'
 
-- name: Check nginx and reload
+- name: check nginx and reload
   command: '{{ nginx_binary }} -t'
-  notify: [ 'Reload nginx' ]
+  notify:
+    - 'reload nginx'
 
-- name: Check nginx and restart
+- name: check nginx and restart
   command: '{{ nginx_binary }} -t'
-  notify: [ 'Restart nginx' ]
+  notify:
+    - 'restart nginx'
 
-- name: Restart nginx
+- name: restart nginx
   service:
     name: '{{ nginx_service }}'
     state: restarted
 
-- name: Reload nginx
+- name: reload nginx
   service:
     name: '{{ nginx_service }}'
     state: reloaded
