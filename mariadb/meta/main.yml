@@ -24,3 +24,5 @@ galaxy_info:
   galaxy_tags:
     - mariadb
     - mysql
+    - database
+    - sql
