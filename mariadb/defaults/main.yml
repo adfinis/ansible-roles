@@ -6,6 +6,9 @@ mariadb_datadir: /var/lib/mysql
 # mariadb bind address
 mariadb_bind_address: 127.0.0.1
 
+# mariadb bind port
+mariadb_bind_port: 3306
+
 # mariadb database list
 # mariadb_databases:
 #   - name: database1

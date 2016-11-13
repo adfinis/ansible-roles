@@ -18,7 +18,7 @@
 # escpecially if they contain "#" chars...
 # Remember to edit /etc/mysql/debian.cnf when changing the socket location.
 [client]
-port                    = 3306
+port                    = {{ mariadb_bind_port }}
 socket                  = {{ mariadb_socket }}
 
 # Here is entries for some specific programs
@@ -36,7 +36,7 @@ nice                    = 0
 user                    = mysql
 pid-file                = {{ mariadb_run_dir }}/mysqld.pid
 socket                  = {{ mariadb_socket }}
-port                    = 3306
+port                    = {{ mariadb_bind_port }}
 basedir                 = /usr
 datadir                 = {{ mariadb_datadir }}
 tmpdir                  = /tmp
