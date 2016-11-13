@@ -10,3 +10,5 @@
   with_items: '{{ mariadb_packages }}'
   notify:
     - 'restart mariadb'
+    - 'remove anonymous mysql users'
+    - 'remove test database'

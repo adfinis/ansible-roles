@@ -30,3 +30,8 @@ mariadb_run_dir: /var/run/mysqld
 
 # mariadb socket file
 mariadb_socket: '{{ mariadb_run_dir }}/mysqld.sock'
+
+# mariadb anonymous users
+mariadb_anon_user_hosts:
+  - localhost
+  - '{{ ansible_fqdn }}'
