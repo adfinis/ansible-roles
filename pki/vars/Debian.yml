@@ -6,6 +6,7 @@ pki_packages:
   - openssl-blacklist
   - openssl-blacklist-extra
   - ca-certificates
+  - ssl-cert
 
 # PKI private key directory
 pki_directory_keys: /etc/ssl/private
