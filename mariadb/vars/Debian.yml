@@ -1,0 +1,35 @@
+---
+
+# mariadb related packages
+mariadb_packages:
+  - mariadb-server
+  - mariadb-client
+  - python-mysqldb
+  - pwgen
+
+# mariadb service name
+mariadb_service: mysql
+
+# mariadb server binary
+mariadb_server_bin: /usr/sbin/mysqld
+
+# global mariadb configuration file location
+mariadb_conf: /etc/mysql/my.cnf
+
+# roots my.cnf
+mariadb_root_mycnf: /root/.my.cnf
+
+# mariadb slow log file
+mariadb_log_slow: /var/log/mysql/mysql-slow.log
+
+# mariadb error log file
+mariadb_log_error: /var/log/mysql/error.log
+
+# mariadb run directory
+mariadb_run_dir: /var/run/mysqld
+
+# mariadb socket file
+mariadb_socket: '{{ mariadb_run_dir }}/mysqld.sock'
+
+# mariadb anonymous users
+mariadb_anon_user_hosts: []

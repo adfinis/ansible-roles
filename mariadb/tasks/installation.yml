@@ -1,0 +1,14 @@
+---
+
+- name: install mariadb related packages
+  package:
+    name: '{{ item }}'
+    state: present
+  tags:
+    - 'role::mariadb'
+    - 'role::mariadb:install'
+  with_items: '{{ mariadb_packages }}'
+  notify:
+    - 'restart mariadb'
+    - 'remove anonymous mysql users'
+    - 'remove test database'

@@ -1,0 +1,25 @@
+---
+
+- name: check mariadb and restart
+  shell: '{{ mariadb_server_bin }} --help --verbose --skip-networking 1>/dev/null'
+  notify:
+    - 'restart mariadb'
+
+- name: restart mariadb
+  service:
+    name: '{{ mariadb_service }}'
+    state: restarted
+
+- name: remove anonymous mysql users
+  mysql_user:
+    name: ''
+    host: '{{ item }}'
+    login_unix_socket: '{{ mariadb_socket }}'
+    state: absent
+  with_items: '{{ mariadb_anon_user_hosts }}'
+
+- name: remove test database
+  mysql_db:
+    name: test
+    login_unix_socket: '{{ mariadb_socket }}'
+    state: absent
