@@ -42,14 +42,6 @@
     - 'role::mariadb:config'
   when: not mariadb_register_root_mycnf.stat.exists
 
-- name: show root password
-  debug:
-    msg: '{{ mariadb_register_root_password.stdout }}'
-  tags:
-    - 'role::mariadb'
-    - 'role::mariadb:config'
-  when: mariadb_register_root_password.stdout is defined and mariadb_register_root_password.stdout
-
 - name: create root password
   mysql_user:
     name: root
