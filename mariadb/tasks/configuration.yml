@@ -26,7 +26,7 @@
     - 'role::mariadb'
     - 'role::mariadb:config'
 
-- name: check if roots my.cnf exists
+- name: check if root my.cnf exists
   stat:
     path: '{{ mariadb_root_mycnf }}'
   register: mariadb_register_root_mycnf
@@ -56,7 +56,7 @@
     - 'role::mariadb:config'
   when: mariadb_register_root_password.stdout is defined and mariadb_register_root_password.stdout
 
-- name: create roots my.cnf
+- name: create root my.cnf
   template:
     src: root/my.cnf.j2
     dest: '{{ mariadb_root_mycnf }}'
