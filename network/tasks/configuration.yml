@@ -14,3 +14,18 @@
   tags:
     - 'role::ifconfig'
     - 'role::ifconfig:config'
+
+- name: create global network configuration
+  template:
+    src: 'etc/{{ ansible_os_family }}/network.j2'
+    dest: '{{ ifconfig_cfg_main }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  tags:
+    - 'role::ifconfig'
+    - 'role::ifconfig:config'
