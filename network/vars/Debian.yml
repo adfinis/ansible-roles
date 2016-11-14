@@ -1,5 +1,6 @@
 ---
 
+# network related packages
 ifconfig_packages:
   - bridge-utils
   - ifenslave
@@ -7,4 +8,5 @@ ifconfig_packages:
   - resolvconf
   - vlan
 
-ifconfig_config_sysctl_ipv6_ra: /etc/sysctl.d/AdfinisSyGroup.conf
+# system control configuration file for IPv6 RA
+ifconfig_config_sysctl_ipv6_ra: /etc/sysctl.d/network_ipv6_ra.conf

@@ -4,4 +4,7 @@
   package:
     name: '{{ item }}'
     state: present
+  tags:
+    - 'role::ifconfig'
+    - 'role::ifconfig:install'
   with_items: '{{ ifconfig_packages }}'
