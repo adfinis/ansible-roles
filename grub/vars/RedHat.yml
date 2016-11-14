@@ -3,3 +3,9 @@
 # grub related packages
 grub_packages:
   - grub2
+
+# grub-mkconfig binary
+grub_mkconfig_bin: /usr/sbin/grub2-mkconfig
+
+# grub configuration file
+grub_cfg: /etc/default/grub

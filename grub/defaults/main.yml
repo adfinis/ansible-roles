@@ -1,0 +1,17 @@
+---
+
+# start grub and linux on these consoles
+grub_consoles:
+  - tty0
+  - 'ttyS0,{{ grub_serial.speed }}'
+
+# grub main running configuration
+grub_boot_cfg: /boot/grub/grub.cfg
+
+# grub serial command settings
+grub_serial:
+  speed: 115200
+  unit: 0
+  word: 8
+  parity: 0
+  stop: 1
