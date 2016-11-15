@@ -5,6 +5,6 @@
     name: '{{ item }}'
     state: present
   tags:
-    - 'role::ifconfig'
-    - 'role::ifconfig:install'
-  with_items: '{{ ifconfig_packages }}'
+    - 'role::network'
+    - 'role::network:install'
+  with_items: '{{ network_packages }}'

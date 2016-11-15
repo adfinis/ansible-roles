@@ -6,9 +6,9 @@
     - '{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml'
     - '{{ ansible_os_family }}.yml'
   tags:
-    - 'role::ifconfig'
-    - 'role::ifconfig:install'
-    - 'role::ifconfig:config'
+    - 'role::network'
+    - 'role::network:install'
+    - 'role::network:config'
 
 - include: installation.yml
 - include: configuration.yml

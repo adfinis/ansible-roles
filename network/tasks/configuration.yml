@@ -3,7 +3,7 @@
 - name: do not accept ipv6 default routes
   template:
     src: etc/sysctl.d/network_ipv6_ra.conf.j2
-    dest: '{{ ifconfig_config_sysctl_ipv6_ra }}'
+    dest: '{{ network_config_sysctl_ipv6_ra }}'
     owner: root
     group: root
     mode: 0644
@@ -12,13 +12,13 @@
     setype: etc_t
     selevel: s0
   tags:
-    - 'role::ifconfig'
-    - 'role::ifconfig:config'
+    - 'role::network'
+    - 'role::network:config'
 
 - name: create global network configuration
   template:
     src: 'etc/{{ ansible_os_family }}/network.j2'
-    dest: '{{ ifconfig_cfg_main }}'
+    dest: '{{ network_cfg_main }}'
     owner: root
     group: root
     mode: 0644
@@ -27,13 +27,13 @@
     setype: etc_t
     selevel: s0
   tags:
-    - 'role::ifconfig'
-    - 'role::ifconfig:config'
+    - 'role::network'
+    - 'role::network:config'
 
 - name: create network interface configuration
   template:
     src: 'etc/{{ ansible_os_family }}/{{ item.tmpl }}.j2'
-    dest: '{{ ifconfig_cfg_dir }}/ifcfg-{{ item.name }}'
+    dest: '{{ network_cfg_dir }}/ifcfg-{{ item.name }}'
     owner: root
     group: root
     mode: 0644
@@ -42,8 +42,8 @@
     setype: net_conf_t
     selevel: s0
   tags:
-    - 'role::ifconfig'
-    - 'role::ifconfig:config'
+    - 'role::network'
+    - 'role::network:config'
   when: item.name is defined and item.name and
         item.type is defined and item.type
-  with_items: '{{ ifconfig_interfaces }}'
+  with_items: '{{ network_interfaces }}'
