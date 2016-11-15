@@ -1,0 +1,11 @@
+---
+# -*- coding: utf-8 -*-
+
+extends: default
+
+rules:
+  line-length: disable
+  brackets: disable
+  truthy: disable
+
+# vim: set ts=2 sw=2 tw=2 :
