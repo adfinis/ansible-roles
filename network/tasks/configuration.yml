@@ -29,3 +29,21 @@
   tags:
     - 'role::ifconfig'
     - 'role::ifconfig:config'
+
+- name: create network interface configuration
+  template:
+    src: 'etc/{{ ansible_os_family }}/{{ item.tmpl }}.j2'
+    dest: '{{ ifconfig_cfg_dir }}/ifcfg-{{ item.name }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: net_conf_t
+    selevel: s0
+  tags:
+    - 'role::ifconfig'
+    - 'role::ifconfig:config'
+  when: item.name is defined and item.name and
+        item.type is defined and item.type
+  with_items: '{{ ifconfig_interfaces }}'
