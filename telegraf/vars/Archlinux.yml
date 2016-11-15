@@ -18,3 +18,6 @@ telegraf_daemon_bin: /usr/bin/telegraf
 
 # telegraf service name
 telegraf_service: telegraf
+
+# rsyslog configuration file for telegraf
+telegraf_rsyslog_cfg: /etc/rsyslog.d/telegraf.conf
