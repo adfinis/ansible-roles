@@ -4,10 +4,16 @@
   package:
     name: '{{ item }}'
     state: present
+  tags:
+    - 'role::snmp'
+    - 'role::snmp:install'
   with_items: '{{ snmp_packages }}'
 
 - name: Install additional snmp related packages
   package:
     name: '{{ item }}'
     state: present
+  tags:
+    - 'role::snmp'
+    - 'role::snmp:install'
   with_items: '{{ snmp_additional_packages }}'
