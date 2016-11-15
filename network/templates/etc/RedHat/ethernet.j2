@@ -1,0 +1,22 @@
+TYPE=Ethernet
+HWADDR="{{ item.hwaddress }}"
+DEVICE="{{ item.name }}"
+NAME="{{ item.name }}"
+
+ONBOOT=yes
+BOOTPROTO=static
+USERCTL=no
+
+IPADDR={{ item.ipv4.address }}
+PREFIX={{ item.ipv4.netmask }}
+GATEWAY={{ item.ipv4.gateway }}
+DEFROUTE=yes
+PEERDNS=no
+
+IPV6INIT=no
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_PEERDNS=yes
+IPV6_PEERROUTES=yes
+IPV6_PRIVACY=yes

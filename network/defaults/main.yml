@@ -10,6 +10,7 @@ network_resolv_nameservers: []
 # netowrk_interfaces:
 #   - name: eth0
 #     tmpl: ethernet
+#     hwaddress: 00:11:22:33:44:55
 #     ipv4:
 #       - type: static
 #         address: 192.168.1.10

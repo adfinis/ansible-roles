@@ -1,0 +1,72 @@
+# {{ ansible_managed }}
+
+auto {{ item.name }}
+allow-hotplug {{ item.name }}
+{% if item.ipv4 | d() %}
+
+{% for ipv4 in item.ipv4 %}
+iface {{ item.name }} inet {{ ipv4.type }}
+{% if ipv4.type == "static" %}
+    address     {{ ipv4.address }}
+    netmask     {{ ipv4.netmask | d("255.255.255.0") }}
+{% if ipv4.gateway | d() %}
+    gateway     {{ ipv4.gateway }}
+{% endif %}
+{% endif %}
+{% if ipv4.hwaddress | d() %}
+    hwaddress   {{ ipv4.hwaddress }}
+{% endif %}
+{% if ipv4.pre_up | d() %}
+    pre-up      {{ ipv4.pre_up }}
+{% endif %}
+{% if ipv4.up | d() %}
+    up          {{ ipv4.up }}
+{% endif %}
+{% if ipv4.post_up | d() %}
+    post-up     {{ ipv4.post_up }}
+{% endif %}
+{% if ipv4.down | d() %}
+    down        {{ ipv4.down }}
+{% endif %}
+{% if ipv4.pre_down | d() %}
+    pre-down    {{ ipv4.pre_down }}
+{% endif %}
+{% if ipv4.post_down | d() %}
+    post-down   {{ ipv4.post_down }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% if item.ipv6 | d() %}
+
+{% for ipv6 in item.ipv6 %}
+iface {{ item.name }} inet6 {{ ipv6.type }}
+{% if ipv6.type == "static" %}
+    address     {{ ipv6.address }}
+    netmask     {{ ipv6.netmask | d("64") }}
+{% if ipv6.gateway | d() %}
+    gateway     {{ ipv6.gateway }}
+{% endif %}
+{% endif %}
+{% if ipv6.hwaddress | d() %}
+    hwaddress   {{ ipv6.hwaddress }}
+{% endif %}
+{% if ipv6.pre_up | d() %}
+    pre-up      {{ ipv6.pre_up }}
+{% endif %}
+{% if ipv6.up | d() %}
+    up          {{ ipv6.up }}
+{% endif %}
+{% if ipv6.post_up | d() %}
+    post-up     {{ ipv6.post_up }}
+{% endif %}
+{% if ipv6.down | d() %}
+    down        {{ ipv6.down }}
+{% endif %}
+{% if ipv6.pre_down | d() %}
+    pre-down    {{ ipv6.pre_down }}
+{% endif %}
+{% if ipv6.post_down | d() %}
+    post-down   {{ ipv6.post_down }}
+{% endif %}
+{% endfor %}
+{% endif %}
