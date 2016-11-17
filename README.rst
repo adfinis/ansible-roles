@@ -61,6 +61,8 @@ Currently the repository features the following roles:
 +----------+---------------------------------------------------------------------------------------------------+
 | pki      | PKI related stuff, like generate certificates and diffie-hellman parameters                       |
 +----------+---------------------------------------------------------------------------------------------------+
+| postfix  | manage postfix to send and receive email                                                          |
++----------+---------------------------------------------------------------------------------------------------+
 | rsyslog  | install and configure rsyslog                                                                     |
 +----------+---------------------------------------------------------------------------------------------------+
 | snmp     | manage snmp server and client                                                                     |
