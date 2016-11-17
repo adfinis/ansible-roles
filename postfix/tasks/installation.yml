@@ -1,0 +1,10 @@
+---
+
+- name: install postfix related packages
+  package:
+    name: '{{ item }}'
+    state: present
+  tags:
+    - 'role::postfix'
+    - 'role::postfix:install'
+  with_items: '{{ postfix_packages }}'

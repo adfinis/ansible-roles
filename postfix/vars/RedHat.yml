@@ -1,0 +1,5 @@
+---
+
+# postfix related packages
+postfix_packages:
+  - postfix
