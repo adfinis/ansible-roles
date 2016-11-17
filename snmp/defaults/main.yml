@@ -8,7 +8,7 @@ snmp_additional_packages: []
 snmp_logging_options: ''
 
 # Path on the remote host where extension scripts are stored
-snmp_extension_scripts: '/usr/local/lib/snmpd'
+snmp_extension_scripts: /usr/local/lib/snmpd
 
 
 # -------------------------------------------
@@ -59,7 +59,7 @@ snmp_load: true
 
 # Name of the load average "profile" to use, see ``snmp_load_percent_map`` and
 # ``snmp_load_weight_map`` variables for list of profiles.
-snmp_load_profile: 'default'
+snmp_load_profile: default
 
 # Name of the profile used to define amount of available CPU power taken into
 # account for load average profile calculation. See ``snmp_load_percent_map``
@@ -72,7 +72,7 @@ snmp_load_percent: '{{ snmp_load_profile }}'
 snmp_load_weight: '{{ snmp_load_profile }}'
 
 # Base value used to calculate load average profiles - number of vCPU cores.
-snmp_load_base:  '{{ ansible_processor_vcpus }}'
+snmp_load_base: '{{ ansible_processor_vcpus }}'
 
 # Dict with CPU percentage profiles.
 #
@@ -85,10 +85,10 @@ snmp_load_base:  '{{ ansible_processor_vcpus }}'
 # Values lower than 100% mean that alerts will be fired earlier, values higher
 # than 100% give processes more time to do the work before firing the alerts.
 snmp_load_percent_map:
-  'default':
-    - '90'
-    - '90'
-    - '100'
+  default:
+    - 90
+    - 90
+    - 100
 
 # Dict with load average weight profiles.
 #
@@ -101,20 +101,20 @@ snmp_load_percent_map:
 # It's hard to explain, essentially it's another parameter which you can use to
 # tune the load average monitoring.
 snmp_load_weight_map:
-  'default':
-    - '1.5'
-    - '1.7'
-    - '1.8'
+  default:
+    - 1.5
+    - 1.7
+    - 1.8
 
 # 1 minute load average value which will trigger a SNMP trap.
-snmp_load_1min:  '{{ (((snmp_load_base | float) *
-                        (snmp_load_percent_map[snmp_load_percent][0] | float) / 100) | float *
-                         snmp_load_weight_map[snmp_load_weight][0] | float) }}'
+snmp_load_1min: '{{ (((snmp_load_base | float) *
+                       (snmp_load_percent_map[snmp_load_percent][0] | float) / 100) | float *
+                        snmp_load_weight_map[snmp_load_weight][0] | float) }}'
 
 # 5 minute load average value which will trigger a SNMP trap.
-snmp_load_5min:  '{{ (((snmp_load_base | float) *
-                        (snmp_load_percent_map[snmp_load_percent][1] | float) / 100) | float *
-                         snmp_load_weight_map[snmp_load_weight][1] | float) }}'
+snmp_load_5min: '{{ (((snmp_load_base | float) *
+                       (snmp_load_percent_map[snmp_load_percent][1] | float) / 100) | float *
+                        snmp_load_weight_map[snmp_load_weight][1] | float) }}'
 
 # 15 minute load average value which will trigger a SNMP trap.
 snmp_load_15min: '{{ (((snmp_load_base | float) *
@@ -148,11 +148,11 @@ snmp_account_local_password: ''
 # Accounts list
 snmp_accounts_list: []
 
-#  - name: 'user1'
-#    authProtocol: '(MD5|SHA)'              # optional
-#    authPassword: 'authpassphrase'
-#    privProtocol: '(DES|AES)'              # optional
-#    privPassword: 'privpassphrase'
-#  - name: 'user2'
-#    authPassword: 'authpassphrase_user2'
-#    privPassword: 'privpassphrase_user2'
+#  - name: user1
+#    authProtocol: (MD5|SHA)                # optional
+#    authPassword: authpassphrase
+#    privProtocol: (DES|AES)                # optional
+#    privPassword: privpassphrase
+#  - name: user2
+#    authPassword: authpassphrase_user2
+#    privPassword: privpassphrase_user2

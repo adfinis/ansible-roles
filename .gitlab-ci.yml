@@ -1,16 +1,23 @@
+---
 # -*- coding: utf-8 -*-
 
 before_script:
-  - pip install --upgrade ansible ansible-lint
+  - pip install --upgrade ansible ansible-lint yamllint
+  - ansible --version
+  - ansible-lint --version
+  - yamllint --version
 
 stages:
   - lint
 
-run-lint:
+ansible-lint:
   stage: lint
   script:
-    - ansible --version
-    - ansible-lint --version
-    - for dir in *; do test -d "$dir" && ansible-lint "$dir"; done
+    - for dir in *; do test -d "$dir" && echo "$dir" && ansible-lint "$dir"; done
+
+yamllint:
+  stage: lint
+  script:
+    - for dir in *; do test -d "$dir" && echo "$dir" && yamllint -c ./.testenv/yamllint.yml "$dir"; done
 
 # vim: set ts=2 sw=2 tw=2 :
