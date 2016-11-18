@@ -1,0 +1,57 @@
+---
+
+- name: create telegraf main configuration
+  template:
+    src: etc/telegraf/telegraf.conf.j2
+    dest: '{{ telegraf_main_cfg }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  tags:
+    - 'role::telegraf'
+    - 'role::telegraf:config'
+  notify:
+    - 'check telegraf config and restart'
+
+- name: create telegraf plugin configuration
+  template:
+    src: etc/telegraf/telegraf.d/{{ item }}.j2
+    dest: '{{ telegraf_plugin_cfg }}/{{ item }}.conf'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  tags:
+    - 'role::telegraf'
+    - 'role::telegraf:config'
+  with_flattened:
+    - '{{ telegraf_plugins_global }}'
+    - '{{ telegraf_plugins_group | default([]) }}'
+    - '{{ telegraf_plugins_host | default([]) }}'
+  notify:
+    - 'check telegraf config and restart'
+
+- name: create rsyslog configuration for telegraf
+  template:
+    src: etc/rsyslog.d/telegraf.conf.j2
+    dest: '{{ telegraf_rsyslog_cfg }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: syslog_conf_t
+    selevel: s0
+  tags:
+    - 'role::telegraf'
+    - 'role::telegraf:config'
+  when: telegraf_rsyslog
+  notify:
+    - 'restart rsyslogd'

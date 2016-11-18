@@ -1,0 +1,5 @@
+# /etc/rsyslog.d/telegraf.conf
+# {{ ansible_managed }}
+
+# don't log DEBUG, INFO and NOTICE
+if $programname == 'telegraf' and $syslogseverity >= '{{ telegraf_rsyslog_severity }}' then stop

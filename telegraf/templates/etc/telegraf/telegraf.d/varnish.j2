@@ -1,0 +1,14 @@
+## {{ ansible_managed }}
+
+# A plugin to collect stats from Varnish HTTP Cache
+[[inputs.varnish]]
+  ## The default location of the varnishstat binary can be overridden with:
+  binary = "/usr/bin/varnishstat"
+
+  ## By default, telegraf gather stats for 3 metric points.
+  ## Setting stats will override the defaults shown below.
+  ## Glob matching can be used, ie, stats = ["MAIN.*"]
+  ## stats may also be set to ["*"], which will collect all stats
+  stats = ["MAIN.cache_hit", "MAIN.cache_miss", "MAIN.uptime"]
+
+# vim: set sw=2 ts=2 et wrap tw=76 :

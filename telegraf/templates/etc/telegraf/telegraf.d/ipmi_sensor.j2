@@ -1,0 +1,12 @@
+## {{ ansible_managed }}
+
+# Read metrics from one or many bare metal servers
+[[inputs.ipmi_sensor]]
+  ## specify servers via a url matching:
+  ##  [username[:password]@][protocol[(address)]]
+  ##  e.g.
+  ##    root:passwd@lan(127.0.0.1)
+  ##
+  servers = ["USERID:PASSW0RD@lan(192.168.1.1)"]
+
+# vim: set sw=2 ts=2 et wrap tw=76 :

@@ -1,0 +1,15 @@
+## {{ ansible_managed }}
+
+# Read specific statistics per cgroup
+[[inputs.cgroup]]
+  ## Directories in which to look for files, globs are supported.
+	# paths = [
+	#   "/cgroup/memory",
+	#   "/cgroup/memory/child1",
+	#   "/cgroup/memory/child2/*",
+	# ]
+	## cgroup stat fields, as file names, globs are supported.
+	## these file names are appended to each path from above.
+	# files = ["memory.*usage*", "memory.limit_in_bytes"]
+
+# vim: set sw=2 ts=2 et wrap tw=76 :

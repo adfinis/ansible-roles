@@ -1,0 +1,18 @@
+## {{ ansible_managed }}
+
+# Read metrics from one or many prometheus clients
+[[inputs.prometheus]]
+  ## An array of urls to scrape metrics from.
+  urls = ["http://localhost:9100/metrics"]
+
+  ## Use bearer token for authorization
+  # bearer_token = /path/to/bearer/token
+
+  ## Optional SSL Config
+  # ssl_ca = /path/to/cafile
+  # ssl_cert = /path/to/certfile
+  # ssl_key = /path/to/keyfile
+  ## Use SSL but skip chain & host verification
+  # insecure_skip_verify = false
+
+# vim: set sw=2 ts=2 et wrap tw=76 :

@@ -1,0 +1,9 @@
+## {{ ansible_managed }}
+
+# Read CouchDB Stats from one or more servers
+[[inputs.couchdb]]
+  ## Works with CouchDB stats endpoints out of the box
+  ## Multiple HOSTs from which to read CouchDB stats:
+  hosts = ["http://localhost:8086/_stats"]
+
+# vim: set sw=2 ts=2 et wrap tw=76 :

@@ -1,0 +1,25 @@
+## {{ ansible_managed }}
+
+# Query given DNS server and gives statistics
+[[inputs.dns_query]]
+  ## servers to query
+  servers = [
+    "{{ telegraf_plugin_dns_query.servers | join('", "') }}"
+  ]
+
+  ## Domains or subdomains to query. "."(root) is default
+  domains = [
+    "{{ telegraf_plugin_dns_query.domains | default(["."]) | join('", "') }}"
+  ]
+
+  ## Query record type. Default is "A"
+  ## Posible values: A, AAAA, CNAME, MX, NS, PTR, TXT, SOA, SPF, SRV.
+  record_type = "{{ telegraf_plugin_dns_query.record_type | default("A") }}"
+
+  ## Dns server port. 53 is default
+  port = {{ telegraf_plugin_dns_query.port | default("53") }}
+
+  ## Query timeout in seconds. Default is 2 seconds
+  timeout = {{ telegraf_plugin_dns_query.timeout | default("2") }}
+
+# vim: set sw=2 ts=2 et wrap tw=76 :

@@ -1,0 +1,53 @@
+---
+
+# default data collection interval for all inputs
+telegraf_interval: "10s"
+
+# rounds collection interval to 'interval'
+# ie, if interval="10s" then always collect on :00, :10, :20, etc.
+telegraf_round_interval: true
+
+# default flushing interval for all outputs. You shouldn't set this below
+# interval. Maximum flush_interval will be flush_interval + flush_jitter
+telegraf_flush_interval: "10s"
+
+# telegraf output plugins to load
+telegraf_output:
+  - influxdb
+
+# telegraf influxdb configuration
+telegraf_output_influxdb:
+  urls:
+    - http://localhost:8086
+  database: telegraf
+
+# telegraf service input plugins to load
+telegraf_service_input: []
+
+# telegraf plugins
+telegraf_plugins_global:
+  - cpu
+  - disk
+  - diskio
+  - kernel
+  - mem
+  - net
+  - netstat
+  - ntpq
+  - processes
+  - swap
+  - system
+
+# configure rsyslog to log lesser
+telegraf_rsyslog: True
+
+# rsyslog severity
+# 0 Emergency: system is unusable
+# 1 Alert: action must be taken immediately
+# 2 Critical: critical conditions
+# 3 Error: error conditions
+# 4 Warning: warning conditions
+# 5 Notice: normal but significant condition
+# 6 Informational: informational messages
+# 7 Debug: debug-level messages
+telegraf_rsyslog_severity: 5

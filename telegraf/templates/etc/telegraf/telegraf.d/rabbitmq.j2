@@ -1,0 +1,21 @@
+## {{ ansible_managed }}
+
+# Read metrics from one or many RabbitMQ servers via the management API
+[[inputs.rabbitmq]]
+  # url = "http://localhost:15672"
+  # name = "rmq-server-1" # optional tag
+  # username = "guest"
+  # password = "guest"
+
+  ## Optional SSL Config
+  # ssl_ca = "/etc/telegraf/ca.pem"
+  # ssl_cert = "/etc/telegraf/cert.pem"
+  # ssl_key = "/etc/telegraf/key.pem"
+  ## Use SSL but skip chain & host verification
+  # insecure_skip_verify = false
+
+  ## A list of nodes to pull metrics about. If not specified, metrics for
+  ## all nodes are gathered.
+  # nodes = ["rabbit@node1", "rabbit@node2"]
+
+# vim: set sw=2 ts=2 et wrap tw=76 :
