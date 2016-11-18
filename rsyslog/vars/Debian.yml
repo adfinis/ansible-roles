@@ -1,0 +1,14 @@
+---
+
+# rsyslog related packages
+rsyslog_packages:
+  - rsyslog
+
+# rsyslog service name
+rsyslog_service: rsyslog
+
+# rsyslog main configuration
+rsyslog_cfg: /etc/rsyslog.conf
+
+# rsyslog configuration directory
+rsyslog_cfg_dir: /etc/rsyslog.d
