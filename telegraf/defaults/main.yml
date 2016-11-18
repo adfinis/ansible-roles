@@ -1,14 +1,14 @@
 ---
 
-# Default data collection interval for all inputs
+# default data collection interval for all inputs
 telegraf_interval: "10s"
 
-## Rounds collection interval to 'interval'
-## ie, if interval="10s" then always collect on :00, :10, :20, etc.
+# rounds collection interval to 'interval'
+# ie, if interval="10s" then always collect on :00, :10, :20, etc.
 telegraf_round_interval: true
 
-## Default flushing interval for all outputs. You shouldn't set this below
-## interval. Maximum flush_interval will be flush_interval + flush_jitter
+# default flushing interval for all outputs. You shouldn't set this below
+# interval. Maximum flush_interval will be flush_interval + flush_jitter
 telegraf_flush_interval: "10s"
 
 # telegraf output plugins to load
