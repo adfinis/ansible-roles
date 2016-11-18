@@ -23,7 +23,7 @@
     name: influxdata
     description: InfluxDB Repository - RHEL \$releasever
     baseurl: '{{ telegraf_repo_baseurl }}'
-    enabled: True
+    enabled: yes
     gpgcheck: True
     gpgkey: '{{ telegraf_repo_key }}'
   tags:
@@ -44,7 +44,7 @@
   service:
     name: '{{ telegraf_service }}'
     state: started
-    enabled: True
+    enabled: yes
   tags:
     - 'role::telegraf'
     - 'role::telegraf:install'
