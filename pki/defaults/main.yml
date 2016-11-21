@@ -5,3 +5,18 @@ pki_dhparam_bits: 4096
 
 # dhparam file path
 pki_dhparam_file: '/etc/ssl/dh{{ pki_dhparam_bits }}.pem'
+
+# backup system and path for certificates and keys
+# the tasks will be delegated to this system
+pki_backup:
+  system: ''
+  path: ''
+
+# certificates and keys to backup
+# filename within the ``pki_directory_certs`` and ``pki_directory_keys``
+# directories (without ending.pem)
+# e.g.
+# pki_backup_certs:
+#   - www.example.org -> /etc/ssl/private/www.example.org.pem
+#                     -> /etc/ssl/certs/www.example.org.pem
+pki_backup_certs: []

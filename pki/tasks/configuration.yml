@@ -38,3 +38,23 @@
     - 'role::pki'
     - 'role::pki:config'
   when: not pki_register_dhparam.stat.exists
+
+- name: copy keys to the backup system
+  fetch:
+    src: '{{ pki_directory_keys }}/{{ item }}.pem'
+    dest: '{{ pki_backup.path }}'
+  delegate_to: '{{ pki_backup.system }}'
+  when: pki_backup is defined and
+        pki_backup.system is defined and pki_backup.system and
+        pki_backup.path is defined and pki_backup.path
+  with_items: '{{ pki_backup_certs }}'
+
+- name: copy certificates to the backup system
+  fetch:
+    src: '{{ pki_directory_certs }}/{{ item }}.pem'
+    dest: '{{ pki_backup.path }}'
+  delegate_to: '{{ pki_backup.system }}'
+  when: pki_backup is defined and
+        pki_backup.system is defined and pki_backup.system and
+        pki_backup.path is defined and pki_backup.path
+  with_items: '{{ pki_backup_certs }}'
