@@ -4,7 +4,7 @@
 [[inputs.nginx]]
   ## An array of Nginx stub_status URI to gather stats.
   urls = [
-    "{{ telegraf_plugin_nginx | default(["http://localhost/status"]) | join('", "') }}"
+    "{{ telegraf_plugin_nginx | default(["http://localhost/status"]) | sort | join('", "') }}"
   ]
 
 # vim: set sw=2 ts=2 et wrap tw=76 :
