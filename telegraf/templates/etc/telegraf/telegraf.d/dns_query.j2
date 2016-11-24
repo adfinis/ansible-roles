@@ -4,12 +4,12 @@
 [[inputs.dns_query]]
   ## servers to query
   servers = [
-    "{{ telegraf_plugin_dns_query.servers | join('", "') }}"
+    "{{ telegraf_plugin_dns_query.servers | sort | join('", "') }}"
   ]
 
   ## Domains or subdomains to query. "."(root) is default
   domains = [
-    "{{ telegraf_plugin_dns_query.domains | default(["."]) | join('", "') }}"
+    "{{ telegraf_plugin_dns_query.domains | default(["."]) | sort | join('", "') }}"
   ]
 
   ## Query record type. Default is "A"

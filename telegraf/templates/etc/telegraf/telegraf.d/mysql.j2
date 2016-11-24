@@ -11,7 +11,7 @@
   #
   ## If no servers are specified, then localhost is used as the host.
   servers = [
-    "{{ telegraf_plugin_mysql.servers | default(["tcp(127.0.0.1:3306)/"]) | join('", "') }}"
+    "{{ telegraf_plugin_mysql.servers | default(["tcp(127.0.0.1:3306)/"]) | sort | join('", "') }}"
   ]
   ## the limits for metrics form perf_events_statements
   perf_events_statements_digest_text_limit  = {{ telegraf_plugin_mysql.perf_events_statements_digest_text_limit | default("120") }}
@@ -21,7 +21,7 @@
   ## if the list is empty, then metrics are gathered from all databasee tables
 {% if telegraf_plugin_mysql.table_schema_databases | default(False) %}
   table_schema_databases                    = [
-    "{{ telegraf_plugin_mysql.table_schema_databases | default([]) | join('", "') }}"
+    "{{ telegraf_plugin_mysql.table_schema_databases | default([]) | sort | join('", "') }}"
   ]
 {% else %}
   table_schema_databases                    = []
