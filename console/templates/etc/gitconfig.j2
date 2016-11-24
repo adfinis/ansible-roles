@@ -1,0 +1,33 @@
+# {{ ansible_managed }}
+# system wide git configuration
+
+[push]
+    default     = matching
+
+[pull]
+    rebase      = true
+
+[branch]
+    autosetuprebase = always
+
+[color]
+    ui          = true
+    branch      = auto
+    diff        = auto
+    interactive = auto
+    status      = auto
+
+[color "status"]
+    header      = normal
+    added       = green
+    updated     = cyan
+    changed     = yellow
+    untracked   = red
+    nobranch    = red
+    branch      = normal bold
+
+[alias]
+    lg          = log --graph --all --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset'
+    graph       = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset'
+    cm          = commit -m
+    amend       = commit --amend

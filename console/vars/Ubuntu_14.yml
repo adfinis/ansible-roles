@@ -60,3 +60,6 @@ console_bashrc: /etc/bash.bashrc
 
 # system vimrc
 console_vimrc: /etc/vim/vimrc
+
+# system gitconfig
+console_gitconfig: /etc/gitconfig
