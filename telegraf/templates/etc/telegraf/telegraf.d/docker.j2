@@ -7,14 +7,21 @@
   ##   To use environment variables (ie, docker-machine), set endpoint = "ENV"
   endpoint = "unix:///var/run/docker.sock"
   ## Only collect metrics for these containers, collect all if empty
+{% if telegraf_plugin_docker.names | default(False) %}
+  container_names = [
+    "{{ telegraf_plugin_docker.names | sort | join('", "') }}"
+  ]
+{% else %}
   container_names = []
+{% endif %}
+
   ## Timeout for docker list, info, and stats commands
-  timeout = "5s"
+  timeout = "{{ telegraf_plugin_docker.timeout | default("5s") }}"
 
   ## Whether to report for each container per-device blkio (8:0, 8:1...) and
   ## network (eth0, eth1, ...) stats or not
-  perdevice = true
+  perdevice = {{ telegraf_plugin_docker.perdevice | default('true') }}
   ## Whether to report for each container total blkio and network stats or not
-  total = false
+  total = {{ telegraf_plugin_docker.perdevice | default('false') }}
 
 # vim: set sw=2 ts=2 et wrap tw=76 :
