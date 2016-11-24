@@ -8,50 +8,47 @@ sysContact      {{ snmp_sys_contact }}
 
 sysServices     72
 
-{% if snmp_account_local_username|d() and snmp_account_local_username %}
+{% if snmp_account_local_username | d() and snmp_account_local_username %}
 createUser      {{ snmp_account_local_username }} SHA {{ snmp_account_local_password }} AES {{ snmp_account_local_password }}
 {% endif %}
-{% if snmp_accounts_list|d() and snmp_accounts_list %}
+{% if snmp_accounts_list | d() and snmp_accounts_list %}
 {% for snmp_account in snmp_accounts_list %}
-{% if snmp_account.name|d() and snmp_account.name and snmp_account.authPassword|d() and snmp_account.authPassword and snmp_account.privPassword|d() and snmp_account.privPassword %}
-createUser      {{ snmp_account.name }} {% if snmp_account.authProtocol|d() %}{{ snmp_account.authProtocol }}{% else %}SHA{% endif %} {{ snmp_account.authPassword }} {% if snmp_account.privProtocol|d() %}{{ snmp_account.privProtocol }}{% else %}AES{% endif %} {{ snmp_account.privPassword }}
+{% if snmp_account.name | d() and snmp_account.name and snmp_account.authPassword | d() and snmp_account.authPassword and snmp_account.privPassword | d() and snmp_account.privPassword %}
+createUser      {{ snmp_account.name }} {% if snmp_account.authProtocol | d() %}{{ snmp_account.authProtocol }}{% else %}SHA{% endif %} {{ snmp_account.authPassword }} {% if snmp_account.privProtocol | d() %}{{ snmp_account.privProtocol }}{% else %}AES{% endif %} {{ snmp_account.privPassword }}
 {% endif %}
 {% endfor %}
 {% endif %}
 
-{% if snmp_account_local_username|d() and snmp_account_local_username %}
+{% if snmp_account_local_username | d() and snmp_account_local_username %}
 roUser          {{ snmp_account_local_username }} priv
 {% endif %}
-{% if snmp_accounts_list|d() and snmp_accounts_list %}
+{% if snmp_accounts_list | d() and snmp_accounts_list %}
 {% for snmp_account in snmp_accounts_list %}
 roUser          {{ snmp_account.name }} priv
 {% endfor %}
 {% endif %}
 
-{% if snmp_rocommunity|d() and snmp_rocommunity %}
+{% if snmp_rocommunity | d() and snmp_rocommunity %}
 {% for community in snmp_rocommunity %}
-{% if community.passwd|d(False) and community.passwd %}
-rocommunity {{ community.passwd }} {{ community.source|d('') }}
+{% if community.passwd | d(False) and community.passwd %}
+rocommunity {{ community.passwd }} {{ community.source | d('') }}
 {% endif %}
 {% endfor %}
 {% endif %}
-{% if snmp_rwcommunity|d() and snmp_rwcommunity %}
+{% if snmp_rwcommunity | d() and snmp_rwcommunity %}
 {% for community in snmp_rwcommunity %}
-{% if community.passwd|d(False) and community.passwd %}
-rwcommunity {{ community.passwd }} {{ community.source|d('') }}
+{% if community.passwd | d(False) and community.passwd %}
+rwcommunity {{ community.passwd }} {{ community.source | d('') }}
 {% endif %}
 {% endfor %}
 {% endif %}
 
 master agentx
 
-{% if snmp_load|d() and snmp_load %}
+{% if snmp_load | d() and snmp_load %}
 # CPU load average monitoring
 # ===========================
 # Profile: {{ snmp_load_profile }}
-# {{ "%-5s = (%s * %-5s * %s" | format("1min", snmp_load_base, snmp_load_percent_map[snmp_load_percent][0] + "%)", snmp_load_weight_map[snmp_load_weight][0]) }}
-# {{ "%-5s = (%s * %-5s * %s" | format("5min", snmp_load_base, snmp_load_percent_map[snmp_load_percent][1] + "%)", snmp_load_weight_map[snmp_load_weight][1]) }}
-# {{ "%-5s = (%s * %-5s * %s" | format("15min", snmp_load_base, snmp_load_percent_map[snmp_load_percent][2] + "%)", snmp_load_weight_map[snmp_load_weight][2]) }}
 
 load {{ snmp_load_1min }} {{ snmp_load_5min }} {{ snmp_load_15min }}
 {% endif %}
