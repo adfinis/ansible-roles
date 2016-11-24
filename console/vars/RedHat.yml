@@ -53,3 +53,6 @@ console_bashrc: /etc/bashrc
 
 # system vimrc
 console_vimrc: /etc/vimrc
+
+# system gitconfig
+console_gitconfig: /etc/gitconfig

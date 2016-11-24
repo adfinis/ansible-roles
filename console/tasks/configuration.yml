@@ -29,3 +29,18 @@
   tags:
     - 'role::console'
     - 'role::console:config'
+
+- name: configure git
+  template:
+    src: etc/gitconfig.j2
+    dest: '{{ console_gitconfig }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  tags:
+    - 'role::console'
+    - 'role::console:config'
