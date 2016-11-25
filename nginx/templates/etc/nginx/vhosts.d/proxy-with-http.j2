@@ -1,0 +1,85 @@
+# {{ ansible_managed }}
+# vhost for {{ item.name | d(ansible_hostname+'.'+ansible_domain) }}
+
+server {
+    listen 443 ssl http2{% if item.default | d(False) %} default{% endif %};
+    server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
+
+    ##
+    # SSL Settings
+    ##
+
+    ssl_prefer_server_ciphers on;
+    ssl_protocols {{ nginx_ssl_protocols | join(' ') }};
+    ssl_ciphers {{ nginx_ssl_ciphers | join(':') }};
+
+    ssl_session_cache shared:SSL:50m;
+    ssl_session_timeout 5m;
+
+    ssl_certificate {{ item.ssl_crt | d('/etc/ssl/certs/ssl-cert-snakeoil.pem') }};
+    ssl_certificate_key {{ item.ssl_key | d('/etc/ssl/private/ssl-cert-snakeoil.key') }};
+{% if item.ssl_dhparam | d(False) %}
+
+    ssl_dhparam {{ item.ssl_dhparam }};
+{% endif %}
+{% if item.ssl_stapling | d(False) %}
+
+    ssl_stapling on;
+    ssl_trusted_certificate {{ item.ssl_stapling }};
+{% endif %}
+{% if item.ssl_hsts | d(False) %}
+
+    add_header Strict-Transport-Security "max-age={{ item.ssl_hsts_age | d('15768000') }}; includeSubdomains;";
+{% endif %}
+
+    access_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_access.log;
+    error_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_error.log;
+
+{% for proxy in item.proxy %}
+    location {{ proxy.src | d("/") }} {
+        proxy_pass {{ proxy.dest }};
+        proxy_set_header Host $host;
+    }
+{% endfor %}
+{% if item.headers | d(False) %}
+
+{% for header in item.headers %}
+    add_header {{ header.name }} "{{ header.value }}";
+{% endfor %}
+{% endif %}
+}
+
+server {
+    listen 80{% if item.default | d(False) %} default{% endif %};
+    server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
+{% if item.acme | d(False) %}
+
+    location ~ /.well-known/acme-challenge/ {
+        root /var/www;
+    }
+{% endif %}
+{% if item.status | d(False) %}
+
+    location {{ item.status.page }} {
+        stub_status on;
+        access_log off;
+{% for allow in item.status.allows %}
+        allow {{ allow }};
+{% endfor %}
+        deny all;
+    }
+{% endif %}
+
+{% for proxy in item.proxy %}
+    location {{ proxy.src | d("/") }} {
+        proxy_pass {{ proxy.dest }};
+        proxy_set_header Host $host;
+    }
+{% endfor %}
+{% if item.headers | d(False) %}
+
+{% for header in item.headers %}
+    add_header {{ header.name }} "{{ header.value }}";
+{% endfor %}
+{% endif %}
+}
