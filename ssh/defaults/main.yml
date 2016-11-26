@@ -16,6 +16,9 @@ ssh_daemon_ports: [ 22 ]
 #   - without-password (only allowed with publickey)
 ssh_daemon_permit_root_login: 'yes'
 
+# allow password authentication
+ssh_daemon_password_authentication: 'yes'
+
 # enable or disable the sshd X11 forwarding
 ssh_daemon_x11_forwarding: 'no'
 
