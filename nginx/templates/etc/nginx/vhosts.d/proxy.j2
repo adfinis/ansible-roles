@@ -32,8 +32,8 @@ server {
     add_header Strict-Transport-Security "max-age={{ item.ssl_hsts_age | d('15768000') }}; includeSubdomains;";
 {% endif %}
 
-    access_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_access.log;
-    error_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_error.log;
+    access_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_ssl_access.log;
+    error_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_ssl_error.log;
 
 {% for proxy in item.proxy %}
     location {{ proxy.src | d("/") }} {
