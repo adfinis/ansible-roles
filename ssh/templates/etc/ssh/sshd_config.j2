@@ -65,7 +65,7 @@ AuthorizedKeysFile {{ ssh_daemon_authorized_keys | join(' ') }}
 IgnoreRhosts yes
 
 # To disable tunneled clear text passwords, change to no here!
-PasswordAuthentication yes
+PasswordAuthentication {{ ssh_daemon_password_authentication }}
 PermitEmptyPasswords no
 
 # Change to yes to enable challenge-response passwords (beware issues with
