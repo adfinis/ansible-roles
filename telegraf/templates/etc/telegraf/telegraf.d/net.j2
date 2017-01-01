@@ -7,7 +7,7 @@
   ## regardless of status.
   ##
   interfaces = [
-    "{{ ansible_interfaces | map('regex_search', '^(eth|eno|enp|ens|br).*') | select('string') | list | sort | join('", "') }}"
+    "{{ ansible_interfaces | map('regex_search', '^(eth|eno|enp|ens|br|tun|tap).*') | select('string') | list | sort | join('", "') }}"
   ]
 
 # vim: set sw=2 ts=2 et wrap tw=76 :
