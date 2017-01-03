@@ -15,3 +15,6 @@ grub_serial:
   word: 8
   parity: 0
   stop: 1
+
+# grub timeout (in seconds)
+grub_timeout: 5
