@@ -8,17 +8,16 @@ network_resolv_nameservers: []
 
 # network interface configurations
 # netowrk_interfaces:
-#   - name: eth0
+#   - device: eth0
 #     tmpl: ethernet
 #     hwaddress: 00:11:22:33:44:55
+#     type: static
 #     ipv4:
-#       - type: static
-#         address: 192.168.1.10
-#         netmask: 255.255.255.0
-#         gateway: 192.168.1.1
+#       address: 192.168.1.10
+#       netmask: 255.255.255.0
+#       gateway: 192.168.1.1
 #     ipv6:
-#       - type: static
-#         address: 2001:db8::10
-#         netmask: 64
-#         gateway: 2001:db8::1
+#       address: 2001:db8::10
+#       netmask: 64
+#       gateway: 2001:db8::1
 network_interfaces: []

@@ -33,7 +33,7 @@
 - name: create network interface configuration
   template:
     src: 'etc/{{ ansible_os_family }}/{{ item.tmpl }}.j2'
-    dest: '{{ network_cfg_dir }}/ifcfg-{{ item.name }}'
+    dest: '{{ network_cfg_dir }}/ifcfg-{{ item.device }}'
     owner: root
     group: root
     mode: 0644
@@ -44,6 +44,6 @@
   tags:
     - 'role::network'
     - 'role::network:config'
-  when: item.name is defined and item.name and
+  when: item.device is defined and item.device and
         item.type is defined and item.type
   with_items: '{{ network_interfaces }}'

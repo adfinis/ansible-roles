@@ -1,22 +1,39 @@
 TYPE=Ethernet
 HWADDR="{{ item.hwaddress }}"
-DEVICE="{{ item.name }}"
-NAME="{{ item.name }}"
+DEVICE="{{ item.device }}"
 
 ONBOOT=yes
-BOOTPROTO=static
+BOOTPROTO={{ item.type }}
 USERCTL=no
 
+{% if item.ipv4 is defined %}
+{% if item.type == 'static' %}
 IPADDR={{ item.ipv4.address }}
-PREFIX={{ item.ipv4.netmask }}
+PREFIX={{ item.ipv4.netmask | d("255.255.255.0") }}
+{% if item.ipv4.gateway is defined %}
 GATEWAY={{ item.ipv4.gateway }}
 DEFROUTE=yes
+{% endif %}
+{% endif %}
+IPV4_FAILURE_FATAL=no
 PEERDNS=no
+{% endif %}
 
-IPV6INIT=no
-IPV6_AUTOCONF=yes
+{% if item.ipv6 is defined %}
+IPV6INIT=yes
+IPV6_AUTOCONF={{ item.ipv6.autoconf | d("yes") }}
+{% if item.type == 'static' %}
+IPV6ADDR={{ item.ipv6.address }}/{{ item.ipv6.netmask | d("64") }}
+{% if item.ipv6.gateway %}
+IPV6_DEFAULTGW={{ item.ipv6.gateway }}
 IPV6_DEFROUTE=yes
+{% endif %}
+{% endfi %}
+IPV6FORWARDING={{ item.ipv6.forwarding | d("no") }}
 IPV6_FAILURE_FATAL=no
-IPV6_PEERDNS=yes
-IPV6_PEERROUTES=yes
-IPV6_PRIVACY=yes
+IPV6_PEERDNS=no
+IPV6_PEERROUTES=no
+IPV6_PRIVACY={{ item.ipv6.privacy | d("no") }}
+{% else %}
+IPV6INIT=no
+{% endif %}

@@ -1,20 +1,19 @@
 # {{ ansible_managed }}
 
-auto {{ item.name }}
-allow-hotplug {{ item.name }}
-{% if item.ipv4 | d() %}
+auto {{ item.device }}
+allow-hotplug {{ item.device }}
 
-{% for ipv4 in item.ipv4 %}
-iface {{ item.name }} inet {{ ipv4.type }}
-{% if ipv4.type == "static" %}
-    address     {{ ipv4.address }}
-    netmask     {{ ipv4.netmask | d("255.255.255.0") }}
-{% if ipv4.gateway | d() %}
-    gateway     {{ ipv4.gateway }}
+{% if item.ipv4 is defined %}
+iface {{ item.device }} inet {{ item.type }}
+{% if item.type == 'static' %}
+    address     {{ item.ipv4.address }}
+    netmask     {{ item.ipv4.netmask | d("255.255.255.0") }}
+{% if item.ipv4.gateway is defined %}
+    gateway     {{ item.ipv4.gateway }}
 {% endif %}
 {% endif %}
-{% if ipv4.hwaddress | d() %}
-    hwaddress   {{ ipv4.hwaddress }}
+{% if item.hwaddress is defined %}
+    hwaddress   {{ item.hwaddress }}
 {% endif %}
 {% if ipv4.pre_up | d() %}
     pre-up      {{ ipv4.pre_up }}
@@ -25,30 +24,30 @@ iface {{ item.name }} inet {{ ipv4.type }}
 {% if ipv4.post_up | d() %}
     post-up     {{ ipv4.post_up }}
 {% endif %}
-{% if ipv4.down | d() %}
-    down        {{ ipv4.down }}
-{% endif %}
 {% if ipv4.pre_down | d() %}
     pre-down    {{ ipv4.pre_down }}
+{% endif %}
+{% if ipv4.down | d() %}
+    down        {{ ipv4.down }}
 {% endif %}
 {% if ipv4.post_down | d() %}
     post-down   {{ ipv4.post_down }}
 {% endif %}
-{% endfor %}
+{% else %}
+iface {{ item.device }} inet manual
 {% endif %}
-{% if item.ipv6 | d() %}
 
-{% for ipv6 in item.ipv6 %}
-iface {{ item.name }} inet6 {{ ipv6.type }}
-{% if ipv6.type == "static" %}
-    address     {{ ipv6.address }}
-    netmask     {{ ipv6.netmask | d("64") }}
-{% if ipv6.gateway | d() %}
-    gateway     {{ ipv6.gateway }}
+{% if item.ipv6 is defined %}
+iface {{ item.device }} inet6 {{ item.type }}
+{% if item.type == 'static' %}
+    address     {{ item.ipv6.address }}
+    netmask     {{ item.ipv6.netmask | d("64") }}
+{% if item.ipv6.gateway is defined %}
+    gateway     {{ item.ipv6.gateway }}
 {% endif %}
 {% endif %}
-{% if ipv6.hwaddress | d() %}
-    hwaddress   {{ ipv6.hwaddress }}
+{% if item.hwaddress | d() %}
+    hwaddress   {{ item.hwaddress }}
 {% endif %}
 {% if ipv6.pre_up | d() %}
     pre-up      {{ ipv6.pre_up }}
@@ -59,14 +58,15 @@ iface {{ item.name }} inet6 {{ ipv6.type }}
 {% if ipv6.post_up | d() %}
     post-up     {{ ipv6.post_up }}
 {% endif %}
-{% if ipv6.down | d() %}
-    down        {{ ipv6.down }}
-{% endif %}
 {% if ipv6.pre_down | d() %}
     pre-down    {{ ipv6.pre_down }}
+{% endif %}
+{% if ipv6.down | d() %}
+    down        {{ ipv6.down }}
 {% endif %}
 {% if ipv6.post_down | d() %}
     post-down   {{ ipv6.post_down }}
 {% endif %}
-{% endfor %}
+{% else %}
+iface {{ item.device }} inet6 manual
 {% endif %}
