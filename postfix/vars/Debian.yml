@@ -3,3 +3,6 @@
 # postfix related packages
 postfix_packages:
   - postfix
+
+# postfix service name
+postfix_service: postfix
