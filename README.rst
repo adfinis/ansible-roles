@@ -51,6 +51,8 @@ Currently the repository features the following roles:
 +----------+---------------------------------------------------------------------------------------------------+
 | console  | manage adsy standard tooles, bashrc and vimrc                                                     |
 +----------+---------------------------------------------------------------------------------------------------+
+| hostname | set system hostname                                                                               |
++----------+---------------------------------------------------------------------------------------------------+
 | mariadb  | manage a mariadb server and client (if mariadb is not available, mysql will be installed instead) |
 +----------+---------------------------------------------------------------------------------------------------+
 | nginx    | install and manage nginx                                                                          |
