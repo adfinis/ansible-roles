@@ -1,0 +1,112 @@
+# {{ ansible_managed }}
+
+# Base options
+smtpd_banner                    = $myhostname ESMTP
+biff                            = no
+append_dot_mydomain             = no
+delay_warning_time              = 4h
+enable_long_queue_ids           = yes
+
+myhostname                      = {{ postfix_myhostname }}
+mydomain                        = {{ postfix_mydomain }}
+myorigin                        = {{ postfix_myorigin }}
+smtp_helo_name                  = {{ postfix_myorigin }}
+
+alias_maps                      = hash:/etc/aliases
+alias_database                  = hash:/etc/aliases
+
+mailbox_size_limit              = 0
+message_size_limit              = 52428800
+recipient_delimiter             = {{ postfix_recipient_delimiter }}
+inet_interfaces                 = {{ postfix_inet_interfaces | join(", ") }}
+
+mydestination                   = {{ postfix_mydestination | join(", ") }}, $myhostname, localhost.$mydomain, localhost
+{% if postfix_mynetworks | d(False) %}
+mynetworks                      = {{ postfix_mynetworks | join(", ") }}
+{% else %}
+mynetworks_style                = {{ postfix_mynetworks_style }}
+{% endif %}
+
+unknown_local_recipient_reject_code = {{ postfix_unknown_local_recipient_reject_code }}
+{% if postfix_virtual_alias_maps | d(False) and postfix_virtual_alias_domains | d(False) %}
+
+virtual_alias_maps              = {{ postfix_virtual_alias_maps }}
+virtual_alias_domains           = {{ postfix_virtual_alias_domains }}
+{% endif %}
+
+# TLS parameters
+tls_high_cipherlist             = !aNULL:ALL:!EXPORT:!LOW:!MEDIUM:!DES:!3DES:!MD5:!RC4:@STRENGTH
+tls_medium_cipherlist           = !aNULL:ALL:!EXPORT:!LOW:!DES:!3DES:!MD5:!RC4:@STRENGTH
+tls_low_cipherlist              = !aNULL:ALL:!EXPORT:!DES:!3DES:!MD5:!RC4:@STRENGTH
+
+smtpd_tls_cert_file             = {{ postfix_tls_cert_file | d(pki_snakeoil.cert) }}
+smtpd_tls_key_file              = {{ postfix_tls_key_file | d(pki_snakeoil.pkey) }}
+smtpd_tls_auth_only             = yes
+smtpd_tls_received_header       = yes
+smtpd_tls_security_level        = may
+smtpd_tls_ciphers               = medium
+smtpd_tls_exclude_ciphers       = aNULL, DES, 3DES, MD5, DES+MD5, RC4
+smtpd_tls_protocols             = {{ postfix_ssl_protocols | join(', ') }}
+
+smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+
+smtp_tls_note_starttls_offer    = yes
+smtp_tls_security_level         = may
+smtp_tls_ciphers                = high
+smtp_tls_exclude_ciphers        = aNULL, DES, 3DES, MD5, DES+MD5, RC4
+smtp_tls_protocols              = {{ postfix_ssl_protocols | join(', ') }}
+smtp_tls_CApath                 = {{ pki_directory_certs }}
+
+# postscreen configuration (http://rob0.nodns4.us/postscreen.html)
+#postscreen_blacklist_action     = drop
+#postscreen_greet_action         = enforce
+#postscreen_dnsbl_action         = enforce
+
+#postscreen_access_list =
+#      permit_mynetworks,
+#      cidr:${config_directory}/tables/postscreen_access.cidr
+
+#postscreen_dnsbl_sites =
+
+#postscreen_whitelist_interfaces = static:all
+
+# postscreen greylisting actions
+#postscreen_pipelining_enable    = no
+#postscreen_pipelining_action    = enforce
+
+#postscreen_non_smtp_command_enable = no
+#postscreen_non_smtp_command_action = drop
+
+#postscreen_bare_newline_enable  = no
+#postscreen_bare_newline_action  = ignore
+
+smtpd_client_restrictions =
+      permit_mynetworks
+
+smtpd_helo_restrictions =
+      reject_invalid_helo_hostname,
+      reject_unknown_helo_hostname,
+      reject_non_fqdn_helo_hostname
+
+smtpd_sender_restrictions =
+      reject_unknown_sender_domain,
+      reject_non_fqdn_sender
+
+smtpd_relay_restrictions =
+      reject_non_fqdn_recipient,
+      reject_unknown_recipient_domain,
+      permit_mynetworks,
+      permit_sasl_authenticated,
+      reject_unauth_destination
+
+smtpd_recipient_restrictions =
+      reject_non_fqdn_recipient,
+      reject_unknown_recipient_domain,
+      permit_mynetworks,
+      permit_sasl_authenticated,
+      reject_unauth_destination,
+
+smtpd_data_restrictions =
+      reject_unauth_pipelining,
+      reject_multi_recipient_bounce
