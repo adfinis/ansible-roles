@@ -12,7 +12,7 @@
     setype: postfix_etc_t
     selevel: s0
   notify:
-    - 'restart postfix'
+    - 'check postfix and reload'
 
 - name: configure postfix main.cf
   template:
@@ -26,4 +26,4 @@
     setype: postfix_etc_t
     selevel: s0
   notify:
-    - 'restart postfix'
+    - 'check postfix and reload'
