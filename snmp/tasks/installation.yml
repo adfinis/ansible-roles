@@ -1,6 +1,6 @@
 ---
 
-- name: Install snmp related packages
+- name: install snmp related packages
   package:
     name: '{{ item }}'
     state: present
@@ -9,7 +9,7 @@
     - 'role::snmp:install'
   with_items: '{{ snmp_packages }}'
 
-- name: Install additional snmp related packages
+- name: install additional snmp related packages
   package:
     name: '{{ item }}'
     state: present

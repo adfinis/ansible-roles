@@ -20,4 +20,9 @@ yamllint:
   script:
     - for dir in *; do test -d "$dir" && echo "$dir" && yamllint -c ./.testenv/yamllint.yml "$dir"; done
 
+bcp_check:
+  stage: lint
+  script:
+    - for file in */tasks/*; do egrep -H '^- name:.*[[:upper:]]' "$file" && exit 1; done; exit 0
+
 # vim: set ts=2 sw=2 tw=2 :
