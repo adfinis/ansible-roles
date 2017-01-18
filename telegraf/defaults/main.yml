@@ -38,6 +38,10 @@ telegraf_plugins_global:
   - swap
   - system
 
+# set global tags to the metrics
+# e.g. hypervisor: hs.example.com
+telegraf_global_tags: {}
+
 # configure rsyslog to log lesser
 telegraf_rsyslog: True
 
