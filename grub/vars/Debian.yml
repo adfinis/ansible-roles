@@ -9,3 +9,6 @@ grub_mkconfig_bin: /usr/sbin/grub-mkconfig
 
 # grub configuration file
 grub_cfg: /etc/default/grub
+
+# grub main running configuration
+grub_boot_cfg: /boot/grub/grub.cfg
