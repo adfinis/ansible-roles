@@ -13,6 +13,9 @@
     selevel: s0
   notify:
     - 'check postfix and reload'
+  tags:
+    - 'role::postfix'
+    - 'role::postfix:config'
 
 - name: configure postfix main.cf
   template:
@@ -27,3 +30,6 @@
     selevel: s0
   notify:
     - 'check postfix and reload'
+  tags:
+    - 'role::postfix'
+    - 'role::postfix:config'
