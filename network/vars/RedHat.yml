@@ -6,6 +6,11 @@ network_packages:
   - iproute
   - vconfig
 
+# remove non rfc 1149 compatible software
+network_packages_remove:
+  - NetworkManager
+  - NetworkManager-libnm
+
 # system control configuration file for IPv6 RA
 network_config_sysctl_ipv6_ra: /etc/sysctl.d/network_ipv6_ra.conf
 
