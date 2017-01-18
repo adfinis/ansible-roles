@@ -16,7 +16,22 @@
     - 'role::pki'
     - 'role::pki:config'
 
-- name: create snakeoil certificates
+- name: create snakeoil certificate directory
+  file:
+    path: '{{ pki_directory }}/ssl-cert-snakeoil'
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+    seuser: system_u
+    serole: object_r
+    setype: cert_t
+    selevel: s0
+  tags:
+    - 'role::pki'
+    - 'role::pki:config'
+
+- name: create snakeoil certificate
   command: 'openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout {{ pki_snakeoil.pkey }} -days 3650 -out {{ pki_snakeoil.cert }} -subj "/C=/ST=/L=/O=/OU=/CN={{ ansible_fqdn }}"'
   tags:
     - 'role::pki'
@@ -39,22 +54,67 @@
     - 'role::pki:config'
   when: not pki_register_dhparam.stat.exists
 
-- name: copy keys to the backup system
-  fetch:
-    src: '{{ pki_directory_keys }}/{{ item }}.pem'
-    dest: '{{ pki_backup.path }}'
+- name: create certificate domain directories
+  file:
+    path: '{{ pki_directory }}/{{ item.cert }}'
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+    seuser: system_u
+    serole: object_r
+    setype: cert_t
+    selevel: s0
+  with_items: '{{ pki_domains }}'
+  tags:
+    - 'role::pki'
+    - 'role::pki:config'
+
+- name: create backup directories
+  file:
+    path: '{{ pki_backup.path }}/{{ item }}'
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+    seuser: system_u
+    serole: object_r
+    setype: cert_t
+    selevel: s0
   delegate_to: '{{ pki_backup.system }}'
   when: pki_backup is defined and
         pki_backup.system is defined and pki_backup.system and
         pki_backup.path is defined and pki_backup.path
-  with_items: '{{ pki_backup_certs }}'
+  with_items: '{{ pki_backup_domains }}'
+  tags:
+    - 'role::pki'
+    - 'role::pki:config'
+    - 'role::pki:backup'
+
+- name: copy private keys to the backup system
+  fetch:
+    src: '{{ pki_directory }}/{{ item }}/privkey.pem'
+    dest: '{{ pki_backup.path }}/{{ item }}'
+  delegate_to: '{{ pki_backup.system }}'
+  when: pki_backup is defined and
+        pki_backup.system is defined and pki_backup.system and
+        pki_backup.path is defined and pki_backup.path
+  with_items: '{{ pki_backup_domains }}'
+  tags:
+    - 'role::pki'
+    - 'role::pki:config'
+    - 'role::pki:backup'
 
 - name: copy certificates to the backup system
   fetch:
-    src: '{{ pki_directory_certs }}/{{ item }}.pem'
-    dest: '{{ pki_backup.path }}'
+    src: '{{ pki_directory }}/{{ item }}/cert.pem'
+    dest: '{{ pki_backup.path }}/{{ item }}'
   delegate_to: '{{ pki_backup.system }}'
   when: pki_backup is defined and
         pki_backup.system is defined and pki_backup.system and
         pki_backup.path is defined and pki_backup.path
-  with_items: '{{ pki_backup_certs }}'
+  with_items: '{{ pki_backup_domains }}'
+  tags:
+    - 'role::pki'
+    - 'role::pki:config'
+    - 'role::pki:backup'

@@ -12,11 +12,20 @@ pki_backup:
   system: ''
   path: ''
 
+# a list of all domains for which certificates should exist.
+# alt DNS entries can be added as well, e.g.
+# pki_domains:
+#   - cert: www.example.com
+#   - cert: mail.example.com
+#     alt:
+#       - imap.example.com
+#       - smtp.example.com
+pki_domains: []
+
 # certificates and keys to backup
-# filename within the ``pki_directory_certs`` and ``pki_directory_keys``
-# directories (without ending.pem)
+# domain names within the ``pki_directory`` directory to backup.
 # e.g.
-# pki_backup_certs:
-#   - www.example.org -> /etc/ssl/private/www.example.org.pem
-#                     -> /etc/ssl/certs/www.example.org.pem
-pki_backup_certs: []
+# pki_backup_domains:
+#   - www.example.org -> /etc/ssl/private/www.example.org/privkey.pem
+#                     -> /etc/ssl/private/www.example.org/cert.pem
+pki_backup_domains: []
