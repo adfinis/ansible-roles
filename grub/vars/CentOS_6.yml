@@ -1,5 +1,0 @@
----
-
-# grub related packages
-grub_packages:
-  - grub
