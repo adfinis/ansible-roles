@@ -1,6 +1,6 @@
 ---
 
-- name: Divert default configuration file
+- name: divert default configuration file
   command: 'dpkg-divert --quiet --local --divert {{ snmp_daemon_cfg }}.dpkg-divert --rename {{ snmp_daemon_cfg }}'
   args:
     creates: '{{ snmp_daemon_cfg }}.dpkg-divert'
@@ -11,7 +11,7 @@
     - 'restart snmpd'
   when: 'ansible_os_family == "Debian"'
 
-- name: Configure snmpd daemon variables
+- name: configure snmpd daemon variables
   template:
     src: 'etc/default/snmpd.{{ ansible_os_family }}.j2'
     dest: '{{ snmp_daemon_env_cfg }}'
@@ -28,7 +28,7 @@
   notify:
     - 'restart snmpd'
 
-- name: Configure snmpd service
+- name: configure snmpd service
   template:
     src: etc/snmp/snmpd.conf.j2
     dest: '{{ snmp_daemon_cfg }}'
@@ -45,7 +45,7 @@
   notify:
     - 'restart snmpd'
 
-- name: Configure snmp client connection to localhost
+- name: configure snmp client connection to localhost
   template:
     src: etc/snmp/snmp.local.conf.j2
     dest: '{{ snmp_local_cfg }}'
@@ -62,7 +62,7 @@
   notify:
     - 'restart snmpd'
 
-- name: Create snmpd extension script directory
+- name: create snmpd extension script directory
   file:
     path: '{{ snmp_extension_scripts }}'
     state: directory
@@ -77,7 +77,7 @@
     - 'role::snmp'
     - 'role::snmp:config'
 
-- name: Install snmpd extension scripts
+- name: install snmpd extension scripts
   copy:
     src: usr/local/lib/snmpd/
     dest: '{{ snmp_extension_scripts + "/" }}'
