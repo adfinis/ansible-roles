@@ -1,0 +1,19 @@
+---
+
+- name: check postfix
+  command: '{{ postfix_bin }} -c {{ postfix_cfg_dir }} check'
+
+- name: check postfix and reload
+  command: '{{ postfix_bin }} -c {{ postfix_cfg_dir }} check'
+  notify:
+    - 'reload postfix'
+
+- name: restart postfix
+  service:
+    name: '{{ postfix_service }}'
+    state: restarted
+
+- name: reload postfix
+  service:
+    name: '{{ postfix_service }}'
+    state: reloaded

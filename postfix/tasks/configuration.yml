@@ -1,0 +1,35 @@
+---
+
+- name: configure postfix master.cf
+  template:
+    src: 'etc/postfix/master.cf/{{ postfix_role }}.j2'
+    dest: '{{ postfix_cfg_dir }}/master.cf'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: postfix_etc_t
+    selevel: s0
+  notify:
+    - 'check postfix and reload'
+  tags:
+    - 'role::postfix'
+    - 'role::postfix:config'
+
+- name: configure postfix main.cf
+  template:
+    src: 'etc/postfix/main.cf/{{ postfix_role }}.j2'
+    dest: '{{ postfix_cfg_dir }}/main.cf'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: postfix_etc_t
+    selevel: s0
+  notify:
+    - 'check postfix and reload'
+  tags:
+    - 'role::postfix'
+    - 'role::postfix:config'

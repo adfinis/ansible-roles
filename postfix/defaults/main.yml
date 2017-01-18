@@ -1,0 +1,94 @@
+---
+
+# postfix role
+# default: root
+postfix_role: root
+
+# The internet hostname of this mail system. The default is to use the #
+# fully-qualified domain name (FQDN) from gethostname(), or to use the # non-FQDN
+# result from gethostname() and append ".$mydomain". $myhostname is # used as a
+# default value for many other configuration parameters.
+postfix_myhostname: '{{ ansible_fqdn }}'
+
+# The internet domain name of this mail system. The default is to use #
+# $myhostname minus the first component, or "localdomain" (Postfix 2.3 and #
+# later). $mydomain is used as a default value for many other configuration #
+# parameters.
+postfix_mydomain: '{{ ansible_domain }}'
+
+# The domain name that locally-posted mail appears to come from, and that #
+# locally posted mail is delivered to. The default, $myhostname, is adequate #
+# for small sites. If you run a domain with multiple machines, you should (1)
+# change this to $mydomain and (2) set up a domain-wide alias database that
+# aliases each user to user@that.users.mailhost.
+postfix_myorigin: '$myhostname'
+
+# The set of characters that can separate a user name from its extension
+# (example: user+foo), or a .forward file name from its extension (example:
+# .forward+foo). Basically, the software tries user+foo and .forward+foo before
+# trying user and .forward. This implementation recognizes one delimiter
+# character and one extension per email address or .forward file name.
+postfix_recipient_delimiter: ''
+
+# The network interface addresses that this mail system receives mail on.
+# Specify "all" to receive mail on all network interfaces (default), and
+# "loopback-only" to receive mail on loopback network interfaces only (Postfix
+# version 2.2 and later). The parameter also controls delivery of mail to
+# user@[ip.address].
+postfix_inet_interfaces:
+  - all
+
+# The list of domains that are delivered via the $local_transport mail delivery
+# transport. By default this is the Postfix local(8) delivery agent which looks
+# up all recipients in /etc/passwd and /etc/aliases. The SMTP server validates
+# recipient addresses with $local_recipient_maps and rejects non-existent
+# recipients. See also the local domain class in the ADDRESS_CLASS_README file.
+postfix_mydestination: []
+
+# The list of "trusted" remote SMTP clients that have more privileges than
+# "strangers".
+postfix_mynetworks: []
+
+# The method to generate the default value for the mynetworks parameter. This
+# is the list of trusted networks for relay access control etc.  # Specify
+# "mynetworks_style = host" when Postfix should "trust" only the local machine.
+# Specify "mynetworks_style = subnet" when Postfix should "trust" remote SMTP
+# clients in the same IP subnetworks as the local machine. On Linux, this works
+# correctly only with interfaces specified with the "ifconfig" command.  #
+# Specify "mynetworks_style = class" when Postfix should "trust" remote SMTP
+# clients in the same IP class A/B/C networks as the local machine. Caution: this
+# may cause Postfix to "trust" your entire provider's network. Instead, specify
+# an explicit mynetworks list by hand, as described with the mynetworks
+# configuration parameter.
+postfix_mynetworks_style: host
+
+# The numerical Postfix SMTP server response code when a recipient address is
+# local, and $local_recipient_maps specifies a list of lookup tables that does
+# not match the recipient. A recipient address is local when its domain matches
+# $mydestination, $proxy_interfaces or $inet_interfaces.
+postfix_unknown_local_recipient_reject_code: 550
+
+# Optional lookup tables that alias specific mail addresses or domains to other
+# local or remote address. The table format and lookups are documented in #
+# virtual(5). For an overview of Postfix address manipulations see the
+# ADDRESS_REWRITING_README document.
+postfix_virtual_alias_maps: ''
+
+# Postfix is final destination for the specified list of virtual alias domains,
+# that is, domains for which all addresses are aliased to addresses in other
+# local or remote domains. The SMTP server validates recipient addresses with
+# $virtual_alias_maps and rejects non-existent recipients. See also the virtual
+# alias domain class in the ADDRESS_CLASS_README file
+postfix_virtual_alias_domains: ''
+
+# List of TLS protocols that the Postfix SMTP client will exclude or include
+# with opportunistic TLS encryption. The default value is "!SSLv2, !SSLv3" for
+# Postfix releases after the middle of 2015, "!SSLv2" for older releases. Before
+# Postfix 2.6, the Postfix SMTP client would use all protocols with opportunistic
+# TLS.
+postfix_ssl_protocols:
+  - TLSv1
+  - TLSv1.1
+  - TLSv1.2
+  - '!SSLv2'
+  - '!SSLv3'
