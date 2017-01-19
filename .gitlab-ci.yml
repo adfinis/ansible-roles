@@ -10,19 +10,18 @@ before_script:
 stages:
   - lint
 
-ansible-lint:
+lint:
   stage: lint
   script:
-    - for dir in *; do test -d "$dir" && echo "$dir" && ansible-lint "$dir"; done
-
-yamllint:
-  stage: lint
-  script:
-    - for dir in *; do test -d "$dir" && echo "$dir" && yamllint -c ./.testenv/yamllint.yml "$dir"; done
-
-bcp_check:
-  stage: lint
-  script:
-    - for file in */tasks/*; do egrep -H '^- name:.*[[:upper:]]' "$file" && exit 1; done; exit 0
+    - for dir in *; do
+        test -d "$dir" &&
+        echo "$dir" &&
+        ansible-lint -R -r .testenv/lint-rules/ "$dir";
+      done
+    - for dir in *; do
+        test -d "$dir" &&
+        echo "$dir" &&
+        yamllint -c ./.testenv/yamllint.yml "$dir";
+      done
 
 # vim: set ts=2 sw=2 tw=2 :
