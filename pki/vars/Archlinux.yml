@@ -6,23 +6,16 @@ pki_packages:
   - ca-certificates
 
 # PKI private key directory
-pki_directory_keys: /etc/ssl/private
-
-# PKI certificate directory
-pki_directory_certs: /etc/ssl/certs
+pki_directory: /etc/ssl/private
 
 # snakeoil certificate
 pki_snakeoil:
-  pkey: '{{ pki_directory_keys }}/ssl-cert-snakeoil.key'
-  cert: '{{ pki_directory_certs }}/ssl-cert-snakeoil.pem'
+  pkey: '{{ pki_directory }}/ssl-cert-snakeoil/privkey.pem'
+  cert: '{{ pki_directory }}/ssl-cert-snakeoil/cert.pem'
 
 # PKI directories
 pki_directories:
-  - path: '{{ pki_directory_keys }}'
+  - path: '{{ pki_directory }}'
     owner: root
     group: root
     mode: '0711'
-  - path: '{{ pki_directory_certs }}'
-    owner: root
-    group: root
-    mode: '0755'
