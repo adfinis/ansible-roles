@@ -1,0 +1,18 @@
+# {{ ansible_managed }}
+# If you change this file, run 'update-grub' afterwards
+
+GRUB_DEFAULT=0
+GRUB_TIMEOUT={{ grub_timeout }}
+GRUB_DISTRIBUTOR=$(lsb_release -i -s 2>/dev/null || echo {{ ansible_distribution }})
+{% if grub_consoles | d(False) %}
+GRUB_CMDLINE_LINUX_DEFAULT="console={{ grub_consoles | join(' console=') }}"
+{% else %}
+GRUB_CMDLINE_LINUX_DEFAULT=""
+{% endif %}
+GRUB_CMDLINE_LINUX=""
+{% if grub_serial | d(False) %}
+GRUB_SERIAL_COMMAND="serial --speed={{ grub_serial.speed }} --unit={{ grub_serial.unit }} --word={{ grub_serial.word }} --parity={{ grub_serial.parity }} --stop={{ grub_serial.stop }}"
+{% endif %}
+
+# disable graphical terminal (grub-pc only)
+GRUB_TERMINAL=console

@@ -53,6 +53,8 @@ Currently the repository features the following roles:
 +----------+---------------------------------------------------------------------------------------------------+
 | hostname | set system hostname                                                                               |
 +----------+---------------------------------------------------------------------------------------------------+
+| grub     | install and configure grub                                                                        |
++----------+---------------------------------------------------------------------------------------------------+
 | mariadb  | manage a mariadb server and client (if mariadb is not available, mysql will be installed instead) |
 +----------+---------------------------------------------------------------------------------------------------+
 | nginx    | install and manage nginx                                                                          |
