@@ -4,21 +4,29 @@
 [[inputs.exec]]
   ## Commands array
   commands = [
-    "/tmp/test.sh",
-    "/usr/bin/mycollector --foo=bar",
-    "/tmp/collect_*.sh"
+{% if telegraf_plugin_exec.commands | d(False) %}
+    "{{ telegraf_plugin_exec.commands | sort | join('", "') }}"
+{% endif %}
   ]
 
   ## Timeout for each command to complete.
-  timeout = "5s"
+  timeout = "{{ telegraf_plugin_exec.timeout | default("5s") }}"
 
   ## measurement name suffix (for separating different commands)
-  name_suffix = "_mycollector"
+  name_suffix = "{{ telegraf_plugin_exec.name_suffix | default("") }}"
 
   ## Data format to consume.
   ## Each data format has it's own unique set of configuration options, read
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
-  data_format = "influx"
+  data_format = "{{ telegraf_plugin_exec.data_format }}"
+{% if telegraf_plugin_exec.data_type | d(False) %}
+  data_type = "{{ telegraf_plugin_exec.data_type }}"
+{% endif %}
+{% if telegraf_plugin_exec.tag_keys | d(False) %}
+  tag_keys = [
+    "{{ telegraf_plugin_exec.tag_keys | sort | join('", "') }}"
+  ]
+{% endif %}
 
 # vim: set sw=2 ts=2 et wrap tw=76 :
