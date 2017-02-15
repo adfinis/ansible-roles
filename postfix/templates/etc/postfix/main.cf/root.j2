@@ -56,7 +56,7 @@ smtp_tls_security_level         = may
 smtp_tls_ciphers                = high
 smtp_tls_exclude_ciphers        = aNULL, DES, 3DES, MD5, DES+MD5, RC4
 smtp_tls_protocols              = {{ postfix_ssl_protocols | join(', ') }}
-smtp_tls_CApath                 = {{ pki_directory_certs }}
+smtp_tls_CApath                 = {{ pki_directory }}
 
 # postscreen configuration (http://rob0.nodns4.us/postscreen.html)
 #postscreen_blacklist_action     = drop
