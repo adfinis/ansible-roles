@@ -1,1 +1,12 @@
 ---
+
+- name: enforce root password
+  user:
+    name: root
+    state: present
+    password: '{{ users_root_password }}'
+    update_password: '{{ users_root_password_update }}'
+  tags:
+    - role::users
+    - role::users:config
+  when: users_root_password is defined and users_root_password

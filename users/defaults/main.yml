@@ -1,0 +1,8 @@
+---
+
+# password for user root
+#users_root_password:
+
+# update password for user root
+# possible values are: 'always', 'on_create'
+users_root_password_update: always
