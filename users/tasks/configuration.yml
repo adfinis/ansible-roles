@@ -1,0 +1,45 @@
+---
+
+- name: enforce root password
+  user:
+    name: root
+    state: present
+    password: '{{ users_root_password }}'
+    update_password: '{{ users_root_password_update }}'
+  tags:
+    - role::users
+    - role::users:config
+  when: users_root_password is defined and users_root_password
+
+- name: create user groups
+  group:
+    name: '{{ item.group | default(item.name) }}'
+    system: '{{ item.system | default(omit) }}'
+    gid: '{{ item.gid | default(omit) }}'
+    state: '{{ item.state | default("present") }}'
+  tags:
+    - role::users
+    - role::users:config
+  with_items: '{{ users_user }}'
+  when: item.name is defined and item.name
+
+- name: manage user accounts
+  user:
+    name: '{{ item.name }}'
+    uid: '{{ item.uid | default(omit) }}'
+    group: '{{ item.group | default(omit) }}'
+    comment: '{{ item.comment | default(omit) }}'
+    password: '{{ item.password | default("!") }}'
+    update_password: '{{ item.update_password | default("on_create") }}'
+    system: '{{ item.system | default(omit) }}'
+    shell: '{{ item.shell | default(omit) }}'
+    home: '{{ item.home | default(omit) }}'
+    createhome: '{{ item.createhome | default(omit) }}'
+    expires: '{{ item.expires | default(omit) }}'
+    remove: '{{ item.remove | default(omit) }}'
+    state: '{{ item.state | default("present") }}'
+  tags:
+    - role::users
+    - role::users:config
+  with_items: '{{ users_user }}'
+  when: item.name is defined and item.name
