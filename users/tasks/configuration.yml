@@ -21,5 +21,25 @@
     - role::users
     - role::users:config
   with_items: '{{ users_user }}'
-  when: item.name is defined and item.name and
-        item.name != 'root'
+  when: item.name is defined and item.name
+
+- name: manage user accounts
+  user:
+    name: '{{ item.name }}'
+    uid: '{{ item.uid | default(omit) }}'
+    group: '{{ item.group | default(omit) }}'
+    comment: '{{ item.comment | default(omit) }}'
+    password: '{{ item.password | default("!") }}'
+    update_password: '{{ item.update_password | default("on_create") }}'
+    system: '{{ item.system | default(omit) }}'
+    shell: '{{ item.shell | default(omit) }}'
+    home: '{{ item.home | default(omit) }}'
+    createhome: '{{ item.createhome | default(omit) }}'
+    expires: '{{ item.expires | default(omit) }}'
+    remove: '{{ item.remove | default(omit) }}'
+    state: '{{ item.state | default("present") }}'
+  tags:
+    - role::users
+    - role::users:config
+  with_items: '{{ users_user }}'
+  when: item.name is defined and item.name
