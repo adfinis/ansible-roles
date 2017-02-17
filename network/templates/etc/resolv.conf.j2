@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+
+{% if network_resolv_domain | d(False) %}
+domain {{ network_resolv_domain }}
+{% endif %}
+{% if network_resolv_search | d(False) %}
+search {{ network_resolv_search | join(" ") }}
+{% endif %}
+{% for nameserver in network_resolv_nameservers | d([]) %}
+nameserver {{ nameserver }}
+{% endfor %}

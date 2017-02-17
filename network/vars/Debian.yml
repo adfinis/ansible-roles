@@ -20,3 +20,6 @@ network_cfg_main: /etc/network/interfaces
 
 # netowrk configuration directory
 network_cfg_dir: /etc/network/interfaces.d
+
+# resolv.conf filename
+network_resolv_conf: /etc/resolv.conf

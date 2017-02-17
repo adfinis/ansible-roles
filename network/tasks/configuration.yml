@@ -47,3 +47,18 @@
   when: item.device is defined and item.device and
         item.type is defined and item.type
   with_items: '{{ network_interfaces }}'
+
+- name: create resolv.conf
+  template:
+    src: etc/resolv.conf.j2
+    dest: '{{ network_resolv_conf }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: net_conf_t
+    selevel: s0
+  tags:
+    - 'role::network'
+    - 'role::network:config'

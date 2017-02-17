@@ -19,3 +19,6 @@ network_cfg_main: /etc/sysconfig/network
 
 # netowrk configuration directory
 network_cfg_dir: /etc/sysconfig/network-scripts/
+
+# resolv.conf filename
+network_resolv_conf: /etc/resolv.conf

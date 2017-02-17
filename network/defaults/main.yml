@@ -1,5 +1,12 @@
 ---
 
+# Local domain name
+network_resolv_domain: '{{ ansible_domain }}'
+
+# Search list for host-name lookup
+network_resolv_search:
+  - '{{ ansible_domain }}'
+
 # resolv nameservers
 # network_resolv_nameservers:
 #   - 192.168.1.1
