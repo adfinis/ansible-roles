@@ -1,0 +1,64 @@
+---
+
+- name: do not accept ipv6 default routes
+  template:
+    src: etc/sysctl.d/network_ipv6_ra.conf.j2
+    dest: '{{ network_config_sysctl_ipv6_ra }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  tags:
+    - 'role::network'
+    - 'role::network:config'
+
+- name: create global network configuration
+  template:
+    src: 'etc/{{ ansible_os_family }}/network.j2'
+    dest: '{{ network_cfg_main }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  tags:
+    - 'role::network'
+    - 'role::network:config'
+
+- name: create network interface configuration
+  template:
+    src: 'etc/{{ ansible_os_family }}/{{ item.tmpl }}.j2'
+    dest: '{{ network_cfg_dir }}/ifcfg-{{ item.device }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: net_conf_t
+    selevel: s0
+  tags:
+    - 'role::network'
+    - 'role::network:config'
+  when: item.device is defined and item.device and
+        item.type is defined and item.type
+  with_items: '{{ network_interfaces }}'
+
+- name: create resolv.conf
+  template:
+    src: etc/resolv.conf.j2
+    dest: '{{ network_resolv_conf }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: net_conf_t
+    selevel: s0
+  tags:
+    - 'role::network'
+    - 'role::network:config'

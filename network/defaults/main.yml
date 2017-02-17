@@ -1,0 +1,30 @@
+---
+
+# Local domain name
+network_resolv_domain: '{{ ansible_domain }}'
+
+# Search list for host-name lookup
+network_resolv_search:
+  - '{{ ansible_domain }}'
+
+# resolv nameservers
+# network_resolv_nameservers:
+#   - 192.168.1.1
+#   - 8.8.8.8
+network_resolv_nameservers: []
+
+# network interface configurations
+# netowrk_interfaces:
+#   - device: eth0
+#     tmpl: ethernet
+#     hwaddress: 00:11:22:33:44:55
+#     type: static
+#     ipv4:
+#       address: 192.168.1.10
+#       netmask: 255.255.255.0
+#       gateway: 192.168.1.1
+#     ipv6:
+#       address: 2001:db8::10
+#       netmask: 64
+#       gateway: 2001:db8::1
+network_interfaces: []

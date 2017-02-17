@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+auto lo
+iface lo inet loopback
+
+source {{ network_cfg_dir }}/*

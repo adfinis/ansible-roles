@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+
+NETWORKING=yes
+NETWORKING_IPV6=yes
+{% if network_resolv_nameservers | d([]) %}
+
+{% for nameserver in network_resolv_nameservers %}
+DNS{{ loop.index }}={{ nameserver }}
+{% endfor %}
+{% endif %}

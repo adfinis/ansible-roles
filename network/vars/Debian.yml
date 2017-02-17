@@ -1,0 +1,25 @@
+---
+
+# network related packages
+network_packages:
+  - bridge-utils
+  - ifenslave
+  - iproute2
+  - resolvconf
+  - vlan
+
+# remove non rfc 1149 compatible software
+network_packages_remove:
+  - network-manager
+
+# system control configuration file for IPv6 RA
+network_config_sysctl_ipv6_ra: /etc/sysctl.d/network_ipv6_ra.conf
+
+# network main configuration
+network_cfg_main: /etc/network/interfaces
+
+# netowrk configuration directory
+network_cfg_dir: /etc/network/interfaces.d
+
+# resolv.conf filename
+network_resolv_conf: /etc/resolv.conf
