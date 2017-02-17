@@ -15,7 +15,7 @@ network_packages_remove:
 network_config_sysctl_ipv6_ra: /etc/sysctl.d/network_ipv6_ra.conf
 
 # network main configuration
-network_cfg_main: /etc/network/interfaces
+network_cfg_main: /etc/sysconfig/network
 
 # netowrk configuration directory
 network_cfg_dir: /etc/sysconfig/network-scripts/
