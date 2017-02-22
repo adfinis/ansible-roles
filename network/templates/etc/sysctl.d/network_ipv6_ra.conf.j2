@@ -6,4 +6,5 @@
 {% for interface in ansible_interfaces %}
 net.ipv6.conf.{{ interface }}.accept_ra=0
 net.ipv6.conf.{{ interface }}.autoconf=0
+
 {% endfor %}

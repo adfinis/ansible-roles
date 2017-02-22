@@ -14,6 +14,8 @@
   tags:
     - 'role::network'
     - 'role::network:config'
+  notify:
+    - 'reload network sysctl'
 
 - name: create global network configuration
   template:
