@@ -29,7 +29,8 @@
   tags:
     - 'role::ssh'
     - 'role::ssh:config'
-  notify: [ 'check sshd config and restart' ]
+  notify:
+    - 'check sshd config and restart'
 
 - name: configure ssh client
   template:
