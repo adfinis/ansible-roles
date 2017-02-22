@@ -1,26 +1,26 @@
 ---
 
 # password for user root
-#users_root_password:
+# users_root_password:
 
 # update password for user root
 # possible values are: 'always', 'on_create'
 users_root_password_update: always
 
 # list of users managed by ansible
-#users_user:
-#  - name: JohnDoe
-#    uid: 1000
-#    gid: 1000
-#    group: users
-#    comment: "John Doe"
-#    password: "!"
-#    update_password: always
-#    system: True
-#    shell: /bin/bash
-#    home: /home/johndoe
-#    createhome: True
-#    expires: 1800000000
-#    remove: False
-#    state: present
+# users_user:
+#   - name: JohnDoe
+#     uid: 1000
+#     gid: 1000
+#     group: users
+#     comment: "John Doe"
+#     password: "!"
+#     update_password: always
+#     system: True
+#     shell: /bin/bash
+#     home: /home/johndoe
+#     createhome: True
+#     expires: 1800000000
+#     remove: False
+#     state: present
 users_user: []
