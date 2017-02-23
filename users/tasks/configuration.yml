@@ -35,7 +35,6 @@
     shell: '{{ item.shell | default(omit) }}'
     home: '{{ item.home | default(omit) }}'
     createhome: '{{ item.createhome | default(omit) }}'
-    expires: '{{ item.expires | default(omit) }}'
     remove: '{{ item.remove | default(omit) }}'
     state: '{{ item.state | default("present") }}'
   tags:
