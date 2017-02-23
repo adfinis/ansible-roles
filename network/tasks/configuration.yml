@@ -30,6 +30,18 @@
     - 'role::network'
     - 'role::network:config'
 
+- name: create network interface configuration directory
+  file:
+    path: '{{ network_cfg_dir }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+    seuser: system_u
+    serole: object_r
+    setype: net_conf_t
+    selevel: s0
+
 - name: create network interface configuration
   template:
     src: 'etc/{{ ansible_os_family }}/{{ item.tmpl }}.j2'
