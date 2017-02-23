@@ -28,6 +28,8 @@
     name: '{{ item.name }}'
     uid: '{{ item.uid | default(omit) }}'
     group: '{{ item.group | default(omit) }}'
+    groups: '{{ item.groups | join(",") | default(omit) }}'
+    append: '{{ item.append | default(omit) }}'
     comment: '{{ item.comment | default(omit) }}'
     password: '{{ item.password | default("!") }}'
     update_password: '{{ item.update_password | default("on_create") }}'

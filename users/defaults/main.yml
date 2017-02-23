@@ -13,6 +13,10 @@ users_root_password_update: always
 #     uid: 1000
 #     gid: 1000
 #     group: users
+#     groups:
+#       - foo
+#       - bar
+#     append: no
 #     comment: "John Doe"
 #     password: "!"
 #     update_password: always
