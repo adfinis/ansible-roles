@@ -57,7 +57,7 @@
     - 'role::network'
     - 'role::network:config'
   when: item.device is defined and item.device and
-        item.type is defined and item.type
+        item.tmpl is defined and item.tmpl
   with_items: '{{ network_interfaces }}'
 
 - name: create resolv.conf
