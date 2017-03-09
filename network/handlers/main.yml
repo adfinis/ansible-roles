@@ -1,0 +1,4 @@
+---
+
+- name: reload network sysctl
+  command: '{{ network_sysctl_bin }} -p'
