@@ -20,7 +20,6 @@ users_root_password_update: always
 #     shell: /bin/bash
 #     home: /home/johndoe
 #     createhome: True
-#     expires: 1800000000
 #     remove: False
 #     state: present
 users_user: []
