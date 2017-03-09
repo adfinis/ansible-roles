@@ -1,13 +1,15 @@
 TYPE=Ethernet
+{% if item.hwaddress | d(False) %}
 HWADDR="{{ item.hwaddress }}"
+{% endif %}
 DEVICE="{{ item.device }}"
 
 ONBOOT=yes
-BOOTPROTO={{ item.type }}
+BOOTPROTO={{ item.ipv4.type }}
 USERCTL=no
 
 {% if item.ipv4 is defined %}
-{% if item.type == 'static' %}
+{% if item.ipv4.type == 'static' %}
 IPADDR={{ item.ipv4.address }}
 PREFIX={{ item.ipv4.netmask | d("255.255.255.0") }}
 {% if item.ipv4.gateway is defined %}
@@ -22,13 +24,13 @@ PEERDNS=no
 {% if item.ipv6 is defined %}
 IPV6INIT=yes
 IPV6_AUTOCONF={{ item.ipv6.autoconf | d("yes") }}
-{% if item.type == 'static' %}
+{% if item.ipv6.type == 'static' %}
 IPV6ADDR={{ item.ipv6.address }}/{{ item.ipv6.netmask | d("64") }}
 {% if item.ipv6.gateway %}
 IPV6_DEFAULTGW={{ item.ipv6.gateway }}
 IPV6_DEFROUTE=yes
 {% endif %}
-{% endfi %}
+{% endif %}
 IPV6FORWARDING={{ item.ipv6.forwarding | d("no") }}
 IPV6_FAILURE_FATAL=no
 IPV6_PEERDNS=no
