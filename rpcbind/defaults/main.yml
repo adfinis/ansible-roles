@@ -1,0 +1,7 @@
+---
+
+# disable or enable rpcbind service
+rpcbind_state: stopped
+
+# remove rpcbind packages
+rpcbind_package_state: absent

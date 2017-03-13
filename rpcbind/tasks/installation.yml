@@ -1,0 +1,20 @@
+---
+
+- name: handle rpcbind packages
+  package:
+    name: '{{ item }}'
+    state: '{{ rpcbind_package_state }}'
+  tags:
+    - 'role::rpcbind'
+    - 'role::rpcbind:install'
+  with_items: '{{ rpcbind_packages }}'
+
+- name: disable and stop rpcbind
+  service:
+    name: '{{ rpcbind_service }}'
+    state: '{{ rpcbind_state }}'
+    enabled: no
+  tags:
+    - 'role::rpcbind'
+    - 'role::rpcbind:install'
+  when: not rpcbind_package_state == 'absent'
