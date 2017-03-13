@@ -1,5 +1,11 @@
 ---
 
+- name: set vim as default editor
+  alternatives:
+    name: editor
+    link: '{{ console_editor_link }}'
+    path: '{{ console_editor_path }}'
+
 - name: configure bash
   template:
     src: etc/bashrc.j2
