@@ -56,3 +56,9 @@ console_vimrc: /etc/vimrc
 
 # system gitconfig
 console_gitconfig: /etc/gitconfig
+
+# default editor
+console_editor_path: /usr/bin/vim
+
+# default editor link
+console_editor_link: /etc/alternatives/editor

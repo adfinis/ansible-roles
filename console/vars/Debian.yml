@@ -13,6 +13,7 @@ console_packages:
   - debian-goodies
   - dnsutils
   - dstat
+  - file
   - ftp
   - git
   - hdparm
@@ -65,3 +66,9 @@ console_vimrc: /etc/vim/vimrc
 
 # system gitconfig
 console_gitconfig: /etc/gitconfig
+
+# default editor
+console_editor_path: /usr/bin/vim.basic
+
+# default editor link
+console_editor_link: /etc/alternatives/editor
