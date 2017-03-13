@@ -1,0 +1,8 @@
+---
+
+# rpcbind packages
+rpcbind_packages:
+  - rpcbind
+
+# rpcbind service name
+rpcbind_service: rpcbind
