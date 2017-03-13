@@ -51,3 +51,4 @@
   tags:
     - 'role::nginx'
     - 'role::nginx:install'
+    - 'role::nginx:config'
