@@ -1,0 +1,33 @@
+---
+
+- name: configure apt repository
+  template:
+    src: etc/apt/sources.list.j2
+    dest: '{{ pkg_mirror_sources_file }}'
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - 'role::pkg_mirror'
+    - 'role::pkg_mirror:config'
+  when: ansible_os_family == 'Debian'
+  notify:
+    - 'pkg_mirror reload apt cache'
+
+- name: configure yum repository
+  yum_repository:
+    name: '{{ item.name }}'
+    file: '{{ item.file | default(item.name) }}'
+    description: '{{ item.description }}'
+    baseurl: '{{ item.baseurl | default(omit) }}'
+    mirrorlist: '{{ item.mirrorlist | default(omit) }}'
+    gpgcheck: '{{ item.gpgcheck | default("yes") }}'
+    gpgkey: '{{ item.gpgkey | default(omit) }}'
+    enabled: yes
+    state: present
+    seuser: system_u
+    serole: object_r
+    setype: system_conf_t
+    selevel: s0
+  with_items: '{{ pkg_mirror_url_list }}'
+  when: ansible_os_family == 'RedHat'

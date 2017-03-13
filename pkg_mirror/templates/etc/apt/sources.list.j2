@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+# {{ pkg_mirror_sources_file }}
+
+{% for line in pkg_mirror_url_list %}
+{{ line }}
+{% endfor %}

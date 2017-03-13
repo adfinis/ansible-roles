@@ -1,0 +1,14 @@
+---
+
+# pkg-mirror packages
+pkg_mirror_packages:
+  - epel-release
+
+# pkg-mirror
+pkg_mirror_url_list_default:
+  - name: base
+    file: CentOS-Base
+    description: CentOS-$releasever - Base
+    baseurl: http://pkg.adfinis-sygroup.ch/centos/$releasever/os/$basearch
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7

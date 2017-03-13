@@ -1,0 +1,17 @@
+---
+
+# pkg-mirror packages
+pkg_mirror_packages:
+  - apt-transport-https
+
+# pkg-mirror
+pkg_mirror_url_list_default:
+  - 'deb http://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }} main contrib non-free'
+  - 'deb-src http://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }} main non-free contrib'
+  - 'deb http://security.debian.org/ {{ ansible_distribution_release | lower }}/updates main'
+  - 'deb-src http://security.debian.org/ {{ ansible_distribution_release | lower }}/updates main'
+  - 'deb http://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-updates main contrib non-free'
+  - 'deb-src http://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-updates main contrib non-free'
+
+# sources filename
+pkg_mirror_sources_file: /etc/apt/sources.list
