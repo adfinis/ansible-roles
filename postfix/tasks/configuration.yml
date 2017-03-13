@@ -33,3 +33,15 @@
   tags:
     - 'role::postfix'
     - 'role::postfix:config'
+
+- name: configure aliases
+  lineinfile:
+    name: '{{ postfix_aliases_file }}'
+    regexp: '^{{ item.name }}:'
+    line: '{{ item.name }}: {{ item.alias }}'
+  tags:
+    - 'role::postfix'
+    - 'role::postfix:config'
+  with_items: '{{ postfix_aliases }}'
+  notify:
+    - 'postfix reload aliases'

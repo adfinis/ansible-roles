@@ -17,3 +17,6 @@
   service:
     name: '{{ postfix_service }}'
     state: reloaded
+
+- name: postfix reload aliases
+  command: '{{ postfix_postalias }} {{ postfix_aliases_file }}'
