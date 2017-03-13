@@ -4,6 +4,12 @@
 postfix_packages:
   - postfix
 
+# remove conflicting packages
+postfix_packages_removed:
+  - exim4-base
+  - exim4-config
+  - exim4-daemon-light
+
 # postfix service name
 postfix_service: postfix
 
