@@ -16,3 +16,13 @@
     - 'role::ntp:config'
   notify:
     - 'restart ntpd'
+
+- name: enable and start ntp service
+  service:
+    name: '{{ ntp_service }}'
+    state: started
+    enabled: yes
+  tags:
+    - 'role::ntp'
+    - 'role::ntp:install'
+    - 'role::ntp:config'
