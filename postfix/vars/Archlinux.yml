@@ -12,3 +12,9 @@ postfix_bin: /usr/sbin/postfix
 
 # postfix configuration directory
 postfix_cfg_dir: /etc/postfix
+
+# postalias binary
+postfix_postalias: /usr/bin/postalias
+
+# aliases file
+postfix_aliases_file: /etc/postfix/aliases

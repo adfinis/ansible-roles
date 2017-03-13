@@ -92,3 +92,8 @@ postfix_ssl_protocols:
   - TLSv1.2
   - '!SSLv2'
   - '!SSLv3'
+
+# Define a list of aliases, they will be written to the /etc/aliases file.
+postfix_aliases: []
+#  - name: root
+#    alias: root@example.com
