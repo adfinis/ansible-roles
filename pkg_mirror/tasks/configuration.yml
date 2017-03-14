@@ -7,12 +7,20 @@
     owner: root
     group: root
     mode: 0644
+  register: pkg_mirror_register_apt_repository
   tags:
     - 'role::pkg_mirror'
     - 'role::pkg_mirror:config'
   when: ansible_os_family == 'Debian'
-  notify:
-    - 'pkg_mirror reload apt cache'
+
+- name: pkg_mirror reload apt cache
+  apt:
+    update_cache: yes
+  tags:
+    - 'role::pkg_mirror'
+    - 'role::pkg_mirror:config'
+    - skip_ansible_lint
+  when: pkg_mirror_register_apt_repository.changed
 
 - name: configure yum repository
   yum_repository:
