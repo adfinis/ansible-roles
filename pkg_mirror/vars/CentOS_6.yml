@@ -1,7 +1,8 @@
 ---
 
 # pkg-mirror packages
-pkg_mirror_packages: []
+pkg_mirror_packages:
+  - epel-release
 
 # pkg-mirror
 pkg_mirror_url_list_default:
