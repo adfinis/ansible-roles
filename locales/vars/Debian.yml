@@ -1,0 +1,6 @@
+---
+
+# packages for locales
+locales_packages:
+  - locales
+  - keyboard-configuration

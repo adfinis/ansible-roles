@@ -1,0 +1,10 @@
+---
+
+- name: configure locales
+  locale_gen:
+    name: '{{ item }}'
+    state: present
+  tags:
+    - 'role::locales'
+    - 'role::locales:config'
+  with_items: '{{ locales_locales }}'
