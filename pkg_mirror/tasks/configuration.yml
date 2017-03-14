@@ -20,7 +20,8 @@
     - 'role::pkg_mirror'
     - 'role::pkg_mirror:config'
     - skip_ansible_lint
-  when: pkg_mirror_register_apt_repository.changed
+  when: pkg_mirror_register_apt_repository is defined and
+        pkg_mirror_register_apt_repository.changed
 
 - name: configure yum repository
   yum_repository:
