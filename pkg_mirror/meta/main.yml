@@ -4,7 +4,7 @@ dependencies: []
 
 galaxy_info:
   author: 'Adfinis SyGroup AG'
-  description: ''
+  description: 'manage system package sources'
   company: 'Adfinis SyGroup AG'
   license: 'GNU General Public License v3'
   min_ansible_version: '2.0.0'
@@ -21,4 +21,10 @@ galaxy_info:
       versions:
         - 6
         - 7
-  galaxy_tags: []
+  galaxy_tags:
+    - apt
+    - dpkg
+    - yum
+    - rpm
+    - sources.list
+    - repository
