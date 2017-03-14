@@ -21,6 +21,7 @@
     description: '{{ item.description }}'
     baseurl: '{{ item.baseurl | default(omit) }}'
     mirrorlist: '{{ item.mirrorlist | default(omit) }}'
+    repo_gpgcheck: '{{ item.repo_gpgcheck | default(omit) }}'
     gpgcheck: '{{ item.gpgcheck | default("yes") }}'
     gpgkey: '{{ item.gpgkey | default(omit) }}'
     enabled: yes
