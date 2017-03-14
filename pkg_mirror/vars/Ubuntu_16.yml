@@ -6,14 +6,14 @@ pkg_mirror_packages:
 
 # pkg-mirror
 pkg_mirror_url_list_default:
-  - 'deb http://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }} main restricted universe multiverse'
-  - 'deb-src http://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }} main restricted universe multiverse'
-  - 'deb http://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-updates main restricted universe multiverse'
-  - 'deb-src http://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-updates main restricted universe multiverse'
-  - 'deb http://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-security main restricted universe multiverse'
-  - 'deb-src http://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-security main restricted universe multiverse'
-  - 'deb http://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-backports main restricted universe multiverse'
-  - 'deb-src http://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-backports main restricted universe multiverse'
+  - 'deb https://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }} main restricted universe multiverse'
+  - 'deb-src https://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }} main restricted universe multiverse'
+  - 'deb https://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-updates main restricted universe multiverse'
+  - 'deb-src https://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-updates main restricted universe multiverse'
+  - 'deb https://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-security main restricted universe multiverse'
+  - 'deb-src https://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-security main restricted universe multiverse'
+  - 'deb https://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-backports main restricted universe multiverse'
+  - 'deb-src https://pkg.adfinis-sygroup.ch/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release | lower }}-backports main restricted universe multiverse'
 
 # sources filename
 pkg_mirror_sources_file: /etc/apt/sources.list
