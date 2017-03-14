@@ -1,6 +1,6 @@
 ---
 
-- name: handle pkg_mirror packages
+- name: install pkg_mirror packages
   package:
     name: '{{ item }}'
     state: present
