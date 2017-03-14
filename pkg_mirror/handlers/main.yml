@@ -1,4 +1,5 @@
 ---
 
 - name: pkg_mirror reload apt cache
-  command: apt-get update
+  apt:
+    update_cache: yes
