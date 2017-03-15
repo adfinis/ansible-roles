@@ -8,3 +8,20 @@
     - 'role::locales'
     - 'role::locales:config'
   with_items: '{{ locales_locales }}'
+
+- name: fetch localization facts
+  shell: localectl status | grep 'VC Keymap' | grep '{{ locales_keymap }}'
+  ignore_errors: yes
+  register: keymap_status
+  changed_when: keymap_status.rc != 0
+  failed_when: keymap_status.rc != 1 and keymap_status.rc != 0
+  tags:
+    - 'role::locales'
+    - 'role::locales:config'
+
+- name: Set keymap
+  command: localectl set-keymap '{{ locales_keymap }}'
+  tags:
+    - 'role::locales'
+    - 'role::locales:config'
+  when: keymap_status.rc == 1

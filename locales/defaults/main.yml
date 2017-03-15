@@ -5,3 +5,5 @@ locales_locales:
   - en_US.UTF-8
   - de_CH.UTF-8
   - de_DE.UTF-8
+
+locales_keymap: us
