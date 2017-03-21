@@ -44,3 +44,20 @@
     - role::users:config
   with_items: '{{ users_user }}'
   when: item.name is defined and item.name
+
+- name: manage ssh keys of users
+  authorized_key:
+    user: '{{ item.user }}'
+    key: '{{ item.key }}'
+    exclusive: '{{ item.exclusive | default(omit) }}'
+    key_options: '{{ item.options | default(omit) }}'
+    manage_dir: '{{ item.manage_dir | default("no") }}'
+    path: '{{ item.path | default(ssh_daemon_authorized_keys[0] + item.user) }}'
+    state: '{{ item.present | default(omit) }}'
+  tags:
+    - role::users
+    - role::users:config
+    - role::users:sshkeys
+  with_items: '{{ users_ssh_keys }}'
+  when: item.user is defined and item.user and
+        item.key is defined and item.key
