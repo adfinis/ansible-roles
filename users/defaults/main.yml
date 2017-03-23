@@ -27,3 +27,14 @@ users_root_password_update: always
 #     remove: False
 #     state: present
 users_user: []
+
+# list of ssh keys
+# users_ssh_keys:
+#   - user: ''
+#     key: '{{ lookup("file", "ssh/johndoe.pub") }}'
+#     exclusive: no
+#     key_options: ''
+#     manage_dir: no
+#     path: '{{ ssh_daemon_authorized_keys }}/{{ item.user }}'
+#     state: present
+users_ssh_keys: []
