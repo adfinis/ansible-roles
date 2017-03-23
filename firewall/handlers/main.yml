@@ -1,1 +1,7 @@
 ---
+
+- name: firewall restart
+  service:
+    name: '{{ item }}'
+    state: restarted
+  with_items: '{{ firewall_services }}'

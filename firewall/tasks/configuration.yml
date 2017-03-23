@@ -25,6 +25,8 @@
   tags:
     - 'role::firewall'
     - 'role::firewall:config'
+  notify:
+    - 'firewall restart'
 
 - name: configure firewall v6 ruleset
   template:
@@ -40,3 +42,5 @@
   tags:
     - 'role::firewall'
     - 'role::firewall:config'
+  notify:
+    - 'firewall restart'

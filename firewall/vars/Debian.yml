@@ -9,6 +9,10 @@ firewall_packages:
   - iptables
   - iptables-persistent
 
+# firewall services
+firewall_services:
+  - netfilter-persistent
+
 # directory
 firewall_directory: /etc/iptables
 

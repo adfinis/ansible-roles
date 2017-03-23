@@ -10,6 +10,11 @@ firewall_packages:
   - iptables
   - iptables-ipv6
 
+# firewall services
+firewall_services:
+  - iptables
+  - ip6tables
+
 # directory
 firewall_directory: /etc/sysconfig
 
