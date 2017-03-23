@@ -1,0 +1,61 @@
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [0:0]
+:LIMIT_PSCAN - [0:0]
+:SSH_CHECK - [0:0]
+:SERVICE_IN - [0:0]
+:SERVICE_FWD - [0:0]
+
+
+################################################################################
+### INPUT
+################################################################################
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p ipv6-icmp -j ACCEPT
+-A INPUT -m conntrack --ctstate NEW -j LIMIT_PSCAN
+-A INPUT -m conntrack --ctstate NEW -j SERVICE_IN
+
+
+################################################################################
+### FORWARD
+################################################################################
+-A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -p ipv6-icmp -j ACCEPT
+-A FORWARD -m conntrack --ctstate NEW -j LIMIT_PSCAN
+-A FORWARD -m conntrack --ctstate NEW -j SERVICE_FWD
+
+
+################################################################################
+### SSH CHECK
+################################################################################
+-A SSH_CHECK -m recent --set --name SSH_CHECK --rsource
+-A SSH_CHECK -m recent --rcheck --seconds 30 --hitcount 10 --rttl --name SSH_CHECK --rsource -j LOG --log-prefix "bruteforce "
+-A SSH_CHECK -m recent --rcheck --seconds 30 --hitcount 10 --rttl --name SSH_CHECK --rsource -j DROP
+-A SSH_CHECK -m recent --rcheck --seconds 30 --hitcount 3 --rttl --name SSH_CHECK --rsource -j ACCEPT
+-A SSH_CHECK -m recent --rcheck --seconds 30 --rttl --name SSH_CHECK --rsource -j DROP
+
+
+################################################################################
+### LIMIT PORTSCAN
+################################################################################
+-A LIMIT_PSCAN -p tcp -m tcp --syn -m recent --set --name PORT_SCAN --rsource
+-A LIMIT_PSCAN -p tcp -m tcp --syn -m recent --rcheck --seconds 30 --hitcount 20 --rttl --name PORT_SCAN --rsource -j LOG --log-prefix "port scanner "
+-A LIMIT_PSCAN -p tcp -m tcp --syn -m recent --rcheck --seconds 30 --hitcount 20 --rttl --name PORT_SCAN --rsource -j DROP
+-A LIMIT_PSCAN -p tcp -m tcp --tcp-flags ALL FIN -j DROP
+-A LIMIT_PSCAN -p tcp -m tcp --tcp-flags FIN,SYN FIN,SYN -j DROP
+-A LIMIT_PSCAN -p tcp -m tcp --tcp-flags SYN,RST SYN,RST -j DROP
+-A LIMIT_PSCAN -p tcp -m tcp --tcp-flags ALL FIN,PSH,URG -j DROP
+-A LIMIT_PSCAN -p tcp -m tcp --tcp-flags ALL ALL -j DROP
+-A LIMIT_PSCAN -p tcp -m tcp --tcp-flags ALL NONE -j DROP
+-A LIMIT_PSCAN -m hashlimit --hashlimit-above 20/sec --hashlimit-mode srcip --hashlimit-name PORT_SCAN -j DROP
+
+
+################################################################################
+### SERVICES
+################################################################################
+-A SERVICE_IN -p tcp -m tcp --sport 1024:65535 --dport 22 -j ACCEPT
+
+
+COMMIT
