@@ -14,7 +14,7 @@
 - name: configure firewall v4 ruleset
   template:
     src: iptables.j2
-    dst: '{{ firewall_iptables_v4_cfg }}'
+    dest: '{{ firewall_iptables_v4_cfg }}'
     owner: root
     group: root
     mode: 0600
@@ -29,7 +29,7 @@
 - name: configure firewall v6 ruleset
   template:
     src: ip6tables.j2
-    dst: '{{ firewall_iptables_v6_cfg }}'
+    dest: '{{ firewall_iptables_v6_cfg }}'
     owner: root
     group: root
     mode: 0600
