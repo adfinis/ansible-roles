@@ -15,10 +15,22 @@
   ## connection with the server and doesn't restrict the databases we are trying
   ## to grab metrics for.
   ##
-  address = "host=localhost user=postgres sslmode=disable"
+  address = "{{ telegraf_plugin_postgresql.address | default("host=localhost user=postgres sslmode=disable") }}"
 
   ## A list of databases to pull metrics about. If not specified, metrics for all
   ## databases are gathered.
-  # databases = ["app_production", "testing"]
+{% if telegraf_plugin_postgresql.databases is defined %}
+  databases = [
+{% for database in telegraf_plugin_postgresql.databases %}
+    "{{ database }}",
+{% endfor %}
+  ]
+{% else %}
+  ignored_databases = [
+{% for database in telegraf_plugin_postgresql.ignored_databases | d(['postgres', 'template0', 'template1']) %}
+    "{{ database }}",
+{% endfor %}
+  ]
+{% endif %}
 
 # vim: set sw=2 ts=2 et wrap tw=76 :
