@@ -1,0 +1,11 @@
+---
+
+# firewall packages to remove
+firewall_packages_remove:
+  - firewalld
+  - firewalld-filesystem
+
+# firewall packages to install
+firewall_packages:
+  - iptables
+  - iptables-services

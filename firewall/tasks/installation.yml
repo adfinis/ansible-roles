@@ -1,0 +1,19 @@
+---
+
+- name: remove other firewalls
+  package:
+    name: '{{ item }}'
+    state: absent
+  tags:
+    - 'role::firewall'
+    - 'role::firewall:install'
+  with_items: '{{ firewall_packages_remove }}'
+
+- name: install firewall/iptables related packages
+  package:
+    name: '{{ item }}'
+    state: present
+  tags:
+    - 'role::firewall'
+    - 'role::firewall:install'
+  with_items: '{{ firewall_packages }}'
