@@ -1,1 +1,42 @@
 ---
+
+- name: manage firewall directory
+  file:
+    path: '{{ firewall_directory }}'
+    owner: root
+    group: root
+    mode: 0755
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+
+- name: configure firewall v4 ruleset
+  template:
+    src: iptables.j2
+    dst: '{{ firewall_iptables_v4_cfg }}'
+    owner: root
+    group: root
+    mode: 0600
+    seuser: system_u
+    serole: object_r
+    setype: system_conf_t
+    selevel: s0
+  tags:
+    - 'role::firewall'
+    - 'role::firewall:config'
+
+- name: configure firewall v6 ruleset
+  template:
+    src: ip6tables.j2
+    dst: '{{ firewall_iptables_v6_cfg }}'
+    owner: root
+    group: root
+    mode: 0600
+    seuser: system_u
+    serole: object_r
+    setype: system_conf_t
+    selevel: s0
+  tags:
+    - 'role::firewall'
+    - 'role::firewall:config'

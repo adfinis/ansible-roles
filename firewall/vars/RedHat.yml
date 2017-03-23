@@ -9,3 +9,12 @@ firewall_packages_remove:
 firewall_packages:
   - iptables
   - iptables-services
+
+# directory
+firewall_directory: /etc/sysconfig
+
+# iptables for IPv4
+firewall_iptables_v4_cfg: '{{ firewall_directory }}/iptables'
+
+# iptables for IPv6
+firewall_iptables_v6_cfg: '{{ firewall_directory }}/ip6tables'
