@@ -1,1 +1,4 @@
 ---
+
+# enable rate limiting
+firewall_rate_limiting: false

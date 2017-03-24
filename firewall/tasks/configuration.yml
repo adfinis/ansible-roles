@@ -44,3 +44,14 @@
     - 'role::firewall:config'
   notify:
     - 'firewall restart'
+
+- name: start and enable firewall
+  service:
+    name: '{{ item }}'
+    state: started
+    enabled: true
+  tags:
+    - 'role::firewall'
+    - 'role::firewall:install'
+    - 'role::firewall:config'
+  with_items: '{{ firewall_services }}'
