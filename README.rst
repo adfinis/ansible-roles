@@ -97,12 +97,6 @@ Currently the repository features the following roles:
 +------------+---------------------------------------------------------------------------------------------------+
 
 
-STRUCTURE
-=========
-
-TODO
-
-
 CONTRIBUTIONS
 =============
 Contributions are more than welcome! Please feel free to open new issues or
