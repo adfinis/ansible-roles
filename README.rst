@@ -102,6 +102,16 @@ CONTRIBUTIONS
 Contributions are more than welcome! Please feel free to open new issues or
 pull requests.
 
+We have some contribution rules:
+
+* Each change, regardless if it's a new role, a bugfix, a feature request, or
+  another change, must be a merge request and another person must review it.
+* The language is english.
+* Each role is listed in the README.
+* For each role exists a meta information file (``$ROLE/meta/main.yml``).
+* We use multiple features, like issues, merge requests, labels for requests
+  and issues, reviews and continous integration.
+
 
 LICENSE
 =======
