@@ -131,6 +131,15 @@ ansible. To restart a provisioning task, you can use
 ``vagrant provision <distribution>``.
 
 
+CONTINUOUS INTEGRATION
+======================
+The continuous integration (CI) will do some checks, like
+
+* yaml syntax check
+* ansible syntax check
+* ansible linting (for best current practice and some additional checks)
+
+
 LICENSE
 =======
 GNU GENERAL PUBLIC LICENSE Version 3
