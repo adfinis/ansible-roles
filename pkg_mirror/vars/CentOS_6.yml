@@ -11,4 +11,5 @@ pkg_mirror_url_list_default:
     description: CentOS-$releasever - Base
     baseurl: https://pkg.adfinis-sygroup.ch/centos/$releasever/os/$basearch
     gpgcheck: yes
+    repo_gpgcheck: yes
     gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
