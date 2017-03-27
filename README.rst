@@ -109,8 +109,8 @@ We have some contribution rules:
 * The language is english.
 * Each role is listed in the README.
 * For each role exists a meta information file (``$ROLE/meta/main.yml``).
-* We use multiple features, like issues, merge requests, labels for requests
-  and issues, reviews and continous integration.
+* We use multiple features, like `issue-tracker`_, `merge-request`_,
+  `labels`_ for requests and issues `continuous integration`_.
 
 
 LICENSE
@@ -120,6 +120,12 @@ GNU GENERAL PUBLIC LICENSE Version 3
 See the `LICENSE`_ file.
 
 
+.. _ansible-guide.doc: https://git.adfinis-sygroup.ch/ad-sy/ansible-guide.doc
+.. _ansible-roles.src: https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src
+.. _issue-tracker: https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src/issues
+.. _merge-request: https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src/merge_requests
+.. _labels: https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src/labels
+.. _continuous integration: https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src/pipelines
 .. _LICENSE: LICENSE
 
 
