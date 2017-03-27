@@ -26,7 +26,6 @@ REQUIREMENTS
 ============
 In order to use the roles please make sure to fulfill the following
 requirements:
-
 * FQDN configured on the target host
 * Ansible 2.0+ is used
 
@@ -39,7 +38,7 @@ Below the required steps to include the roles into your playbooks and projects:
 #. Add this repository as git submodule (``git submodule add git@git.adfinis-sygroup.ch:ad-sy/ansible-roles.src.git adsy-roles``)
 #. Configure Ansible to use the additional roles path
 
-.. code-block:: ini
+.. code-block:: Ini
 
   [defaults]
   ansible_managed     = Warning: File is managed by Ansible [https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src]
