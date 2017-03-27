@@ -113,6 +113,23 @@ We have some contribution rules:
   `labels`_ for requests and issues `continuous integration`_.
 
 
+DEVELOPEMENT ENVIRONMENT
+========================
+To setup the developement environment you should clone the repository
+`ansible-guide.doc`_.
+
+.. code-block:: Bash
+
+  git clone git@git.adfinis-sygroup.ch:ad-sy/ansible-guide.doc.git
+  cd ansible-guide.doc
+  git submodule update --init
+
+There is a vagrant box for each supported distribution. ``vagrant up`` will
+start all boxes one by one and will automatically provision those with
+ansible. To restart a provisioning task, you can use
+``vagrant provision <distribution>``.
+
+
 LICENSE
 =======
 GNU GENERAL PUBLIC LICENSE Version 3
