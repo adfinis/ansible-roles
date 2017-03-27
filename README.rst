@@ -41,11 +41,11 @@ Below the required steps to include the roles into your playbooks and projects:
 
 .. code-block:: ini
 
-    [defaults]
-    ansible_managed     = Warning: File is managed by Ansible [https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src]
-    retry_files_enabled = False
-    hostfile            = ./hosts
-    roles_path          = ./adsy-roles
+  [defaults]
+  ansible_managed     = Warning: File is managed by Ansible [https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src]
+  retry_files_enabled = False
+  hostfile            = ./hosts
+  roles_path          = ./adsy-roles
 
 4. Create your own project specific roles in directory ``roles``, ansible will use both directories (with precedence of ``roles``).
 
