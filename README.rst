@@ -1,12 +1,12 @@
 =============
-Ansible Roles
+ANSIBLE ROLES
 =============
 
 Ansible roles to manage your infrastructure in an automated and reproducable
 way.
 
 
-Features
+FEATURES
 ========
 The goal of this repository is to provide a fully blown Ansible roles set to
 manage your infrastructure in an automated fashion whilst providing full
@@ -22,7 +22,7 @@ In addition the roles take care of the necessary SELinux configuration if
 required.
 
 
-Requirements
+REQUIREMENTS
 ============
 In order to use the roles please make sure to fulfill the following
 requirements:
@@ -31,7 +31,7 @@ requirements:
 * Ansible 2.0+ is used
 
 
-Installation
+INSTALLATION
 ============
 Below the required steps to include the roles into your playbooks and projects:
 
@@ -40,7 +40,7 @@ Below the required steps to include the roles into your playbooks and projects:
 TODO
 
 
-Roles
+ROLES
 =====
 Currently the repository features the following roles:
 
@@ -87,19 +87,19 @@ Currently the repository features the following roles:
 +------------+---------------------------------------------------------------------------------------------------+
 
 
-Structure
+STRUCTURE
 =========
 
 TODO
 
 
-Contributions
+CONTRIBUTIONS
 =============
 Contributions are more than welcome! Please feel free to open new issues or
 pull requests.
 
 
-License
+LICENSE
 =======
 GNU GENERAL PUBLIC LICENSE Version 3
 
