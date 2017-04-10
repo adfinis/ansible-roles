@@ -2,3 +2,17 @@
 
 # enable rate limiting
 firewall_rate_limiting: false
+
+# reject all traffic not handled by the firewall with a tcp-reset ICMP message
+firewall_reject: true
+
+# open ports incoming
+firewall_rules_in:
+  - protocol: tcp
+    dport: 22
+
+# open ports forwarding
+firewall_rules_fwd: []
+#  - dst: 192.0.2.1
+#    protocol: tcp
+#    dport: 22

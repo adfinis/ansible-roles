@@ -3,7 +3,6 @@
 :FORWARD DROP [0:0]
 :OUTPUT ACCEPT [0:0]
 :LIMIT_PSCAN - [0:0]
-:SSH_CHECK - [0:0]
 :SERVICE_IN - [0:0]
 :SERVICE_FWD - [0:0]
 
@@ -16,6 +15,9 @@
 -A INPUT -p icmp -j ACCEPT
 -A INPUT -m conntrack --ctstate NEW -j LIMIT_PSCAN
 -A INPUT -m conntrack --ctstate NEW -j SERVICE_IN
+{% if firewall_reject %}
+-A INPUT -j REJECT --reject-with icmp-admin-prohibited
+{% endif %}
 
 
 ################################################################################
@@ -25,16 +27,9 @@
 -A FORWARD -p icmp -j ACCEPT
 -A FORWARD -m conntrack --ctstate NEW -j LIMIT_PSCAN
 -A FORWARD -m conntrack --ctstate NEW -j SERVICE_FWD
-
-
-################################################################################
-### SSH CHECK
-################################################################################
--A SSH_CHECK -m recent --set --name SSH_CHECK --rsource
--A SSH_CHECK -m recent --rcheck --seconds 30 --hitcount 10 --rttl --name SSH_CHECK --rsource -j LOG --log-prefix "bruteforce "
--A SSH_CHECK -m recent --rcheck --seconds 30 --hitcount 10 --rttl --name SSH_CHECK --rsource -j DROP
--A SSH_CHECK -m recent --rcheck --seconds 30 --hitcount 3 --rttl --name SSH_CHECK --rsource -j ACCEPT
--A SSH_CHECK -m recent --rcheck --seconds 30 --rttl --name SSH_CHECK --rsource -j DROP
+{% if firewall_reject %}
+-A FORWARD -j REJECT --reject-with icmp-admin-prohibited
+{% endif %}
 
 
 ################################################################################
@@ -59,7 +54,13 @@
 ################################################################################
 ### SERVICES
 ################################################################################
--A SERVICE_IN -p tcp -m tcp --sport 1024:65535 --dport 22 -j ACCEPT
+{% for entry in firewall_rules_in %}
+-A SERVICE_IN -p {{ entry.protocol }} --sport {{ entry.sport | default("1024:65535") }} --dport {{ entry.dport }} -j ACCEPT
+{% endfor %}
+
+{% for entry in firewall_rules_fwd %}
+-A SERVICE_FWD -d {{ entry.dst }} -p {{ entry.protocol }} --sport {{ entry.sport | default("1024:65535") }} --dport {{ entry.dport }} -j ACCEPT
+{% endfor %}
 
 
 COMMIT
