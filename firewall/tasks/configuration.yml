@@ -10,6 +10,7 @@
     serole: object_r
     setype: etc_t
     selevel: s0
+  register: firewall_register_install
 
 - name: configure firewall v4 ruleset
   template:
@@ -54,4 +55,6 @@
     - 'role::firewall'
     - 'role::firewall:install'
     - 'role::firewall:config'
+    - 'skip_ansible_lint'
   with_items: '{{ firewall_services }}'
+  when: firewall_register_install.changed
