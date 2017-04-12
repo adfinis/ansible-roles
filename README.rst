@@ -2,7 +2,7 @@
 ANSIBLE ROLES
 =============
 
-Ansible roles to manage your infrastructure in an automated and reproducable
+Ansible roles to manage your infrastructure in an automated and reproducible
 way.
 
 
@@ -10,7 +10,7 @@ FEATURES
 ========
 The goal of this repository is to provide a fully blown Ansible roles set to
 manage your infrastructure in an automated fashion whilst providing full
-reproducability.
+reproducibility.
 
 All roles support at least the following distributions:
 
@@ -49,8 +49,8 @@ Below the required steps to include the roles into your playbooks and projects:
   hostfile            = ./hosts
   roles_path          = ./adsy-roles
 
-4. Create your own project specific roles in directory ``roles``, ansible will
-   use both directories (with precedence of ``roles``).
+4. Create your own project specific roles in the directory ``roles``, Ansible
+   will use both directories (with precedence of ``roles``).
 
 
 ROLES
@@ -60,9 +60,9 @@ Currently the repository features the following roles:
 +---------------+-----------------------------------------------------------+
 | Role          | Description                                               |
 +===============+===========================================================+
-| ansible       | install base packages and ansible related packages        |
+| ansible       | install base packages and Ansible related packages        |
 +---------------+-----------------------------------------------------------+
-| console       | manage adsy standard tooles, bashrc and vimrc             |
+| console       | manage standard tools, bashrc and vimrc                   |
 +---------------+-----------------------------------------------------------+
 | hostname      | set system hostname                                       |
 +---------------+-----------------------------------------------------------+
@@ -71,7 +71,7 @@ Currently the repository features the following roles:
 | mariadb       | manage a mariadb server and client (if mariadb is not     |
 |               | available, mysql will be installed instead)               |
 +---------------+-----------------------------------------------------------+
-| network       | manage network interfaces and ip addresses and routes     |
+| network       | manage network interfaces and IP addresses and routes     |
 +---------------+-----------------------------------------------------------+
 | nginx         | install and manage nginx                                  |
 +---------------+-----------------------------------------------------------+
@@ -98,7 +98,7 @@ Currently the repository features the following roles:
 +---------------+-----------------------------------------------------------+
 | upgrade       | install dist upgrades                                     |
 +---------------+-----------------------------------------------------------+
-| users         | manage posix users and groups                             |
+| users         | manage POSIX users and groups                             |
 +---------------+-----------------------------------------------------------+
 
 
@@ -109,18 +109,20 @@ pull requests.
 
 We have some contribution rules:
 
-* Each change, regardless if it's a new role, a bugfix, a feature request, or
+* Each change, regardless if it's a new role, a bug fix, a feature request, or
   another change, must be a merge request and another person must review it.
-* The language is english.
+* The language is English, in the documentation, for pull requests, issues
+  and also commit messages.
 * Each role is listed in the README.
-* For each role exists a meta information file (``$ROLE/meta/main.yml``).
+* Each role must have a meta information file (``$ROLE/meta/main.yml``).
 * We use multiple features, like `issue-tracker`_, `merge-request`_,
   `labels`_ for requests and issues `continuous integration`_.
+* The continuous integration must pass.
 
 
 DEVELOPEMENT ENVIRONMENT
 ========================
-To setup the developement environment you should clone the repository
+To setup the development environment you should clone the repository
 `ansible-guide.doc`_.
 
 .. code-block:: Bash
@@ -131,7 +133,7 @@ To setup the developement environment you should clone the repository
 
 There is a vagrant box for each supported distribution. ``vagrant up`` will
 start all boxes one by one and will automatically provision those with
-ansible. To restart a provisioning task, you can use
+Ansible. To restart a provisioning task, you can use
 ``vagrant provision <distribution>``.
 
 
@@ -140,8 +142,8 @@ CONTINUOUS INTEGRATION
 The continuous integration (CI) will do some checks, like
 
 * yaml syntax check
-* ansible syntax check
-* ansible linting (for best current practice and some additional checks)
+* Ansible syntax check
+* Ansible linting (for best current practice and some additional checks)
 
 
 LICENSE
