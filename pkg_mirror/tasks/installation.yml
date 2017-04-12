@@ -1,0 +1,10 @@
+---
+
+- name: install pkg_mirror packages
+  package:
+    name: '{{ item }}'
+    state: present
+  tags:
+    - 'role::pkg_mirror'
+    - 'role::pkg_mirror:install'
+  with_items: '{{ pkg_mirror_packages }}'

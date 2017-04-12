@@ -1,0 +1,5 @@
+---
+
+# package mirror url list
+# default is defined in vars
+pkg_mirror_url_list: '{{ pkg_mirror_url_list_default }}'
