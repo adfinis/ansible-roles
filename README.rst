@@ -26,6 +26,7 @@ REQUIREMENTS
 ============
 In order to use the roles please make sure to fulfill the following
 requirements:
+
 * FQDN configured on the target host
 * Ansible 2.0+ is used
 
@@ -162,4 +163,4 @@ See the `LICENSE`_ file.
 .. _LICENSE: LICENSE
 
 
-.. vim: set ft=rst sw=2 ts=2 et wrap tw=76:
+.. vim: set ft=rst sw=2 ts=2 et wrap tw=80 :
