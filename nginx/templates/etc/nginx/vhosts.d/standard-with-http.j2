@@ -3,6 +3,7 @@
 
 server {
     listen 443 ssl{% if item.default | d(False) %} default{% endif %};
+    listen [::]:443 ssl{% if item.default | d(False) %} default{% endif %};
     server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
 
     ##
@@ -80,6 +81,7 @@ server {
 
 server {
     listen 80{% if item.default | d(False) %} default{% endif %};
+    listen [::]:80{% if item.default | d(False) %} default{% endif %};
     server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
 
     access_log /var/log/nginx/{{ item.name | d(ansible_hostname+'.'+ansible_domain) }}_access.log;
