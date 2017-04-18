@@ -1,0 +1,10 @@
+---
+
+- name: install logwatch related packages
+  package:
+    name: '{{ item }}'
+    state: present
+  tags:
+    - 'role::logwatch'
+    - 'role::logwatch:install'
+  with_items: '{{ logwatch_packages }}'

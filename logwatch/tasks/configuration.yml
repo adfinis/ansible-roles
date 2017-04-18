@@ -1,0 +1,16 @@
+---
+
+- name: create logwatch configuration
+  template:
+    src: etc/logwatch/conf/logwatch.conf.j2
+    dest: '{{ logwatch_main_conf }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  tags:
+    - 'role::logwatch'
+    - 'role::logwatch:config'

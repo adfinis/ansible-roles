@@ -1,0 +1,8 @@
+---
+
+# logwatch packages
+logwatch_packages:
+  - logwatch
+
+# logwatch main configuration file
+logwatch_main_conf: /etc/logwatch/conf/logwatch.conf
