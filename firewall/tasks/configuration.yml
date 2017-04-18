@@ -11,6 +11,9 @@
     setype: etc_t
     selevel: s0
   register: firewall_register_install
+  tags:
+    - 'role::firewall'
+    - 'role::firewall:config'
 
 - name: configure firewall v4 ruleset
   template:
