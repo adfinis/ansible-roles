@@ -65,9 +65,9 @@ Currently the repository features the following roles:
 +---------------+-----------------------------------------------------------+
 | console       | manage standard tools, bashrc and vimrc                   |
 +---------------+-----------------------------------------------------------+
-| hostname      | set system hostname                                       |
-+---------------+-----------------------------------------------------------+
 | grub          | install and configure grub                                |
++---------------+-----------------------------------------------------------+
+| hostname      | set system hostname                                       |
 +---------------+-----------------------------------------------------------+
 | mariadb       | manage a mariadb server and client (if mariadb is not     |
 |               | available, mysql will be installed instead)               |
