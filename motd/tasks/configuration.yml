@@ -1,0 +1,12 @@
+---
+
+- name: configure motd
+  template:
+    src: etc/motd.j2
+    dest: '{{ motd_file }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t

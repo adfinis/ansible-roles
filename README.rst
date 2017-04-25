@@ -72,6 +72,8 @@ Currently the repository features the following roles:
 | mariadb       | manage a mariadb server and client (if mariadb is not     |
 |               | available, mysql will be installed instead)               |
 +---------------+-----------------------------------------------------------+
+| motd          | set the MOTD                                              |
++---------------+-----------------------------------------------------------+
 | network       | manage network interfaces and IP addresses and routes     |
 +---------------+-----------------------------------------------------------+
 | nginx         | install and manage nginx                                  |

@@ -1,0 +1,8 @@
+---
+
+# MOTD related packages
+motd_packages:
+  - base-files
+
+# MOTD file
+motd_file: /etc/motd
