@@ -6,3 +6,6 @@ motd_packages:
 
 # MOTD file
 motd_file: /etc/motd
+
+# issue file
+motd_issue_file: /etc/issue
