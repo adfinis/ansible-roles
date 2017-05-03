@@ -11,7 +11,7 @@
 
 - name: set fact nginx_fact_file_descriptors
   set_fact:
-    nginx_fact_file_descriptors: '{{ nginx_register_ulimit.stdout }}'
+    nginx_fact_file_descriptors: '{{ nginx_register_ulimit.stdout | default("768") }}'
   tags:
     - 'role::nginx'
     - 'role::nginx:config'
@@ -32,7 +32,7 @@
 - name: create vhosts
   template:
     src: 'etc/nginx/vhosts.d/{{ item.type }}.j2'
-    dest: '{{ nginx_vhosts_dir }}/{{ item.name }}'
+    dest: '{{ nginx_vhosts_dir }}/{{ item.name }}.conf'
     owner: root
     group: root
     mode: 0644
