@@ -1,0 +1,34 @@
+---
+
+- name: configure motd
+  template:
+    src: etc/motd.j2
+    dest: '{{ motd_file }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+
+- name: configure issue
+  template:
+    src: etc/issue.j2
+    dest: '{{ motd_issue_file }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+
+- name: configure issue.net
+  template:
+    src: etc/issue.j2
+    dest: '{{ motd_issue_net_file }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t

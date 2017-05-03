@@ -1,0 +1,14 @@
+---
+
+# MOTD related packages
+motd_packages:
+  - setup
+
+# MOTD file
+motd_file: /etc/motd
+
+# issue file
+motd_issue_file: /etc/issue
+
+# issue.net file
+motd_issue_net_file: /etc/issue.net
