@@ -11,4 +11,11 @@
     - 'role::$role:config'
 
 - include: installation.yml
+  tags:
+    - 'role::$role'
+    - 'role::$role:install'
+
 - include: configuration.yml
+  tags:
+    - 'role::$role'
+    - 'role::$role:config'
