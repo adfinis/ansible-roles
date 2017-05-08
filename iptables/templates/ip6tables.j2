@@ -15,7 +15,7 @@
 -A INPUT -p ipv6-icmp -j ACCEPT
 -A INPUT -m conntrack --ctstate NEW -j LIMIT_PSCAN
 -A INPUT -m conntrack --ctstate NEW -j SERVICE_IN
-{% if firewall_reject %}
+{% if iptables_reject %}
 -A INPUT -j REJECT --reject-with icmp6-adm-prohibited
 {% endif %}
 
@@ -27,7 +27,7 @@
 -A FORWARD -p ipv6-icmp -j ACCEPT
 -A FORWARD -m conntrack --ctstate NEW -j LIMIT_PSCAN
 -A FORWARD -m conntrack --ctstate NEW -j SERVICE_FWD
-{% if firewall_reject %}
+{% if iptables_reject %}
 -A FORWARD -j REJECT --reject-with icmp6-adm-prohibited
 {% endif %}
 
@@ -37,7 +37,7 @@
 ################################################################################
 -A LIMIT_PSCAN -p tcp -m tcp --syn -m recent --set --name PORT_SCAN --rsource
 -A LIMIT_PSCAN -p tcp -m tcp --syn -m recent --rcheck --seconds 30 --hitcount 20 --rttl --name PORT_SCAN --rsource -j LOG --log-prefix "port scanner "
-{% if firewall_rate_limiting %}
+{% if iptables_rate_limiting %}
 -A LIMIT_PSCAN -p tcp -m tcp --syn -m recent --rcheck --seconds 30 --hitcount 20 --rttl --name PORT_SCAN --rsource -j DROP
 {% endif %}
 -A LIMIT_PSCAN -p tcp -m tcp --tcp-flags ALL FIN -j DROP
@@ -46,7 +46,7 @@
 -A LIMIT_PSCAN -p tcp -m tcp --tcp-flags ALL FIN,PSH,URG -j DROP
 -A LIMIT_PSCAN -p tcp -m tcp --tcp-flags ALL ALL -j DROP
 -A LIMIT_PSCAN -p tcp -m tcp --tcp-flags ALL NONE -j DROP
-{% if firewall_rate_limiting %}
+{% if iptables_rate_limiting %}
 -A LIMIT_PSCAN -m hashlimit --hashlimit-above 20/sec --hashlimit-mode srcip --hashlimit-name PORT_SCAN -j DROP
 {% endif %}
 
@@ -54,11 +54,11 @@
 ################################################################################
 ### SERVICES
 ################################################################################
-{% for entry in firewall_rules_in %}
+{% for entry in iptables_rules_in %}
 -A SERVICE_IN -p {{ entry.protocol }} --sport {{ entry.sport | default("1024:65535") }} --dport {{ entry.dport }} -j ACCEPT
 {% endfor %}
 
-{% for entry in firewall_rules_fwd %}
+{% for entry in iptables_rules_fwd %}
 -A SERVICE_FWD -d {{ entry.dst }} -p {{ entry.protocol }} --sport {{ entry.sport | default("1024:65535") }} --dport {{ entry.dport }} -j ACCEPT
 {% endfor %}
 

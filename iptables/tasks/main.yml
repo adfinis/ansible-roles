@@ -6,9 +6,16 @@
     - '{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml'
     - '{{ ansible_os_family }}.yml'
   tags:
-    - 'role::firewall'
-    - 'role::firewall:install'
-    - 'role::firewall:config'
+    - 'role::iptables'
+    - 'role::iptables:install'
+    - 'role::iptables:config'
 
 - include: installation.yml
+  tags:
+    - 'role::iptables'
+    - 'role::iptables:install'
+
 - include: configuration.yml
+  tags:
+    - 'role::iptables'
+    - 'role::iptables:config'

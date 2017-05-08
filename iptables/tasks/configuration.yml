@@ -1,8 +1,8 @@
 ---
 
-- name: manage firewall directory
+- name: manage iptables directory
   file:
-    path: '{{ firewall_directory }}'
+    path: '{{ iptables_directory }}'
     owner: root
     group: root
     mode: 0755
@@ -10,15 +10,12 @@
     serole: object_r
     setype: etc_t
     selevel: s0
-  register: firewall_register_install
-  tags:
-    - 'role::firewall'
-    - 'role::firewall:config'
+  register: iptables_register_install
 
-- name: configure firewall v4 ruleset
+- name: configure iptables v4 ruleset
   template:
     src: iptables.j2
-    dest: '{{ firewall_iptables_v4_cfg }}'
+    dest: '{{ iptables_v4_cfg }}'
     owner: root
     group: root
     mode: 0600
@@ -26,16 +23,13 @@
     serole: object_r
     setype: system_conf_t
     selevel: s0
-  tags:
-    - 'role::firewall'
-    - 'role::firewall:config'
   notify:
-    - 'firewall restart'
+    - 'iptables restart'
 
-- name: configure firewall v6 ruleset
+- name: configure iptables v6 ruleset
   template:
     src: ip6tables.j2
-    dest: '{{ firewall_iptables_v6_cfg }}'
+    dest: '{{ iptables_v6_cfg }}'
     owner: root
     group: root
     mode: 0600
@@ -43,21 +37,15 @@
     serole: object_r
     setype: system_conf_t
     selevel: s0
-  tags:
-    - 'role::firewall'
-    - 'role::firewall:config'
   notify:
-    - 'firewall restart'
+    - 'ip6tables restart'
 
-- name: start and enable firewall
+- name: start and enable iptables
   service:
     name: '{{ item }}'
     state: started
     enabled: true
   tags:
-    - 'role::firewall'
-    - 'role::firewall:install'
-    - 'role::firewall:config'
     - 'skip_ansible_lint'
-  with_items: '{{ firewall_services }}'
-  when: firewall_register_install.changed
+  with_items: '{{ iptables_services }}'
+  when: iptables_register_install.changed

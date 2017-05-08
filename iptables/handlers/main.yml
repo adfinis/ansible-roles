@@ -1,7 +1,7 @@
 ---
 
-- name: firewall restart
+- name: iptables restart
   service:
     name: '{{ item }}'
     state: restarted
-  with_items: '{{ firewall_services }}'
+  with_items: '{{ iptables_services }}'
