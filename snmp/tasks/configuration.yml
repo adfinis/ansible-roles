@@ -8,7 +8,7 @@
     - 'role::snmp'
     - 'role::snmp:config'
   notify:
-    - 'restart snmpd'
+    - 'snmp restart daemon'
   when: 'ansible_os_family == "Debian"'
 
 - name: configure snmpd daemon variables
@@ -26,7 +26,7 @@
     - 'role::snmp'
     - 'role::snmp:config'
   notify:
-    - 'restart snmpd'
+    - 'snmp restart daemon'
 
 - name: configure snmpd service
   template:
@@ -43,7 +43,7 @@
     - 'role::snmp'
     - 'role::snmp:config'
   notify:
-    - 'restart snmpd'
+    - 'snmp restart daemon'
 
 - name: configure snmp client connection to localhost
   template:
@@ -60,7 +60,7 @@
     - 'role::snmp'
     - 'role::snmp:config'
   notify:
-    - 'restart snmpd'
+    - 'snmp restart daemon'
 
 - name: create snmpd extension script directory
   file:

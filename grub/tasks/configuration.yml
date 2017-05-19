@@ -12,7 +12,7 @@
     setype: bootloader_etc_t
     selevel: s0
   notify:
-    - 'update grub'
+    - 'grub update config'
   tags:
     - 'role::grub'
     - 'role::grub:config'

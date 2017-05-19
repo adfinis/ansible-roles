@@ -15,7 +15,7 @@
     - 'role::telegraf'
     - 'role::telegraf:config'
   notify:
-    - 'check telegraf config and restart'
+    - 'telegraf check config and restart'
 
 - name: create telegraf plugin configuration
   template:
@@ -36,7 +36,7 @@
     - '{{ telegraf_plugins_group | default([]) }}'
     - '{{ telegraf_plugins_host | default([]) }}'
   notify:
-    - 'check telegraf config and restart'
+    - 'telegraf check config and restart'
 
 - name: create rsyslog configuration for telegraf
   template:
@@ -54,4 +54,4 @@
     - 'role::telegraf:config'
   when: telegraf_rsyslog
   notify:
-    - 'restart rsyslogd'
+    - 'rsyslog restart daemon'

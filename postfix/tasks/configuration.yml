@@ -12,7 +12,7 @@
     setype: postfix_etc_t
     selevel: s0
   notify:
-    - 'check postfix and reload'
+    - 'postfix check config and reload'
   tags:
     - 'role::postfix'
     - 'role::postfix:config'
@@ -29,7 +29,7 @@
     setype: postfix_etc_t
     selevel: s0
   notify:
-    - 'check postfix and reload'
+    - 'postfix check config and reload'
   tags:
     - 'role::postfix'
     - 'role::postfix:config'

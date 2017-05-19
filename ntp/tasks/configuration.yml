@@ -15,7 +15,7 @@
     - 'role::ntp'
     - 'role::ntp:config'
   notify:
-    - 'restart ntpd'
+    - 'ntp restart daemon'
 
 - name: enable and start ntp service
   service:

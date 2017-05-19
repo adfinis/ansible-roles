@@ -30,7 +30,7 @@
     - 'role::ssh'
     - 'role::ssh:config'
   notify:
-    - 'check sshd config and restart'
+    - 'ssh check sshd config and restart'
 
 - name: configure ssh client
   template:

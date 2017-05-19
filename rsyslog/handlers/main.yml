@@ -1,6 +1,6 @@
 ---
 
-- name: restart rsyslogd
+- name: rsyslog restart daemon
   service:
     name: '{{ rsyslog_service }}'
     state: restarted

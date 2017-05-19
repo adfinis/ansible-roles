@@ -27,7 +27,7 @@
     - 'role::nginx'
     - 'role::nginx:config'
   notify:
-    - 'check nginx and reload'
+    - 'nginx check config and reload'
 
 - name: create vhosts
   template:
@@ -41,7 +41,7 @@
     - 'role::nginx:config'
   with_items: '{{ nginx_vhosts }}'
   notify:
-    - 'check nginx and reload'
+    - 'nginx check config and reload'
 
 - name: enable and start nginx service
   service:

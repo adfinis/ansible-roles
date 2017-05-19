@@ -15,7 +15,7 @@
     - 'role::mariadb'
     - 'role::mariadb:config'
   notify:
-    - 'check mariadb and restart'
+    - 'mariadb check config and restart'
 
 - name: enable mariadb service
   service:

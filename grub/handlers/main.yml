@@ -1,4 +1,4 @@
 ---
 
-- name: update grub
+- name: grub update config
   command: '{{ grub_mkconfig_bin }} -o {{ grub_boot_cfg }}'

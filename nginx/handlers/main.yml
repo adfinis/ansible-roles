@@ -1,29 +1,29 @@
 ---
 
-- name: check nginx
+- name: nginx check config
   command: '{{ nginx_binary }} -t'
 
-- name: check nginx and reload
-  command: '{{ nginx_binary }} -t'
-  notify:
-    - 'reload nginx'
-
-- name: check nginx and restart
+- name: nginx check config and reload
   command: '{{ nginx_binary }} -t'
   notify:
-    - 'restart nginx'
+    - 'nginx reload daemon'
 
-- name: restart nginx
+- name: nginx check config and restart
+  command: '{{ nginx_binary }} -t'
+  notify:
+    - 'nginx restart daemon'
+
+- name: nginx restart daemon
   service:
     name: '{{ nginx_service }}'
     state: restarted
 
-- name: reload nginx
+- name: nginx reload daemon
   service:
     name: '{{ nginx_service }}'
     state: reloaded
 
-- name: remove nginx default vhost
+- name: nginx remove default vhost
   file:
     path: '{{ nginx_default_vhost }}'
     state: absent
