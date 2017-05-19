@@ -3,6 +3,7 @@
 # pkg-mirror packages
 pkg_mirror_packages:
   - apt-transport-https
+  - ca-certificates
 
 # pkg-mirror
 pkg_mirror_url_list_default:
