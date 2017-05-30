@@ -32,7 +32,7 @@
     - 'role::pki:config'
 
 - name: create snakeoil certificate
-  command: 'openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout {{ pki_snakeoil.pkey }} -days 3650 -out {{ pki_snakeoil.cert }} -subj "/C=/ST=/L=/O=/OU=/CN={{ ansible_fqdn }}"'
+  command: 'openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout {{ pki_snakeoil.pkey }} -days 3650 -out {{ pki_snakeoil.cert }} -subj "/CN={{ ansible_fqdn }}"'
   tags:
     - 'role::pki'
     - 'role::pki:config'
