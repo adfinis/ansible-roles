@@ -3,6 +3,8 @@
 # PKI related packages
 pki_packages:
   - openssl
+  - openssl-blacklist
+  - openssl-blacklist-extra
   - ca-certificates
   - ssl-cert
 
