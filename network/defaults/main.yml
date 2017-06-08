@@ -20,9 +20,9 @@ network_resolv_nameservers: []
 #     hwaddress: 00:11:22:33:44:55
 #     ipv4:
 #       type: static
-#       address: 192.168.1.10
+#       address: 192.0.2.10
 #       netmask: 255.255.255.0
-#       gateway: 192.168.1.1
+#       gateway: 192.0.2.1
 #     ipv6:
 #       type: static
 #       address: 2001:db8::10
