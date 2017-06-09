@@ -9,29 +9,40 @@ mariadb_bind_address: 127.0.0.1
 # mariadb bind port
 mariadb_bind_port: 3306
 
-# mariadb database list
-# mariadb_databases:
-#   - name: database1
-#     encoding: utf8
-#   - name: database2
-#   - name: database3
-#     encoding: latin1_swedish_ci
+# Mariadb database list. Default is empty, no databases will be created.
 mariadb_databases: []
 
-# mariadb user list
-# mariadb_users:
-#   - name: john
-#     host: localhost
-#     password: fixme
-#     priv: 'database1.*:ALL'
-#   - name: hans
-#     host: www.example.com
-#     password: s3cr3t
-#     priv: '*.*:ALL,GRANT'
-#   - name: replication
-#     password: 12345
-#     priv: '*.*:REPLICATION CLIENT'
-#   - name: web
-#     password: secure
-#     priv: 'mydb.*:INSERT,UPDATE/anotherdb.*:SELECT/yetanotherdb.*:ALL'
+# A possible structure looks like this:
+#
+# .. code-block:: YAML
+#
+#   mariadb_databases:
+#     - name: database1
+#       encoding: utf8
+#     - name: database2
+#     - name: database3
+#       encoding: latin1_swedish_ci
+#
+
+# Mariadb user list. Default is empty, no users will be created.
 mariadb_users: []
+
+# A posssible structure looks like this:
+#
+# .. code-block:: YAML
+#
+#   mariadb_users:
+#     - name: john
+#       host: localhost
+#       password: fixme
+#       priv: 'database1.*:ALL'
+#     - name: hans
+#       host: www.example.com
+#       password: s3cr3t
+#       priv: '*.*:ALL,GRANT'
+#     - name: replication
+#       password: 12345
+#       priv: '*.*:REPLICATION CLIENT'
+#     - name: web
+#       password: secure
+#       priv: 'mydb.*:INSERT,UPDATE/anotherdb.*:SELECT/yetanotherdb.*:ALL'

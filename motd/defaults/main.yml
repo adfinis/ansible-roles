@@ -1,10 +1,12 @@
 ---
 
+# MOTD message (``/etc/motd``).
 motd_message: |
   -------------------------------------------------
           This system is managed by Ansible
   -------------------------------------------------
 
+# Issue message (``/etc/issue`` and ``/etc/issue.net``).
 motd_issue_message: |
   -------------------------------------------------
           This system is managed by Ansible

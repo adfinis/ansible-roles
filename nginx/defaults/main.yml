@@ -79,51 +79,55 @@ nginx_ssl_ciphers:
   - DES-CBC3-SHA
   - '!DSS'
 
-# a list of nignx vhosts
-# following are some examples how to define virtual hosts.
-# the name of a virtualhost is used as filename and as servername.
-# the value of type is used to choose the virtualhost config template.
-# nginx_vhosts:
-#   # this example shows how to confiugre a standard website with a
-#   # documentroot and php
-#   - name: www.example.com
-#     default: true
-#     type: standard
-#     acme: True
-#     ssl_dhparam: /etc/ssl/dh4096.pem
-#     ssl_crt: /etc/ssl/certs/www.example.com_fullchain.pem
-#     ssl_key: /etc/ssl/local/www.example.com_key.pem
-#     hsts: true
-#     ssl_hsts_age: 15768000
-#     ssl_stapling: true
-#     document_root: /var/www/www.example.com
-#     index: index.html
-#     php_enabled: true
-#   # this example shows how to create a reverse proxy with an upstream server
-#   - name: proxy.example.com
-#     type: proxy
-#     ssl_dhparam: /etc/ssl/dh4096.pem
-#     ssl_crt: /etc/ssl/certs/proxy.example.com_fullchain.pem
-#     ssl_key: /etc/ssl/local/proxy.example.com_key.pem
-#     proxy:
-#       - src: /
-#         dest: http://localhost:8080/
-#   # this example shows how to configure a website with cgi-bin
-#   - name: icinga.example.com
-#     type: standard
-#     ssl_dhparam: /etc/ssl/dh4096.pem
-#     ssl_crt: /etc/ssl/certs/icinga.example.com_fullchain.pem
-#     ssl_key: /etc/ssl/local/icinga.example.com_key.pem
-#     document_root: /usr/share/icinga/htdocs
-#     alias:
-#       - src: /icinga
-#         dest: /usr/share/icinga/htdocs
-#       - src: /stylesheets
-#         dest: /etc/icinga/stylesheets
-#       - src: /icinga/stylesheets
-#         dest: /etc/icinga/stylesheets
-#     cgi_bin:
-#       - location: /cgi-bin/icinga
-#         root: /usr/lib/cgi-bin/icinga
-#         document_root: /usr/lib
+# A list of nignx vhosts. Default is an empty list.
 nginx_vhosts: []
+
+# Following are some examples how to define virtual hosts.
+# The name of a virtualhost is used as filename and as servername.
+# The value of type is used to choose the virtualhost config template.
+#
+# .. code-block:: YAML
+#
+#   nginx_vhosts:
+#     # this example shows how to confiugre a standard website with a
+#     # documentroot and php
+#     - name: www.example.com
+#       default: true
+#       type: standard
+#       acme: True
+#       ssl_dhparam: /etc/ssl/dh4096.pem
+#       ssl_crt: /etc/ssl/certs/www.example.com_fullchain.pem
+#       ssl_key: /etc/ssl/local/www.example.com_key.pem
+#       hsts: true
+#       ssl_hsts_age: 15768000
+#       ssl_stapling: true
+#       document_root: /var/www/www.example.com
+#       index: index.html
+#       php_enabled: true
+#     # this example shows how to create a reverse proxy with an upstream server
+#     - name: proxy.example.com
+#       type: proxy
+#       ssl_dhparam: /etc/ssl/dh4096.pem
+#       ssl_crt: /etc/ssl/certs/proxy.example.com_fullchain.pem
+#       ssl_key: /etc/ssl/local/proxy.example.com_key.pem
+#       proxy:
+#         - src: /
+#           dest: http://localhost:8080/
+#     # this example shows how to configure a website with cgi-bin
+#     - name: icinga.example.com
+#       type: standard
+#       ssl_dhparam: /etc/ssl/dh4096.pem
+#       ssl_crt: /etc/ssl/certs/icinga.example.com_fullchain.pem
+#       ssl_key: /etc/ssl/local/icinga.example.com_key.pem
+#       document_root: /usr/share/icinga/htdocs
+#       alias:
+#         - src: /icinga
+#           dest: /usr/share/icinga/htdocs
+#         - src: /stylesheets
+#           dest: /etc/icinga/stylesheets
+#         - src: /icinga/stylesheets
+#           dest: /etc/icinga/stylesheets
+#       cgi_bin:
+#         - location: /cgi-bin/icinga
+#           root: /usr/lib/cgi-bin/icinga
+#           document_root: /usr/lib

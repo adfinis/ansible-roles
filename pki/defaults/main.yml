@@ -1,31 +1,44 @@
 ---
 
-# dhparam bit size
+# The bit size of the diffie-hellman parameter.
 pki_dhparam_bits: 4096
 
-# dhparam file path
+# The file for the diffie-hellman parameter.
 pki_dhparam_file: '/etc/ssl/dh{{ pki_dhparam_bits }}.pem'
 
-# backup system and path for certificates and keys
-# the tasks will be delegated to this system
+# Backup system and path for certificates and keys.
+# The tasks will be delegated to this system.
 pki_backup:
   system: ''
   path: ''
 
-# a list of all domains for which certificates should exist.
-# alt DNS entries can be added as well, e.g.
-# pki_domains:
-#   - cert: www.example.com
-#   - cert: mail.example.com
-#     alt:
-#       - imap.example.com
-#       - smtp.example.com
+# A list of all domains for which certificates should exist.
 pki_domains: []
 
-# certificates and keys to backup
-# domain names within the ``pki_directory`` directory to backup.
-# e.g.
-# pki_backup_domains:
-#   - www.example.org -> /etc/ssl/private/www.example.org/privkey.pem
-#                     -> /etc/ssl/private/www.example.org/cert.pem
+# Alt DNS entries can be added as well, e.g.
+#
+# .. code-block:: YAML
+#
+#   pki_domains:
+#     - cert: www.example.com
+#     - cert: mail.example.com
+#       alt:
+#         - imap.example.com
+#         - smtp.example.com
+#
+
+# Certificates and keys to backup.
+# Domain names within the ``pki_directory`` directory to backup.
 pki_backup_domains: []
+
+# A possible list looks like this:
+#
+# .. code-block:: YAML
+#
+#   pki_backup_domains:
+#     - www.example.org
+#
+# This will backup the following files:
+#
+# - ``/etc/ssl/private/www.example.org/privkey.pem``
+# - ``/etc/ssl/private/www.example.org/cert.pem``
