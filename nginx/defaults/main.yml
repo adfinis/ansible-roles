@@ -79,7 +79,7 @@ nginx_ssl_ciphers:
   - DES-CBC3-SHA
   - '!DSS'
 
-# A list of nignx vhosts. Default is an empty list.
+# A list of nignx virtual hosts. Default is an empty list.
 nginx_vhosts: []
 
 # Following are some examples how to define virtual hosts.
