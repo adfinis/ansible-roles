@@ -100,7 +100,7 @@ postfix_ssl_protocols:
 # Default is an empty list.
 postfix_aliases: []
 
-# A possible alias list cann look like this:
+# A possible alias list can look like this:
 #
 # .. code-block:: YAML
 #
