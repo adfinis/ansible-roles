@@ -1,19 +1,19 @@
 ---
 
-# SNMP related packages (e.g. lm-sensors
+# SNMP related packages (e.g. lm-sensors).
 snmp_additional_packages: []
 
 # String with ``snmpd`` log-related options, can be used to change log
-# verbosity for debugging. e.g. -LScd
+# verbosity for debugging. E.g. ``-LScd``
 snmp_logging_options: ''
 
-# Path on the remote host where extension scripts are stored
+# Path on the remote host where extension scripts are stored.
 snmp_extension_scripts: /usr/local/lib/snmpd
 
 
-# -------------------------------------------
-#   Network options, firewall, TCP wrappers
-# -------------------------------------------
+# ---------------------------------------
+# Network options, firewall, TCP wrappers
+# ---------------------------------------
 
 # List of addresses on which to listen for incoming connections. By default
 # ``snmpd`` listens on all interfaces and firewall / TCP wrappers are used to
@@ -23,9 +23,9 @@ snmp_agent_address:
   - 'udp6:[::]:161'
 
 
-# ---------------------------------------------------
-#   sysLocation, sysContact, sysName SNMP variables
-# ---------------------------------------------------
+# -----------------------------------------------
+# sysLocation, sysContact, sysName SNMP variables
+# -----------------------------------------------
 
 # Organization name used in ``sysLocation`` and ``sysContact`` SNMP variables.
 snmp_organization: '{{ ansible_domain.split(".") | first | capitalize }}'
@@ -50,9 +50,9 @@ snmp_sys_contact_email: 'root@{{ ansible_domain }}'
 snmp_sys_name: '{{ ansible_fqdn }}'
 
 
-# -------------------------------
-#   CPU load average monitoring
-# -------------------------------
+# ---------------------------
+# CPU load average monitoring
+# ---------------------------
 
 # Enable or disable load average monitoring
 snmp_load: true
@@ -122,24 +122,38 @@ snmp_load_15min: '{{ (((snmp_load_base | float) *
                          snmp_load_weight_map[snmp_load_weight][2] | float) }}'
 
 
-# ------------------------------------------
-#   SNMPv2 communities
-# ------------------------------------------
+# ------------------
+# SNMPv2 communities
+# ------------------
 
 # Define snmp read only communities
 snmp_rocommunity: []
-#  - passwd: ''
-#    source: ''
+
+# E.g.
+#
+# .. code-block:: YAML
+#
+#   snmp_rocommunity:
+#     - passwd: ''
+#       source: ''
+#
 
 # Define snmp read write communities
 snmp_rwcommunity: []
-#  - passwd: ''
-#    source: ''
+
+# E.g.
+#
+# .. code-block:: YAML
+#
+#   snmp_rwcommunity:
+#     - passwd: ''
+#       source: ''
+#
 
 
-# ------------------------------------------
-#   SNMPv3 accounts
-# ------------------------------------------
+# ---------------
+# SNMPv3 accounts
+# ---------------
 
 # Create a local account
 snmp_account_local_username: ''
@@ -148,11 +162,16 @@ snmp_account_local_password: ''
 # Accounts list
 snmp_accounts_list: []
 
-#  - name: user1
-#    authProtocol: (MD5|SHA)                # optional
-#    authPassword: authpassphrase
-#    privProtocol: (DES|AES)                # optional
-#    privPassword: privpassphrase
-#  - name: user2
-#    authPassword: authpassphrase_user2
-#    privPassword: privpassphrase_user2
+# E.g.
+#
+# .. code-block:: YAML
+#
+#  snmp_accounts_list:
+#    - name: user1
+#      authProtocol: (MD5|SHA)                # optional
+#      authPassword: authpassphrase
+#      privProtocol: (DES|AES)                # optional
+#      privPassword: privpassphrase
+#    - name: user2
+#      authPassword: authpassphrase_user2
+#      privPassword: privpassphrase_user2

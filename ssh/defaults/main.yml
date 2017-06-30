@@ -1,38 +1,42 @@
 ---
 
-# a list of all host key files (rsa and ed25519 are recommended)
-# default is only rsa; ed25519 is recommended if supported by sshd
+# A list of all host key files (rsa and ed25519 are recommended).
+# Default is only rsa; ed25519 is recommended if supported by sshd.
 ssh_host_keys:
   - /etc/ssh/ssh_host_rsa_key
   - /etc/ssh/ssh_host_ed25519_key
 
-# a list of all ports for sshd to listen on
-ssh_daemon_ports: [ 22 ]
+# A list of all ports for sshd to listen on.
+ssh_daemon_ports:
+  - 22
 
-# allow root login
+# Allow root login.
 # choices:
+#
 #   - yes (password and publickey)
 #   - no (not allowed)
 #   - without-password (only allowed with publickey)
 ssh_daemon_permit_root_login: 'yes'
 
-# allow password authentication
+# Allow password authentication.
 ssh_daemon_password_authentication: 'yes'
 
-# enable or disable the sshd X11 forwarding
+# Enable or disable the sshd X11 forwarding.
 ssh_daemon_x11_forwarding: 'no'
 
-# environment variables to accept by sshd
-ssh_daemon_accept_env: [ 'LANG', 'LC_*' ]
+# Environment variables to accept by sshd.
+ssh_daemon_accept_env:
+  - 'LANG'
+  - 'LC_*'
 
-# a list of places to search for authorized keys files
+# A list of places to search for authorized keys files.
 # CentOS 6 doesn't support multiple places, so default is just
-# ``$HOME/.ssh/authorized_keys``
+# ``$HOME/.ssh/authorized_keys``.
 ssh_daemon_authorized_keys:
   - '/etc/ssh/authorized_keys/%u'
   - '%h/.ssh/authorized_keys'
 
-# a list of ciphers used by sshd
+# A list of ciphers used by sshd.
 ssh_daemon_ciphers:
   - chacha20-poly1305@openssh.com
   - aes256-gcm@openssh.com
@@ -41,18 +45,18 @@ ssh_daemon_ciphers:
   - aes192-ctr
   - aes128-ctr
 
-# a list of KexAlgorithms used by sshd
+# A list of KexAlgorithms used by sshd.
 ssh_daemon_kex_algorithms:
   - curve25519-sha256@libssh.org
   - diffie-hellman-group-exchange-sha256
 
-# a list of MACs used by sshd
+# A list of MACs used by sshd.
 ssh_daemon_macs:
   - hmac-sha2-512-etm@openssh.com
   - hmac-sha2-256-etm@openssh.com
   - umac-128-etm@openssh.com
 
-# host key algorithms
+# Host key algorithms.
 ssh_host_key_algorithms:
   - ssh-ed25519-cert-v01@openssh.com
   - ssh-rsa-cert-v01@openssh.com

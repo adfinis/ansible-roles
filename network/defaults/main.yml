@@ -7,25 +7,36 @@ network_resolv_domain: '{{ ansible_domain }}'
 network_resolv_search:
   - '{{ ansible_domain }}'
 
-# resolv nameservers
-# network_resolv_nameservers:
-#   - 192.168.1.1
-#   - 8.8.8.8
+# Resolv nameservers. Default is empty, use nameservers from DHCP.
 network_resolv_nameservers: []
 
-# network interface configurations
-# netowrk_interfaces:
-#   - device: eth0
-#     tmpl: ethernet
-#     hwaddress: 00:11:22:33:44:55
-#     ipv4:
-#       type: static
-#       address: 192.0.2.10
-#       netmask: 255.255.255.0
-#       gateway: 192.0.2.1
-#     ipv6:
-#       type: static
-#       address: 2001:db8::10
-#       netmask: 64
-#       gateway: 2001:db8::1
+# A possible list of nameservers can look like this:
+#
+# .. code-block:: YAML
+#
+#   network_resolv_nameservers:
+#     - 192.168.1.1
+#     - 8.8.8.8
+#
+
+# Network interface configurations. Default is to not configure any network interfaces.
 network_interfaces: []
+
+# A possible list of interfaces and their configuration look like this:
+#
+# .. code-block:: YAML
+#
+#   netowrk_interfaces:
+#     - device: eth0
+#       tmpl: ethernet
+#       hwaddress: 00:11:22:33:44:55
+#       ipv4:
+#         type: static
+#         address: 192.0.2.10
+#         netmask: 255.255.255.0
+#         gateway: 192.0.2.1
+#       ipv6:
+#         type: static
+#         address: 2001:db8::10
+#         netmask: 64
+#         gateway: 2001:db8::1
