@@ -1,0 +1,25 @@
+---
+
+# iptables packages to remove
+iptables_packages_remove:
+  - firewalld
+  - firewalld-filesystem
+
+# iptables packages to install
+iptables_packages:
+  - iptables
+  - iptables-services
+
+# iptables services
+iptables_services:
+  - iptables
+  - ip6tables
+
+# directory
+iptables_directory: /etc/sysconfig
+
+# iptables for IPv4
+iptables_v4_cfg: '{{ iptables_directory }}/iptables'
+
+# iptables for IPv6
+iptables_v6_cfg: '{{ iptables_directory }}/ip6tables'

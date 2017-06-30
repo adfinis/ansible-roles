@@ -1,0 +1,18 @@
+---
+
+# enable rate limiting
+iptables_rate_limiting: false
+
+# reject all traffic not handled by the firewall with a tcp-reset ICMP message
+iptables_reject: true
+
+# open ports incoming
+iptables_rules_in:
+  - protocol: tcp
+    dport: 22
+
+# open ports forwarding
+iptables_rules_fwd: []
+#  - dst: 192.0.2.1
+#    protocol: tcp
+#    dport: 22

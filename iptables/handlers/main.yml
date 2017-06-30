@@ -1,0 +1,7 @@
+---
+
+- name: iptables restart
+  service:
+    name: '{{ item }}'
+    state: restarted
+  with_items: '{{ iptables_services }}'

@@ -1,0 +1,23 @@
+---
+
+# iptables packages to remove
+iptables_packages_remove:
+  - firewalld
+
+# iptables packages to install
+iptables_packages:
+  - iptables
+  - iptables-persistent
+
+# iptables services
+iptables_services:
+  - iptables-persistent
+
+# directory
+iptables_directory: /etc/iptables
+
+# iptables for IPv4
+iptables_v4_cfg: '{{ iptables_directory }}/rules.v4'
+
+# iptables for IPv6
+iptables_v6_cfg: '{{ iptables_directory }}/rules.v6'

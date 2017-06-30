@@ -1,0 +1,13 @@
+---
+
+- name: remove other firewalls
+  package:
+    name: '{{ item }}'
+    state: absent
+  with_items: '{{ iptables_packages_remove }}'
+
+- name: install firewall/iptables related packages
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ iptables_packages }}'

@@ -1,0 +1,51 @@
+---
+
+- name: manage iptables directory
+  file:
+    path: '{{ iptables_directory }}'
+    owner: root
+    group: root
+    mode: 0755
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  register: iptables_register_install
+
+- name: configure iptables v4 ruleset
+  template:
+    src: iptables.j2
+    dest: '{{ iptables_v4_cfg }}'
+    owner: root
+    group: root
+    mode: 0600
+    seuser: system_u
+    serole: object_r
+    setype: system_conf_t
+    selevel: s0
+  notify:
+    - 'iptables restart'
+
+- name: configure iptables v6 ruleset
+  template:
+    src: ip6tables.j2
+    dest: '{{ iptables_v6_cfg }}'
+    owner: root
+    group: root
+    mode: 0600
+    seuser: system_u
+    serole: object_r
+    setype: system_conf_t
+    selevel: s0
+  notify:
+    - 'ip6tables restart'
+
+- name: start and enable iptables
+  service:
+    name: '{{ item }}'
+    state: started
+    enabled: true
+  tags:
+    - 'skip_ansible_lint'
+  with_items: '{{ iptables_services }}'
+  when: iptables_register_install.changed
