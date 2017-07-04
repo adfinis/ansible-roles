@@ -38,7 +38,7 @@
     setype: system_conf_t
     selevel: s0
   notify:
-    - 'ip6tables restart'
+    - 'iptables restart'
 
 - name: start and enable iptables
   service:
