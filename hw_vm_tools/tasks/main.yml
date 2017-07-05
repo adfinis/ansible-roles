@@ -1,0 +1,21 @@
+---
+
+- name: include os specific vars
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml'
+    - '{{ ansible_os_family }}.yml'
+  tags:
+    - 'role::hw_vm_tools'
+    - 'role::hw_vm_tools:install'
+    - 'role::hw_vm_tools:config'
+
+- include: installation.yml
+  tags:
+    - 'role::hw_vm_tools'
+    - 'role::hw_vm_tools:install'
+
+- include: configuration.yml
+  tags:
+    - 'role::hw_vm_tools'
+    - 'role::hw_vm_tools:config'

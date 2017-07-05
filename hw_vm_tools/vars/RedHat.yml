@@ -1,0 +1,13 @@
+---
+
+# Hardware management tools
+hw_vm_tools_hw_packages:
+  - ipmitool
+
+# RHV guest tools
+hw_vm_tools_rhv_packages:
+  - ovirt-guest-agent
+
+# KVM guest tools
+hw_vm_tools_kvm_packages:
+  - qemu-guest-agent

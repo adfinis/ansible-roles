@@ -1,0 +1,24 @@
+---
+
+- name: install hardware management tools
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ hw_vm_tools_hw_packages }}'
+  when: ansible_virtualization_role == 'host'
+
+- name: install rhv management tools
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ hw_vm_tools_rhv_packages }}'
+  when: ansible_virtualization_role == 'guest' and
+        ansible_virtualization_type == 'RHEV'
+
+- name: install kvm management tools
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ hw_vm_tools_kvm_packages }}'
+  when: ansible_virtualization_role == 'guest' and
+        ansible_virtualization_type == 'kvm'
