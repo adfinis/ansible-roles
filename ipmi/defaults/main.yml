@@ -1,0 +1,24 @@
+---
+
+# IPMI module device path
+ipmi_device_path: /dev/ipmi0
+
+# IPMI kernel modules to load
+ipmi_kernel_modules:
+  - ipmi_poweroff
+  - ipmi_watchdog
+  - ipmi_si
+  - ipmi_devintf
+  - ipmi_msghandler
+
+# IPMI network configuration
+ipmi_network: {}
+
+# The following example shows how to configure your IPMI device.
+#
+# .. code-block:: YAML
+#
+#   ipmi_network:
+#     address: 192.0.2.2
+#     netmask: 255.0.0.0
+#     gateway: 192.0.2.1

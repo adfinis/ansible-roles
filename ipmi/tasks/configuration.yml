@@ -1,0 +1,46 @@
+---
+
+- name: load ipmi modules at boot
+  template:
+    src: etc/modules-load.d/ipmi.conf.j2
+    dest: '{{ ipmi_kernel_modules_conf }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: modules_conf_t
+    selevel: s0
+  register: ipmi_register_kernel_modules
+
+- name: load ipmi modules
+  service:
+    name: '{{ ipmi_modules_load_service }}'
+    state: restarted
+  when: ipmi_register_kernel_modules.changed
+  tags:
+    - skip_ansible_lint
+
+- name: ipmi ip source
+  shell: ipmitool lan set 2 ipsrc static
+  when: ipmi_network is defined and
+        ipmi_network.address is defined and
+        ipmi_network.address
+
+- name: ipmi ip address
+  shell: ipmitool lan set 2 ipaddr {{ ipmi_network.address }}
+  when: ipmi_network is defined and
+        ipmi_network.address is defined and
+        ipmi_network.address
+
+- name: ipmi netmask
+  shell: ipmitool lan set 2 netmask {{ ipmi_network.netmask }}
+  when: ipmi_network is defined and
+        ipmi_network.netmask is defined and
+        ipmi_network.netmask
+
+- name: ipmi gateway
+  shell: ipmitool lan set 2 defgw ipaddr {{ ipmi_network.gateway }}
+  when: ipmi_network is defined and
+        ipmi_network.gateway is defined and
+        ipmi_network.gateway
