@@ -1,8 +1,7 @@
 ---
 
 # Hardware management tools
-hw_vm_tools_hw_packages:
-  - ipmitool
+hw_vm_tools_hw_packages: []
 
 # RHV guest tools
 hw_vm_tools_rhv_packages:
