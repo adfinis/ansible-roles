@@ -28,19 +28,23 @@
         ipmi_network.address
 
 - name: ipmi ip address
-  command: ipmitool lan set 2 ipaddr {{ ipmi_network.address }}
+  command: ipmitool lan set {{ ipmi_channel }} ipaddr {{ ipmi_network.address }}
   when: ipmi_network is defined and
         ipmi_network.address is defined and
         ipmi_network.address
 
 - name: ipmi netmask
-  command: ipmitool lan set 2 netmask {{ ipmi_network.netmask }}
+  command: ipmitool lan set {{ ipmi_channel }} netmask {{ ipmi_network.netmask }}
   when: ipmi_network is defined and
         ipmi_network.netmask is defined and
         ipmi_network.netmask
 
 - name: ipmi gateway
-  command: ipmitool lan set 2 defgw ipaddr {{ ipmi_network.gateway }}
+  command: ipmitool lan set {{ ipmi_channel }} defgw ipaddr {{ ipmi_network.gateway }}
   when: ipmi_network is defined and
         ipmi_network.gateway is defined and
         ipmi_network.gateway
+
+- name: ipmi snmp community
+  command: ipmitool lan set {{ ipmi_channel }} snmp {{ ipmi_snmp_community }}
+  when: ipmi_snmp_community is defined and ipmi_snmp_community
