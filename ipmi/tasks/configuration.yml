@@ -21,30 +21,75 @@
   tags:
     - skip_ansible_lint
 
+- name: ipmi ip source check
+  shell: ipmitool lan print {{ ipmi_channel }} | egrep '^IP Address Source.*Static Address'
+  register: ipmi_register_ip_source
+  failed_when: False
+  changed_when: False
+
 - name: ipmi ip source
-  command: ipmitool lan set 2 ipsrc static
+  command: ipmitool lan set {{ ipmi_channel }} ipsrc static
+  when: ipmi_network is defined and
+        ipmi_network.address is defined and
+        ipmi_network.address and
+        ipmi_register_ip_source.rc != 0
+
+- name: ipmi ip address check
+  shell: ipmitool lan print {{ ipmi_channel }} | egrep '^IP Address.*{{ ipmi_network.address }}'
+  register: ipmi_register_ip
+  failed_when: False
+  changed_when: False
   when: ipmi_network is defined and
         ipmi_network.address is defined and
         ipmi_network.address
+
+- name: ipmi netmask check
+  shell: ipmitool lan print {{ ipmi_channel }} | egrep '^Subnet Mask.*{{ ipmi_network.netmask }}'
+  register: ipmi_register_netmask
+  failed_when: False
+  changed_when: False
+  when: ipmi_network is defined and
+        ipmi_network.netmask is defined and
+        ipmi_network.netmask
+
+- name: ipmi gateway check
+  shell: ipmitool lan print {{ ipmi_channel }} | egrep '^Default Gateway IP.*{{ ipmi_network.gateway }}'
+  register: ipmi_register_gateway
+  failed_when: False
+  changed_when: False
+  when: ipmi_network is defined and
+        ipmi_network.gateway is defined and
+        ipmi_network.gateway
+
+- name: ipmi snmp community check
+  shell: ipmitool lan print {{ ipmi_channel }} | egrep '^SNMP Community String.*{{ ipmi_snmp_community }}'
+  register: ipmi_register_snmp
+  failed_when: False
+  changed_when: False
+  when: ipmi_snmp_community is defined and ipmi_snmp_community
 
 - name: ipmi ip address
   command: ipmitool lan set {{ ipmi_channel }} ipaddr {{ ipmi_network.address }}
   when: ipmi_network is defined and
         ipmi_network.address is defined and
-        ipmi_network.address
+        ipmi_network.address and
+        ipmi_register_ip.rc != 0
 
 - name: ipmi netmask
   command: ipmitool lan set {{ ipmi_channel }} netmask {{ ipmi_network.netmask }}
   when: ipmi_network is defined and
         ipmi_network.netmask is defined and
-        ipmi_network.netmask
+        ipmi_network.netmask and
+        ipmi_register_netmask.rc != 0
 
 - name: ipmi gateway
   command: ipmitool lan set {{ ipmi_channel }} defgw ipaddr {{ ipmi_network.gateway }}
   when: ipmi_network is defined and
         ipmi_network.gateway is defined and
-        ipmi_network.gateway
+        ipmi_network.gateway and
+        ipmi_register_gateway.rc != 0
 
 - name: ipmi snmp community
   command: ipmitool lan set {{ ipmi_channel }} snmp {{ ipmi_snmp_community }}
-  when: ipmi_snmp_community is defined and ipmi_snmp_community
+  when: ipmi_snmp_community is defined and ipmi_snmp_community and
+        ipmi_register_snmp.rc != 0
