@@ -22,25 +22,25 @@
     - skip_ansible_lint
 
 - name: ipmi ip source
-  shell: ipmitool lan set 2 ipsrc static
+  command: ipmitool lan set 2 ipsrc static
   when: ipmi_network is defined and
         ipmi_network.address is defined and
         ipmi_network.address
 
 - name: ipmi ip address
-  shell: ipmitool lan set 2 ipaddr {{ ipmi_network.address }}
+  command: ipmitool lan set 2 ipaddr {{ ipmi_network.address }}
   when: ipmi_network is defined and
         ipmi_network.address is defined and
         ipmi_network.address
 
 - name: ipmi netmask
-  shell: ipmitool lan set 2 netmask {{ ipmi_network.netmask }}
+  command: ipmitool lan set 2 netmask {{ ipmi_network.netmask }}
   when: ipmi_network is defined and
         ipmi_network.netmask is defined and
         ipmi_network.netmask
 
 - name: ipmi gateway
-  shell: ipmitool lan set 2 defgw ipaddr {{ ipmi_network.gateway }}
+  command: ipmitool lan set 2 defgw ipaddr {{ ipmi_network.gateway }}
   when: ipmi_network is defined and
         ipmi_network.gateway is defined and
         ipmi_network.gateway
