@@ -1,0 +1,79 @@
+---
+
+- name: install the hp gpg key
+  apt_key:
+    url: '{{ item }}'
+    state: present
+  with_items: '{{ hwraid_apt_hp_keys }}'
+  when: ansible_os_family == 'Debian'
+        #ansible_devices.sda.vendor is defined and
+        #ansible_devices.sda.vendor == 'HP'
+
+- name: add the hp apt repository
+  apt_repository:
+    repo: '{{ hwraid_apt_hp_repository }}'
+    state: present
+    update_cache: yes
+  when: ansible_os_family == 'Debian' and
+        hwraid_apt_hp_repository is defined and hwraid_apt_hp_repository
+        #ansible_devices.sda.vendor is defined and
+        #ansible_devices.sda.vendor == 'HP'
+
+- name: add the hp yum repository
+  yum_repository:
+    name: '{{ hwraid_yum_hp_repository.name }}'
+    file: '{{ hwraid_yum_hp_repository.file | default(hwraid_yum_hp_repository.name) }}'
+    description: '{{ hwraid_yum_hp_repository.description }}'
+    baseurl: '{{ hwraid_yum_hp_repository.baseurl | default(omit) }}'
+    mirrorlist: '{{ hwraid_yum_hp_repository.mirrorlist | default(omit) }}'
+    repo_gpgcheck: '{{ hwraid_yum_hp_repository.repo_gpgcheck | default(omit) }}'
+    gpgcheck: '{{ hwraid_yum_hp_repository.gpgcheck | default("yes") }}'
+    gpgkey: '{{ hwraid_yum_hp_repository.gpgkey | default(omit) }}'
+    enabled: yes
+    state: present
+    seuser: system_u
+    serole: object_r
+    setype: system_conf_t
+    selevel: s0
+  with_items: '{{ hwraid_yum_hp_repository }}'
+  when: ansible_os_family == 'RedHat'
+        #ansible_devices.sda.vendor is defined and
+        #ansible_devices.sda.vendor == 'HP'
+
+- name: install hp raid tools
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ hwraid_hp_raid_packages }}'
+  #when: ansible_devices.sda.vendor is defined and
+  #      ansible_devices.sda.vendor == 'HP'
+
+- name: install the hwraid.le-vert.net gpg key
+  apt_key:
+    url: '{{ item }}'
+    state: present
+  with_items: '{{ hwraid_apt_le_vert_keys }}'
+  when: ansible_os_family == 'Debian'
+        #ansible_devices.sda.vendor is defined and
+        #ansible_devices.sda.vendor == 'IBM'
+
+- name: add the hwraid.le-vert.net apt repository
+  apt_repository:
+    repo: '{{ hwraid_apt_le_vert_repository }}'
+    state: present
+    update_cache: yes
+  when: ansible_os_family == 'Debian' and
+        hwraid_apt_le_vert_repository is defined and hwraid_apt_le_vert_repository
+        #ansible_devices.sda.vendor is defined and
+        #ansible_devices.sda.vendor == 'IBM'
+
+- name: install ibm raid tools
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ hwraid_ibm_raid_packages }}'
+  #when: ansible_devices.sda.vendor is defined and
+  #      ansible_devices.sda.vendor == 'IBM'
+
+#- name: Add the nagios user to the sudoers file
+#  shell: /usr/lib/nagios/plugins/check_raid -S

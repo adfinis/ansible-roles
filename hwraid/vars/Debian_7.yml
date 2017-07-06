@@ -1,0 +1,26 @@
+---
+
+# HP apt repository signing key
+hwraid_apt_hp_keys:
+  - http://downloads.linux.hpe.com/SDR/hpPublicKey2048_key1.pub
+  - http://downloads.linux.hpe.com/SDR/hpePublicKey2048_key1.pub
+
+# hwraid.le-vert.net apt repository signing key
+hwraid_apt_le_vert_keys:
+  - http://hwraid.le-vert.net/debian/hwraid.le-vert.net.gpg.key
+
+# HP apt repository
+hwraid_apt_hp_repository: 'deb http://downloads.linux.hpe.com/SDR/repo/mcp/{{ ansible_distribution | lower }} {{ ansible_distribution_release | lower }}/current non-free'
+
+# hwraid.le-vert.net apt repository
+hwraid_apt_le_vert_repository: 'deb http://hwraid.le-vert.net/debian {{ ansible_distribution_release | lower }} main'
+
+# HP raid controller tools
+hwraid_hp_raid_packages:
+  - hpacucli
+  - nagios-plugins-contrib
+
+# IBM raid controller tools
+hwraid_ibm_raid_packages:
+  - megacli
+  - nagios-plugins-contrib
