@@ -75,5 +75,13 @@
   when: ansible_devices.sda.vendor is defined and
         ansible_devices.sda.vendor == 'IBM'
 
-#- name: Add the nagios user to the sudoers file
-#  shell: /usr/lib/nagios/plugins/check_raid -S
+- name: check if nagios plugin check_raid is installed
+  stat:
+    path: '{{ hwraid_nagios_plugin_path }}'
+  register: hwraid_register_nagios_plugin
+  when: hwraid_nagios_plugin_path is defined and hwraid_nagios_plugin_path
+
+- name: Add the nagios user to the sudoers file
+  command: "{{ hwraid_nagios_plugin_path }} -S"
+  when: hwraid_nagios_plugin_path is defined and hwraid_nagios_plugin_path and
+        hwraid_register_nagios_plugin.stat.exists

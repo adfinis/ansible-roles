@@ -24,3 +24,6 @@ hwraid_hp_raid_packages:
 hwraid_ibm_raid_packages:
   - megacli
   - nagios-plugins-contrib
+
+# Nagios plugin to check raid status
+hwraid_nagios_plugin_path: /usr/lib/nagios/plugins/check_raid

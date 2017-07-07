@@ -18,3 +18,6 @@ hwraid_hp_raid_packages:
 
 # IBM raid controller tools
 hwraid_ibm_raid_packages: []
+
+# Nagios plugin to check raid status
+hwraid_nagios_plugin_path: ''
