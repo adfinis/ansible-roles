@@ -59,7 +59,8 @@
     - 'role::network'
     - 'role::network:config'
   when: item.device is defined and item.device and
-        item.tmpl is defined and item.tmpl
+        item.tmpl is defined and item.tmpl and
+        item.device in ansible_interfaces
   with_items: '{{ network_interfaces }}'
 
 - name: create resolv.conf
