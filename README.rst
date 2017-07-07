@@ -71,6 +71,8 @@ Currently the repository features the following roles:
 +---------------+-----------------------------------------------------------+
 | hwraid        | hardware raid controller management tools                 |
 +---------------+-----------------------------------------------------------+
+| ipmi          | Manage IPMI devices                                       |
++---------------+-----------------------------------------------------------+
 | iptables      | install iptables persistent services and configure        |
 |               | iptables rules                                            |
 +---------------+-----------------------------------------------------------+
