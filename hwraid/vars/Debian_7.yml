@@ -27,3 +27,6 @@ hwraid_ibm_raid_packages:
 
 # Nagios plugin to check raid status
 hwraid_nagios_plugin_path: /usr/lib/nagios/plugins/check_raid
+
+# Nagios plugin to check raid status sudoers file path
+hwraid_nagios_plugin_sudoers_path: /etc/sudoers.d/check_raid

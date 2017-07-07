@@ -81,7 +81,16 @@
   register: hwraid_register_nagios_plugin
   when: hwraid_nagios_plugin_path is defined and hwraid_nagios_plugin_path
 
+- name: check if nagios plugin check_raid has sudo permissions
+  stat:
+    path: '{{ hwraid_nagios_plugin_sudoers_path }}'
+  register: hwraid_register_nagios_plugin_sudoers
+  when: hwraid_nagios_plugin_sudoers_path is defined and hwraid_nagios_plugin_sudoers_path
+
 - name: Add the nagios user to the sudoers file
   command: "{{ hwraid_nagios_plugin_path }} -S"
+  register: hwraid_register_nagios_plugin_command_check_raid
+  failed_when: hwraid_register_nagios_plugin_command_check_raid.rc > 1
   when: hwraid_nagios_plugin_path is defined and hwraid_nagios_plugin_path and
+        not hwraid_register_nagios_plugin_sudoers.stat.exists and
         hwraid_register_nagios_plugin.stat.exists
