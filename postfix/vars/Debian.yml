@@ -6,6 +6,7 @@ postfix_packages:
 
 # remove conflicting packages
 postfix_packages_removed:
+  - exim4
   - exim4-base
   - exim4-config
   - exim4-daemon-light
