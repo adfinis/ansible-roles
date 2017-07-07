@@ -17,10 +17,6 @@ galaxy_info:
       versions:
         - trusty
         - xenial
-    - name: CentOS
-      versions:
-        - 6
-        - 7
   galaxy_tags:
     - raid
     - hp
