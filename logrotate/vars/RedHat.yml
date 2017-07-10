@@ -1,0 +1,11 @@
+---
+
+# Logrotate packages
+logrotate_packages:
+  - logrotate
+
+# Logrotate configuration directory
+logrotate_cfg_d: /etc/logrotate.d
+
+# Logrotate main configuration
+logrotate_cfg: /etc/logrotate.conf

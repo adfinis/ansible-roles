@@ -1,0 +1,25 @@
+---
+
+- name: create logrotate configuration directory
+  file:
+    path: '{{ logrotate_cfg_d }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+
+- name: create main logrotate configuration
+  template:
+    src: etc/logrotate.conf.j2
+    dest: '{{ logrotate_cfg }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
