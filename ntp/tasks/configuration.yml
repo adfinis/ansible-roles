@@ -11,9 +11,6 @@
     serole: object_r
     setype: net_conf_t
     selevel: s0
-  tags:
-    - 'role::ntp'
-    - 'role::ntp:config'
   notify:
     - 'ntp restart daemon'
 
@@ -22,7 +19,3 @@
     name: '{{ ntp_service }}'
     state: started
     enabled: yes
-  tags:
-    - 'role::ntp'
-    - 'role::ntp:install'
-    - 'role::ntp:config'
