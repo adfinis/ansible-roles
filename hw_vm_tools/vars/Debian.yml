@@ -13,3 +13,10 @@ hw_vm_tools_kvm_packages:
 
 # VMware guest tools
 hw_vm_tools_vmware_packages: []
+
+# Remove some unused packages
+hw_vm_tools_packages_remove: []
+
+# Remove some unused packages on virtual machines
+hw_vm_tools_vm_packages_remove:
+  - smartmontools

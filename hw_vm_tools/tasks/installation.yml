@@ -1,5 +1,19 @@
 ---
 
+- name: remove unused tools
+  package:
+    name: '{{ item }}'
+    state: absent
+  with_items: '{{ hw_vm_tools_packages_remove }}'
+  when: hw_vm_tools_packages_remove is defined
+
+- name: remove unused tools on virtual machines
+  package:
+    name: '{{ item }}'
+    state: absent
+  with_items: '{{ hw_vm_tools_vm_packages_remove }}'
+  when: hw_vm_tools_vm_packages_remove is defined
+
 - name: install hardware management tools
   package:
     name: '{{ item }}'
