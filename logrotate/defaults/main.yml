@@ -1,1 +1,24 @@
 ---
+
+# Custom logrotate configurations
+logrotate_custom_cfg: []
+
+# Following are some examples how to define logrotate configurations.
+#
+# .. code-block:: YAML
+#
+#   logrotate_custom_cfg:
+#     - name: syslog
+#       type: standard
+#       files:
+#         - /var/log/cron
+#         - /var/log/maillog
+#         - /var/log/messages
+#         - /var/log/secure
+#         - /var/log/spooler
+#       options:
+#         - rotate 6
+#         - daily
+#         - missingok
+#         - notifempty
+#         - compress
