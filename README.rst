@@ -76,6 +76,8 @@ Currently the repository features the following roles:
 | iptables      | install iptables persistent services and configure        |
 |               | iptables rules                                            |
 +---------------+-----------------------------------------------------------+
+| logrotate     | install and configure logrotate                           |
++---------------+-----------------------------------------------------------+
 | mariadb       | manage a mariadb server and client (if mariadb is not     |
 |               | available, mysql will be installed instead)               |
 +---------------+-----------------------------------------------------------+
