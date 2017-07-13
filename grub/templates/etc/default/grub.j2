@@ -1,8 +1,12 @@
 {% if grub_consoles | d(False) %}
 {%   set grub_console = "console=" + grub_consoles | join(' console=') %}
 {% endif %}
+{% set grub_cmdline_linux = [] %}
 {% if ansible_cmdline['rd.auto'] | d(False) %}
-{%   set grub_cmdline_linux = 'rd.auto' %}
+{%   set grub_cmdline_linux = grub_cmdline_linux + ['rd.auto'] %}
+{% endif %}
+{% if grub_disable_network_predictable_interface_names %}
+{%   set grub_cmdline_linux = grub_cmdline_linux + ['net.ifnames=0'] %}
 {% endif %}
 # {{ ansible_managed }}
 # If you change this file, run 'update-grub' afterwards
@@ -11,7 +15,7 @@ GRUB_DEFAULT=0
 GRUB_TIMEOUT={{ grub_timeout }}
 GRUB_DISTRIBUTOR=$(lsb_release -i -s 2>/dev/null || echo {{ ansible_distribution }})
 GRUB_CMDLINE_LINUX_DEFAULT="{{ grub_console }}"
-GRUB_CMDLINE_LINUX="{{ grub_cmdline_linux | default(omit) }}"
+GRUB_CMDLINE_LINUX="{{ grub_cmdline_linux | join(' ') }}"
 {% if grub_serial | d(False) %}
 GRUB_SERIAL_COMMAND="serial --speed={{ grub_serial.speed }} --unit={{ grub_serial.unit }} --word={{ grub_serial.word }} --parity={{ grub_serial.parity }} --stop={{ grub_serial.stop }}"
 {% endif %}
