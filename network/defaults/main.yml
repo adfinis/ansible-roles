@@ -30,6 +30,7 @@ network_interfaces: []
 #     - device: eth0
 #       tmpl: ethernet
 #       hwaddress: 00:11:22:33:44:55
+#       force: True  # enforce that the configuration will be written
 #       ipv4:
 #         type: static
 #         address: 192.0.2.10
