@@ -46,3 +46,15 @@ mariadb_users: []
 #     - name: web
 #       password: secure
 #       priv: 'mydb.*:INSERT,UPDATE/anotherdb.*:SELECT/yetanotherdb.*:ALL'
+
+# Mariadb server id.
+#
+# .. code-block:: YAML
+#
+#   mariadb_server_id: 1
+
+# Mariadb binary logs.
+#
+# .. code-block:: YAML
+#
+#   mariadb_log_bin: /var/log/mysql/mysql-bin.log
