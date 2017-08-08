@@ -58,3 +58,10 @@ mariadb_users: []
 # .. code-block:: YAML
 #
 #   mariadb_log_bin: /var/log/mysql/mysql-bin.log
+
+# Mariadb replicate-wild-do-table.
+# Replicate only some tables (wildcard allowed).
+#
+# .. code-block:: YAML
+#
+#   mariadb_replicate_wild_do_table: ykksm.%
