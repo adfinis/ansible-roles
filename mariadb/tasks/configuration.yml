@@ -11,9 +11,6 @@
     serole: object_r
     setype: mysqld_etc_t
     selevel: s0
-  tags:
-    - 'role::mariadb'
-    - 'role::mariadb:config'
   notify:
     - 'mariadb check config and restart'
 
@@ -22,24 +19,15 @@
     name: '{{ mariadb_service }}'
     state: started
     enabled: yes
-  tags:
-    - 'role::mariadb'
-    - 'role::mariadb:config'
 
 - name: check if root my.cnf exists
   stat:
     path: '{{ mariadb_root_mycnf }}'
   register: mariadb_register_root_mycnf
-  tags:
-    - 'role::mariadb'
-    - 'role::mariadb:config'
 
 - name: generate root password
   command: pwgen -s 24 -N 1
   register: mariadb_register_root_password
-  tags:
-    - 'role::mariadb'
-    - 'role::mariadb:config'
   when: not mariadb_register_root_mycnf.stat.exists
 
 - name: create root password
@@ -51,9 +39,6 @@
     check_implicit_admin: yes
     login_unix_socket: '{{ mariadb_socket }}'
     state: present
-  tags:
-    - 'role::mariadb'
-    - 'role::mariadb:config'
   when: mariadb_register_root_password.stdout is defined and mariadb_register_root_password.stdout
 
 - name: create root my.cnf
@@ -67,16 +52,10 @@
     serole: object_r
     setype: admin_home_t
     selevel: s0
-  tags:
-    - 'role::mariadb'
-    - 'role::mariadb:config'
   when: mariadb_register_root_password.stdout is defined and mariadb_register_root_password.stdout
 
 - name: flush handlers
   meta: flush_handlers
-  tags:
-    - 'role::mariadb'
-    - 'role::mariadb:config'
 
 - name: create databases
   mysql_db:
@@ -84,9 +63,6 @@
     encoding: '{{ item.encoding | default("utf8") }}'
     login_unix_socket: '{{ mariadb_socket }}'
     state: present
-  tags:
-    - 'role::mariadb'
-    - 'role::mariadb:config'
   when: item.name is defined and item.name
   with_items: '{{ mariadb_databases }}'
 
@@ -99,9 +75,6 @@
     priv: '{{ item.priv }}'
     login_unix_socket: '{{ mariadb_socket }}'
     state: present
-  tags:
-    - 'role::mariadb'
-    - 'role::mariadb:config'
   when: item.name is defined and item.name and
         item.password is defined and item.password and
         item.priv is defined and item.priv
