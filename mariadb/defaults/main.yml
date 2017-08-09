@@ -99,3 +99,21 @@ mariadb_ca_privatekey_passphrase: ''
 
 # Enable mariadb SSL encryption.
 mariadb_ssl: False
+
+# Mariadb replication settings.
+#
+# .. code-block:: YAML
+#
+#   mariadb_replication:
+#     role: master
+#     databases:
+#       - db1
+#
+#   mariadb_replication:
+#     role: slave
+#     master: db01.example.com
+#     user: replicate
+#     password: secure
+#     databases:
+#       - db1
+#
