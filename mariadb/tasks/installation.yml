@@ -4,9 +4,6 @@
   package:
     name: '{{ item }}'
     state: present
-  tags:
-    - 'role::mariadb'
-    - 'role::mariadb:install'
   with_items: '{{ mariadb_packages }}'
   notify:
     - 'mariadb restart daemon'

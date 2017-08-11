@@ -11,4 +11,11 @@
     - 'role::mariadb:config'
 
 - include: installation.yml
+  tags:
+    - 'role::mariadb'
+    - 'role::mariadb:install'
+
 - include: configuration.yml
+  tags:
+    - 'role::mariadb'
+    - 'role::mariadb:config'
