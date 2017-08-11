@@ -5,6 +5,10 @@ ntp_packages:
   - ntp
   - ntpdate
 
+# remove conflicting packages
+ntp_packages_remove:
+  - chrony
+
 # ntp service name
 ntp_service: ntpd
 

@@ -4,7 +4,11 @@
   package:
     name: '{{ item }}'
     state: present
-  tags:
-    - 'role::ntp'
-    - 'role::ntp:install'
   with_items: '{{ ntp_packages }}'
+
+- name: remove ntp conflicting packages
+  package:
+    name: '{{ item }}'
+    state: absent
+  with_items: '{{ ntp_packages_remove }}'
+  when: ntp_packages_remove is defined

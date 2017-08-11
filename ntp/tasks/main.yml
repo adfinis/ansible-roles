@@ -11,4 +11,11 @@
     - 'role::ntp:config'
 
 - include: installation.yml
+  tags:
+    - 'role::ntp'
+    - 'role::ntp:install'
+
 - include: configuration.yml
+  tags:
+    - 'role::ntp'
+    - 'role::ntp:config'
