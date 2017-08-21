@@ -5,7 +5,6 @@ network_packages:
   - bridge-utils
   - ifenslave
   - iproute2
-  - resolvconf
   - vlan
 
 # remove non rfc 1149 compatible software
