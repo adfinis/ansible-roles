@@ -98,7 +98,7 @@ nginx_vhosts: []
 #       ssl_dhparam: /etc/ssl/dh4096.pem
 #       ssl_crt: /etc/ssl/certs/www.example.com_fullchain.pem
 #       ssl_key: /etc/ssl/local/www.example.com_key.pem
-#       hsts: true
+#       ssl_hsts: true
 #       ssl_hsts_age: 15768000
 #       ssl_stapling: true
 #       document_root: /var/www/www.example.com
