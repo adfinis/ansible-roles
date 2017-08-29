@@ -87,7 +87,7 @@
   register: hwraid_register_nagios_plugin_sudoers
   when: hwraid_nagios_plugin_sudoers_path is defined and hwraid_nagios_plugin_sudoers_path
 
-- name: Add the nagios user to the sudoers file
+- name: add the nagios user to the sudoers file
   command: "{{ hwraid_nagios_plugin_path }} -S"
   register: hwraid_register_nagios_plugin_command_check_raid
   failed_when: hwraid_register_nagios_plugin_command_check_raid.rc > 1
