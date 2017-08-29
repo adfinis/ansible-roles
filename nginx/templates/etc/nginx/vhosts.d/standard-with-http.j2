@@ -17,8 +17,8 @@ server {
     ssl_session_cache shared:SSL:50m;
     ssl_session_timeout 5m;
 
-    ssl_certificate {{ item.ssl_crt | d('/etc/ssl/certs/ssl-cert-snakeoil.pem') }};
-    ssl_certificate_key {{ item.ssl_key | d('/etc/ssl/private/ssl-cert-snakeoil.key') }};
+    ssl_certificate {{ item.ssl_crt | d(pki_snakeoil.cert) }};
+    ssl_certificate_key {{ item.ssl_key | d(pki_snakeoil.pkey) }};
 {% if item.ssl_dhparam | d(False) %}
 
     ssl_dhparam {{ item.ssl_dhparam }};
