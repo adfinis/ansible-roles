@@ -11,4 +11,11 @@
     - 'role::pkg_mirror:config'
 
 - include: installation.yml
+  tags:
+    - 'role::pkg_mirror'
+    - 'role::pkg_mirror:install'
+
 - include: configuration.yml
+  tags:
+    - 'role::pkg_mirror'
+    - 'role::pkg_mirror:config'
