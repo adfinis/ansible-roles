@@ -69,6 +69,8 @@ Currently the repository features the following roles:
 +---------------+-----------------------------------------------------------+
 | hostname      | set system hostname                                       |
 +---------------+-----------------------------------------------------------+
+| hwraid        | hardware raid controller management tools                 |
++---------------+-----------------------------------------------------------+
 | iptables      | install iptables persistent services and configure        |
 |               | iptables rules                                            |
 +---------------+-----------------------------------------------------------+
