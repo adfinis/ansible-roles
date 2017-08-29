@@ -1,0 +1,23 @@
+---
+
+# HP yum repository
+hwraid_yum_hp_repository:
+  name: hpe
+  file: HPE
+  description: CentOS-$releasever - HP Raid Controller
+  baseurl: http://downloads.linux.hpe.com/SDR/repo/mcp/CentOS/$releasever/$basearch/current
+  gpgcheck: yes
+  repo_gpgcheck: no
+  gpgkey: http://downloads.linux.hpe.com/SDR/hpePublicKey2048_key1.pub
+
+# HP raid controller tools
+hwraid_hp_raid_packages:
+  - ssaducli
+  - ssacli
+  - ssa
+
+# IBM raid controller tools
+hwraid_ibm_raid_packages: []
+
+# Nagios plugin to check raid status
+hwraid_nagios_plugin_path: ''
