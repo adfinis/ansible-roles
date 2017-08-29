@@ -1,0 +1,32 @@
+---
+
+- name: include os specific vars
+  include_vars: '{{ item }}'
+  with_first_found:
+    - '{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml'
+    - '{{ ansible_os_family }}.yml'
+  tags:
+    - 'role::ipmi'
+    - 'role::ipmi:install'
+    - 'role::ipmi:config'
+
+- name: check if an ipmi module is present
+  stat:
+    path: '{{ ipmi_device_path }}'
+  register: ipmi_register_device
+  tags:
+    - 'role::ipmi'
+    - 'role::ipmi:install'
+    - 'role::ipmi:config'
+
+- include: installation.yml
+  when: ipmi_register_device.stat.exists
+  tags:
+    - 'role::ipmi'
+    - 'role::ipmi:install'
+
+- include: configuration.yml
+  when: ipmi_register_device.stat.exists
+  tags:
+    - 'role::ipmi'
+    - 'role::ipmi:config'
