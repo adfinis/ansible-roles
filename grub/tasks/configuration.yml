@@ -13,6 +13,3 @@
     selevel: s0
   notify:
     - 'grub update config'
-  tags:
-    - 'role::grub'
-    - 'role::grub:config'

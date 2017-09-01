@@ -4,6 +4,9 @@
 grub_packages:
   - grub2
 
+# grub unwanted packages
+grub_packages_removed: []
+
 # grub-mkconfig binary
 grub_mkconfig_bin: /usr/sbin/grub2-mkconfig
 

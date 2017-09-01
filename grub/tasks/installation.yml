@@ -2,9 +2,10 @@
 
 - name: install grub related packages
   package:
-    name: '{{ item }}'
+    name: '{{ grub_packages }}'
     state: present
-  tags:
-    - 'role::grub'
-    - 'role::grub:install'
-  with_items: '{{ grub_packages }}'
+
+- name: remove unused grub packages
+  package:
+    name: '{{ grub_packages_removed }}'
+    state: absent
