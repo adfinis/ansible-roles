@@ -1,0 +1,17 @@
+---
+
+ssh_packages:
+  - openssh-clients
+  - openssh-server
+
+ssh_service: sshd
+ssh_daemon_bin: /usr/sbin/sshd
+
+ssh_cfg: /etc/ssh/ssh_config
+ssh_daemon_cfg: /etc/ssh/sshd_config
+ssh_sftp_server: internal-sftp
+
+# A list of KexAlgorithms used by sshd.
+ssh_daemon_kex_algorithms:
+  - curve25519-sha256@libssh.org
+  - diffie-hellman-group-exchange-sha256
