@@ -12,7 +12,8 @@ hw_vm_tools_kvm_packages:
   - qemu-guest-agent
 
 # VMware guest tools
-hw_vm_tools_vmware_packages: []
+hw_vm_tools_vmware_packages:
+  - open-vm-tools
 
 # Remove some unused packages
 hw_vm_tools_packages_remove:
