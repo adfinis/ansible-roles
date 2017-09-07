@@ -39,6 +39,7 @@ console_packages:
   - tar
   - tcpdump
   - telnet
+  - tmux
   - unzip
   - util-linux
   - vim
