@@ -26,7 +26,8 @@ server {
 {% if item.ssl_stapling | d(False) %}
 
     ssl_stapling on;
-    ssl_trusted_certificate {{ item.ssl_stapling }};
+    ssl_stapling_verify on;
+    ssl_trusted_certificate {{ item.ssl_trusted_certificate | d(pki_ca_bundle) }};
 {% endif %}
 {% if item.ssl_hsts | d(False) %}
 
