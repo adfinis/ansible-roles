@@ -55,7 +55,7 @@
 ### SERVICES
 ################################################################################
 {% for entry in iptables_rules_in %}
--A SERVICE_IN -p {{ entry.protocol }} --sport {{ entry.sport | default("1024:65535") }} --dport {{ entry.dport }} -j ACCEPT
+-A SERVICE_IN -p {{ entry.protocol }}{% if entry.srcnet4 is defined %} --src {{entry.srcnet4}}{% endif %} --sport {{ entry.sport | default("1024:65535") }} --dport {{ entry.dport }} -j ACCEPT
 {% endfor %}
 
 {% for entry in iptables_rules_fwd %}
