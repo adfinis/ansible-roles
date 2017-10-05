@@ -4,9 +4,6 @@
   package:
     name: '{{ item }}'
     state: present
-  tags:
-    - 'role::pki'
-    - 'role::pki:install'
   with_items: '{{ pki_packages }}'
 
 - name: create directory for private keys and certificates
@@ -20,7 +17,4 @@
     setype: cert_t
     selevel: s0
     state: directory
-  tags:
-    - 'role::pki'
-    - 'role::pki:install'
   with_items: '{{ pki_directories }}'
