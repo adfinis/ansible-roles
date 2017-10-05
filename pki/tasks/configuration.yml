@@ -4,17 +4,11 @@
   stat:
     path: '{{ pki_snakeoil.pkey }}'
   register: pki_register_snakeoil_pkey
-  tags:
-    - 'role::pki'
-    - 'role::pki:config'
 
 - name: check snakeoil certificate
   stat:
     path: '{{ pki_snakeoil.cert }}'
   register: pki_register_snakeoil_cert
-  tags:
-    - 'role::pki'
-    - 'role::pki:config'
 
 - name: create snakeoil certificate directory
   file:
@@ -27,15 +21,9 @@
     serole: object_r
     setype: cert_t
     selevel: s0
-  tags:
-    - 'role::pki'
-    - 'role::pki:config'
 
 - name: create snakeoil certificate
   command: 'openssl req -x509 -sha256 -nodes -newkey rsa:4096 -keyout {{ pki_snakeoil.pkey }} -days 3650 -out {{ pki_snakeoil.cert }} -subj "/CN={{ ansible_fqdn }}"'
-  tags:
-    - 'role::pki'
-    - 'role::pki:config'
   when: not pki_register_snakeoil_pkey.stat.exists or
         not pki_register_snakeoil_cert.stat.exists
 
@@ -43,15 +31,9 @@
   stat:
     path: '{{ pki_dhparam_file }}'
   register: pki_register_dhparam
-  tags:
-    - 'role::pki'
-    - 'role::pki:config'
 
 - name: create dhparam
   command: 'openssl dhparam -out {{ pki_dhparam_file }} {{ pki_dhparam_bits }}'
-  tags:
-    - 'role::pki'
-    - 'role::pki:config'
   when: not pki_register_dhparam.stat.exists
 
 - name: create certificate domain directories
@@ -66,9 +48,6 @@
     setype: cert_t
     selevel: s0
   with_items: '{{ pki_domains }}'
-  tags:
-    - 'role::pki'
-    - 'role::pki:config'
 
 - name: create backup directories
   file:
@@ -86,10 +65,6 @@
         pki_backup.system is defined and pki_backup.system and
         pki_backup.path is defined and pki_backup.path
   with_items: '{{ pki_backup_domains }}'
-  tags:
-    - 'role::pki'
-    - 'role::pki:config'
-    - 'role::pki:backup'
 
 - name: copy private keys to the backup system
   fetch:
@@ -100,10 +75,6 @@
         pki_backup.system is defined and pki_backup.system and
         pki_backup.path is defined and pki_backup.path
   with_items: '{{ pki_backup_domains }}'
-  tags:
-    - 'role::pki'
-    - 'role::pki:config'
-    - 'role::pki:backup'
 
 - name: copy certificates to the backup system
   fetch:
@@ -114,7 +85,3 @@
         pki_backup.system is defined and pki_backup.system and
         pki_backup.path is defined and pki_backup.path
   with_items: '{{ pki_backup_domains }}'
-  tags:
-    - 'role::pki'
-    - 'role::pki:config'
-    - 'role::pki:backup'

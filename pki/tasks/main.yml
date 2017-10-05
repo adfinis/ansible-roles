@@ -11,4 +11,11 @@
     - 'role::pki:config'
 
 - include: installation.yml
+  tags:
+    - 'role::pki'
+    - 'role::pki:install'
+
 - include: configuration.yml
+  tags:
+    - 'role::pki'
+    - 'role::pki:config'
