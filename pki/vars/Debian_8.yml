@@ -11,6 +11,9 @@ pki_packages:
 # PKI private key directory
 pki_directory: /etc/ssl/private
 
+# Bundle of certificate authorities
+pki_ca_bundle: /etc/ssl/certs/ca-certificates.crt
+
 # snakeoil certificate
 pki_snakeoil:
   pkey: '{{ pki_directory }}/ssl-cert-snakeoil/privkey.pem'
