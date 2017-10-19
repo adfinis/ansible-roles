@@ -68,4 +68,19 @@ mariadb_users: []
 # .. code-block:: YAML
 #
 #   mariadb_replicate_wild_do_table: ykksm.%
+
+# Mariadb innodb_file_per_table
 #
+# Use seperate InnoDB tablespaces for each database (the ibdata files in the
+# MariaDB libdir).
+#
+# This flag needs to be activated before creating a database. If you want to
+# change this setting on an already provisioned instance you need to rebuild
+# the affected databases
+#
+# See https://dev.mysql.com/doc/refman/5.6/en/tablespace-enabling.html for more
+# details on the innodb_file_per_table configuration.
+#
+# .. code-block:: YAML
+#
+#   mariadb_innodb_file_per_table: true
