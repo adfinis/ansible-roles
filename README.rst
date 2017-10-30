@@ -38,17 +38,17 @@ Below the required steps to include the roles into your playbooks and projects:
 1. Create a project directory (git repository with playbooks, roles,
    group\_vars and/or host\_vars)
 #. Add this repository as a git submodule
-   (``git submodule add git@git.adfinis-sygroup.ch:ad-sy/ansible-roles.src.git
-   adsy-roles``)
+   (``git submodule add https://github.com/adfinis-sygroup/ansible-roles.git
+   adfinis-roles``)
 #. Configure Ansible to use the additional roles path
 
 .. code-block:: Ini
 
   [defaults]
-  ansible_managed     = Warning: File is managed by Ansible [https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src]
+  ansible_managed     = Warning: File is managed by Ansible [https://github.com/adfinis-sygroup/ansible-roles.git]
   retry_files_enabled = False
   hostfile            = ./hosts
-  roles_path          = ./adsy-roles
+  roles_path          = ./adfinis-roles
 
 4. Create your own project specific roles in the directory ``roles``, Ansible
    will use both directories (with precedence of ``roles``).
@@ -125,8 +125,8 @@ We have some contribution rules:
   and also commit messages.
 * Each role is listed in the README.
 * Each role must have a meta information file (``$ROLE/meta/main.yml``).
-* We use multiple features, like `issue-tracker`_, `merge-request`_,
-  `labels`_ for requests and issues `continuous integration`_.
+* We use multiple features, like `issue-tracker`_, `pull-request`_
+  for requests and issues.
 * The continuous integration must pass.
 
 
@@ -137,8 +137,8 @@ To setup the development environment you should clone the repository
 
 .. code-block:: Bash
 
-  git clone git@git.adfinis-sygroup.ch:ad-sy/ansible-guide.doc.git
-  cd ansible-guide.doc
+  git clone https://github.com/adfinis-sygroup/ansible-guide.git
+  cd ansible-guide
   git submodule update --init
 
 There is a vagrant box for each supported distribution. ``vagrant up`` will
@@ -163,12 +163,10 @@ GNU GENERAL PUBLIC LICENSE Version 3
 See the `LICENSE`_ file.
 
 
-.. _ansible-guide.doc: https://git.adfinis-sygroup.ch/ad-sy/ansible-guide.doc
-.. _ansible-roles.src: https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src
-.. _issue-tracker: https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src/issues
-.. _merge-request: https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src/merge_requests
-.. _labels: https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src/labels
-.. _continuous integration: https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src/pipelines
+.. _ansible-guide: https://github.com/adfinis-sygroup/ansible-guide.git
+.. _ansible-roles: https://github.com/adfinis-sygroup/ansible-roles.git
+.. _issue-tracker: https://github.com/adfinis-sygroup/ansible-roles/issues
+.. _pull-request: https://github.com/adfinis-sygroup/ansible-roles/pulls
 .. _LICENSE: LICENSE
 
 
