@@ -14,7 +14,7 @@ reproducibility.
 
 All roles support at least the following distributions:
 
-* Debian 7 & 8
+* Debian 7 & 8 & 9
 * Ubuntu 14.04 & 16.04
 * Centos 6 & 7
 
