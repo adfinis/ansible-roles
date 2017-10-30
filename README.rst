@@ -139,7 +139,7 @@ We have some contribution rules:
 DEVELOPEMENT ENVIRONMENT
 ========================
 To setup the development environment you should clone the repository
-`ansible-guide.doc`_.
+`ansible-guide`_.
 
 .. code-block:: Bash
 
