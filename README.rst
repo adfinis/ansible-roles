@@ -2,6 +2,12 @@
 ANSIBLE ROLES
 =============
 
+.. image:: https://img.shields.io/github/license/adfinis-sygroup/ansible-roles.svg?style=flat-square
+  :target: https://github.com/adfinis-sygroup/ansible-roles/blob/master/LICENSE
+
+.. image:: https://img.shields.io/travis/adfinis-sygroup/ansible-roles.svg?style=flat-square
+  :target: https://github.com/adfinis-sygroup/ansible-roles
+
 Ansible roles to manage your infrastructure in an automated and reproducible
 way.
 
