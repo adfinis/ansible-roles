@@ -25,6 +25,7 @@ ipmi_network: {}
 #     address: 192.0.2.2
 #     netmask: 255.0.0.0
 #     gateway: 192.0.2.1
+#
 
 # IPMI SNMPv2 community
 ipmi_snmp_community: ''
