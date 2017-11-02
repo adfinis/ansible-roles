@@ -133,7 +133,7 @@ We have some contribution rules:
 * Each role must have a meta information file (``$ROLE/meta/main.yml``).
 * We use multiple features, like `issue-tracker`_, `pull-request`_, `labels`_
   for requests and issues.
-* The continuous integration must pass.
+* The `continuous integration`_ must pass.
 
 
 DEVELOPEMENT ENVIRONMENT
@@ -174,6 +174,7 @@ See the `LICENSE`_ file.
 .. _issue-tracker: https://github.com/adfinis-sygroup/ansible-roles/issues
 .. _pull-request: https://github.com/adfinis-sygroup/ansible-roles/pulls
 .. _labels: https://github.com/adfinis-sygroup/ansible-roles/issues/labels
+.. _continuous integration: https://travis-ci.org/adfinis-sygroup/ansible-roles
 .. _LICENSE: LICENSE
 
 
