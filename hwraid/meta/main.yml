@@ -13,10 +13,15 @@ galaxy_info:
       versions:
         - wheezy
         - jessie
+        - stretch
     - name: Ubuntu
       versions:
         - trusty
         - xenial
+    - name: CentOS
+      versions:
+        - 6
+        - 7
   galaxy_tags:
     - raid
     - hp
