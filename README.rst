@@ -45,7 +45,7 @@ Below the required steps to include the roles into your playbooks and projects:
    group\_vars and/or host\_vars)
 #. Add this repository as a git submodule
    (``git submodule add git@git.adfinis-sygroup.ch:ad-sy/ansible-roles.src.git
-   adsy-roles``)
+   adfinis-roles``)
 #. Configure Ansible to use the additional roles path
 
 .. code-block:: Ini
@@ -54,7 +54,7 @@ Below the required steps to include the roles into your playbooks and projects:
   ansible_managed     = Warning: File is managed by Ansible [https://git.adfinis-sygroup.ch/ad-sy/ansible-roles.src]
   retry_files_enabled = False
   hostfile            = ./hosts
-  roles_path          = ./adsy-roles
+  roles_path          = ./adfinis-roles
 
 4. Create your own project specific roles in the directory ``roles``, Ansible
    will use both directories (with precedence of ``roles``).
