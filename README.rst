@@ -131,7 +131,7 @@ We have some contribution rules:
   and also commit messages.
 * Each role is listed in the README.
 * Each role must have a meta information file (``$ROLE/meta/main.yml``).
-* We use multiple features, like `issue-tracker`_, `pull-request`_
+* We use multiple features, like `issue-tracker`_, `pull-request`_, `labels`_
   for requests and issues.
 * The continuous integration must pass.
 
@@ -173,6 +173,7 @@ See the `LICENSE`_ file.
 .. _ansible-roles: https://github.com/adfinis-sygroup/ansible-roles.git
 .. _issue-tracker: https://github.com/adfinis-sygroup/ansible-roles/issues
 .. _pull-request: https://github.com/adfinis-sygroup/ansible-roles/pulls
+.. _labels: https://github.com/adfinis-sygroup/ansible-roles/issues/labels
 .. _LICENSE: LICENSE
 
 
