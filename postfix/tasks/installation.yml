@@ -2,30 +2,27 @@
 
 - name: remove conflicting packages
   apt:
-    name: '{{ item }}'
+    name: '{{ postfix_packages_removed }}'
     state: absent
     purge: yes
   tags:
     - 'role::postfix'
     - 'role::postfix:install'
-  with_items: '{{ postfix_packages_removed }}'
   when: ansible_os_family == 'Debian'
 
 - name: remove conflicting packages
   package:
-    name: '{{ item }}'
+    name: '{{ postfix_packages_removed }}'
     state: absent
   tags:
     - 'role::postfix'
     - 'role::postfix:install'
-  with_items: '{{ postfix_packages_removed }}'
   when: ansible_os_family != 'Debian'
 
 - name: install postfix related packages
   package:
-    name: '{{ item }}'
+    name: '{{ postfix_packages }}'
     state: present
   tags:
     - 'role::postfix'
     - 'role::postfix:install'
-  with_items: '{{ postfix_packages }}'

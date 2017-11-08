@@ -2,12 +2,11 @@
 
 - name: handle rpcbind packages
   package:
-    name: '{{ item }}'
+    name: '{{ rpcbind_packages }}'
     state: '{{ rpcbind_package_state }}'
   tags:
     - 'role::rpcbind'
     - 'role::rpcbind:install'
-  with_items: '{{ rpcbind_packages }}'
 
 - name: disable and stop rpcbind
   service:

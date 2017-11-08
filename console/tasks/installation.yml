@@ -2,9 +2,8 @@
 
 - name: install console related packages
   package:
-    name: '{{ item }}'
+    name: '{{ console_packages }}'
     state: present
   tags:
     - 'role::console'
     - 'role::console:install'
-  with_items: '{{ console_packages }}'

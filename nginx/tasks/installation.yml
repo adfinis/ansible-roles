@@ -38,13 +38,12 @@
 
 - name: install nginx-related packages
   package:
-    name: '{{ item }}'
+    name: '{{ nginx_packages }}'
     state: present
   tags:
     - 'role::nginx'
     - 'role::nginx:install'
   when: item is defined and item
-  with_items: '{{ nginx_packages }}'
   notify:
     - 'nginx remove default vhost'
 

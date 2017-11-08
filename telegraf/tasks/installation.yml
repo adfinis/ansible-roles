@@ -33,12 +33,11 @@
 
 - name: install telegraf related packages
   package:
-    name: '{{ item }}'
+    name: '{{ telegraf_packages }}'
     state: present
   tags:
     - 'role::telegraf'
     - 'role::telegraf:install'
-  with_items: '{{ telegraf_packages }}'
 
 - name: enable telegraf service
   service:

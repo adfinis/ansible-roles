@@ -2,12 +2,11 @@
 
 - name: install packages for ip address and routing management
   package:
-    name: '{{ item }}'
+    name: '{{ network_packages }}'
     state: present
   tags:
     - 'role::network'
     - 'role::network:install'
-  with_items: '{{ network_packages }}'
 
 - name: remove non rfc 1149 compatible software
   package:

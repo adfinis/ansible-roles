@@ -7,6 +7,5 @@
 
 - name: install firewall/iptables related packages
   package:
-    name: '{{ item }}'
+    name: '{{ iptables_packages }}'
     state: present
-  with_items: '{{ iptables_packages }}'

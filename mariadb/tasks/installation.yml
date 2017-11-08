@@ -2,9 +2,8 @@
 
 - name: install mariadb related packages
   package:
-    name: '{{ item }}'
+    name: '{{ mariadb_packages }}'
     state: present
-  with_items: '{{ mariadb_packages }}'
   notify:
     - 'mariadb restart daemon'
     - 'mariadb remove anonymous users'
