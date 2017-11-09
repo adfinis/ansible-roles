@@ -17,6 +17,23 @@
   notify:
     - 'network reload sysctl'
 
+- name: do not leak system uptime over tcp timestamps
+  template:
+    src: etc/sysctl.d/tcp_timestamps.conf.j2
+    dest: '{{ network_config_sysctl_tcp_timestamps }}'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+  tags:
+    - 'role::network'
+    - 'role::network:config'
+  notify:
+    - 'network reload sysctl'
+
 - name: create global network configuration
   template:
     src: 'etc/{{ ansible_os_family }}/network.j2'
