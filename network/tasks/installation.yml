@@ -11,9 +11,8 @@
 
 - name: remove non rfc 1149 compatible software
   package:
-    name: '{{ item }}'
+    name: '{{ network_packages_removed }}'
     state: absent
   tags:
     - 'role::network'
     - 'role::network:install'
-  with_items: '{{ network_packages_remove }}'

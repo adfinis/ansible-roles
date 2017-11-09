@@ -8,7 +8,7 @@ network_packages:
   - vlan
 
 # remove non rfc 1149 compatible software
-network_packages_remove:
+network_packages_removed:
   - network-manager
   - avahi-autoipd
   - avahi
