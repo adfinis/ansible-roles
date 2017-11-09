@@ -2,9 +2,8 @@
 
 - name: install pki related packages
   package:
-    name: '{{ item }}'
+    name: '{{ pki_packages }}'
     state: present
-  with_items: '{{ pki_packages }}'
 
 - name: create directory for private keys and certificates
   file:

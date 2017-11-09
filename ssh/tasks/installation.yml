@@ -2,9 +2,8 @@
 
 - name: install ssh related packages
   package:
-    name: '{{ item }}'
+    name: '{{ ssh_packages }}'
     state: present
   tags:
     - 'role::ssh'
     - 'role::ssh:install'
-  with_items: '{{ ssh_packages }}'

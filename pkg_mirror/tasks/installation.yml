@@ -7,6 +7,5 @@
 
 - name: install pkg_mirror packages
   package:
-    name: '{{ item }}'
+    name: '{{ pkg_mirror_packages }}'
     state: present
-  with_items: '{{ pkg_mirror_packages }}'

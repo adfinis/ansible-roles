@@ -2,9 +2,8 @@
 
 - name: install users related packages
   package:
-    name: '{{ item }}'
+    name: '{{ users_packages }}'
     state: present
   tags:
     - 'role::users'
     - 'role::users:install'
-  with_items: '{{ users_packages }}'

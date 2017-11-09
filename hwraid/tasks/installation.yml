@@ -42,9 +42,8 @@
 
 - name: install hp raid tools
   package:
-    name: '{{ item }}'
+    name: '{{ hwraid_hp_raid_packages }}'
     state: present
-  with_items: '{{ hwraid_hp_raid_packages }}'
   when: ansible_devices.sda.vendor is defined and
         ansible_devices.sda.vendor == 'HP'
 
@@ -69,9 +68,8 @@
 
 - name: install ibm raid tools
   package:
-    name: '{{ item }}'
+    name: '{{ hwraid_ibm_raid_packages }}'
     state: present
-  with_items: '{{ hwraid_ibm_raid_packages }}'
   when: ansible_devices.sda.vendor is defined and
         ansible_devices.sda.vendor == 'IBM'
 

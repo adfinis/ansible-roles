@@ -2,6 +2,5 @@
 
 - name: install motd related packages
   package:
-    name: '{{ item }}'
+    name: '{{ motd_packages }}'
     state: present
-  with_items: '{{ motd_packages }}'

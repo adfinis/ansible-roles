@@ -2,18 +2,16 @@
 
 - name: install snmp related packages
   package:
-    name: '{{ item }}'
+    name: '{{ snmp_packages }}'
     state: present
   tags:
     - 'role::snmp'
     - 'role::snmp:install'
-  with_items: '{{ snmp_packages }}'
 
 - name: install additional snmp related packages
   package:
-    name: '{{ item }}'
+    name: '{{ snmp_additional_packages }}'
     state: present
   tags:
     - 'role::snmp'
     - 'role::snmp:install'
-  with_items: '{{ snmp_additional_packages }}'
