@@ -8,7 +8,6 @@
 
 - name: remove ntp conflicting packages
   package:
-    name: '{{ item }}'
+    name: '{{ ntp_packages_removed }}'
     state: absent
-  with_items: '{{ ntp_packages_remove }}'
-  when: ntp_packages_remove is defined
+  when: ntp_packages_removed is defined
