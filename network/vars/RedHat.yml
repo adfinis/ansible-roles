@@ -16,6 +16,9 @@ network_packages_removed:
 # system control configuration file for IPv6 RA
 network_config_sysctl_ipv6_ra: /etc/sysctl.d/network_ipv6_ra.conf
 
+# system control configuration file for tcp timestamps
+network_config_sysctl_tcp_timestamps: /etc/sysctl.d/tcp_timestamps.conf
+
 # network main configuration
 network_cfg_main: /etc/sysconfig/network
 
