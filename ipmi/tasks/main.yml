@@ -19,13 +19,13 @@
     - 'role::ipmi:install'
     - 'role::ipmi:config'
 
-- include: installation.yml
+- import_tasks: installation.yml
   when: ipmi_register_device.stat.exists
   tags:
     - 'role::ipmi'
     - 'role::ipmi:install'
 
-- include: configuration.yml
+- import_tasks: configuration.yml
   when: ipmi_register_device.stat.exists
   tags:
     - 'role::ipmi'

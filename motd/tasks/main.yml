@@ -10,12 +10,12 @@
     - 'role::motd:install'
     - 'role::motd:config'
 
-- include: installation.yml
+- import_tasks: installation.yml
   tags:
     - 'role::motd'
     - 'role::motd:install'
 
-- include: configuration.yml
+- import_tasks: configuration.yml
   tags:
     - 'role::motd'
     - 'role::motd:config'

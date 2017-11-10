@@ -10,12 +10,12 @@
     - 'role::$role:install'
     - 'role::$role:config'
 
-- include: installation.yml
+- import_tasks: installation.yml
   tags:
     - 'role::$role'
     - 'role::$role:install'
 
-- include: configuration.yml
+- import_tasks: configuration.yml
   tags:
     - 'role::$role'
     - 'role::$role:config'
