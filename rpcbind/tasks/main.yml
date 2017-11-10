@@ -14,8 +14,3 @@
   tags:
     - 'role::rpcbind'
     - 'role::rpcbind:install'
-
-- import_tasks: configuration.yml
-  tags:
-    - 'role::rpcbind'
-    - 'role::rpcbind:config'

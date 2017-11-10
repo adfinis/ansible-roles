@@ -14,8 +14,3 @@
   tags:
     - 'role::hwraid'
     - 'role::hwraid:install'
-
-- import_tasks: configuration.yml
-  tags:
-    - 'role::hwraid'
-    - 'role::hwraid:config'
