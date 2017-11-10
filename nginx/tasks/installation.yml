@@ -43,7 +43,6 @@
   tags:
     - 'role::nginx'
     - 'role::nginx:install'
-  when: item is defined and item
   notify:
     - 'nginx remove default vhost'
 
