@@ -10,12 +10,12 @@
     - 'role::ntp:install'
     - 'role::ntp:config'
 
-- include: installation.yml
+- import_tasks: installation.yml
   tags:
     - 'role::ntp'
     - 'role::ntp:install'
 
-- include: configuration.yml
+- import_tasks: configuration.yml
   tags:
     - 'role::ntp'
     - 'role::ntp:config'

@@ -10,12 +10,12 @@
     - 'role::mariadb:install'
     - 'role::mariadb:config'
 
-- include: installation.yml
+- import_tasks: installation.yml
   tags:
     - 'role::mariadb'
     - 'role::mariadb:install'
 
-- include: configuration.yml
+- import_tasks: configuration.yml
   tags:
     - 'role::mariadb'
     - 'role::mariadb:config'

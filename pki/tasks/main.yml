@@ -10,12 +10,12 @@
     - 'role::pki:install'
     - 'role::pki:config'
 
-- include: installation.yml
+- import_tasks: installation.yml
   tags:
     - 'role::pki'
     - 'role::pki:install'
 
-- include: configuration.yml
+- import_tasks: configuration.yml
   tags:
     - 'role::pki'
     - 'role::pki:config'

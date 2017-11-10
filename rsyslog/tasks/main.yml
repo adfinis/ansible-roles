@@ -10,5 +10,12 @@
     - 'role::rsyslog:install'
     - 'role::rsyslog:config'
 
-- include: installation.yml
-- include: configuration.yml
+- import_tasks: installation.yml
+  tags:
+    - 'role::rsyslog'
+    - 'role::rsyslog:install'
+
+- import_tasks: configuration.yml
+  tags:
+    - 'role::rsyslog'
+    - 'role::rsyslog:config'

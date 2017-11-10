@@ -10,12 +10,12 @@
     - 'role::pkg_mirror:install'
     - 'role::pkg_mirror:config'
 
-- include: installation.yml
+- import_tasks: installation.yml
   tags:
     - 'role::pkg_mirror'
     - 'role::pkg_mirror:install'
 
-- include: configuration.yml
+- import_tasks: configuration.yml
   tags:
     - 'role::pkg_mirror'
     - 'role::pkg_mirror:config'
