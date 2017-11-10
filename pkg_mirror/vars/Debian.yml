@@ -3,6 +3,7 @@
 # pkg-mirror packages
 pkg_mirror_packages:
   - apt-transport-https
+  - python-apt
   - ca-certificates
 
 # pkg-mirror
