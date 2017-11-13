@@ -14,17 +14,21 @@ before_script:
   - ansible --version
   - ansible-lint --version
   - yamllint --version
+  - ERRORS=0
 
 script:
   - for dir in *; do
-      test -d "$dir" &&
-      echo "$dir" &&
-      ansible-lint -R -r .testenv/lint-rules/ "$dir";
+      if [ -d "$dir" ]; then
+        echo "$dir";
+        ansible-lint -R -r .testenv/lint-rules/ "$dir" || let ERRORS+=1 ;
+      fi ;
     done
   - for dir in *; do
-      test -d "$dir" &&
-      echo "$dir" &&
-      yamllint -c .testenv/yamllint.yml "$dir";
+      if [ -d "$dir" ]; then
+        echo "$dir";
+        yamllint -c .testenv/yamllint.yml "$dir" || let ERRORS+=1 ;
+      fi ;
     done
+  - exit $ERRORS
 
 # vim: set ts=2 sw=2 tw=2 :

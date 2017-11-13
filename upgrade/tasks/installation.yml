@@ -17,6 +17,5 @@
   tags:
     - 'role::upgrade'
     - 'role::upgrade:install'
-    - 'skip_ansible_lint'
   when: ansible_os_family == 'RedHat' and
         dist_upgrade is defined and dist_upgrade
