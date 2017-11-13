@@ -1,0 +1,61 @@
+---
+
+- name: get maximum number of open file descriptors
+  shell: ulimit -n
+  register: jitsi_meet_nginx_register_ulimit
+  changed_when: False
+  tags:
+    - 'role::jitsi_meet'
+    - 'role::jitsi_meet:config'
+    - 'skip_ansible_lint'
+
+- name: set fact jitsi_meet_nginx_fact_file_descriptors
+  set_fact:
+    nginx_fact_file_descriptors: '{{ jitsi_meet_nginx_register_ulimit.stdout | default("768") }}'
+  tags:
+    - 'role::jitsi_meet'
+    - 'role::jits_meet:config'
+
+- name: clean old jitsi-meet configuration
+  file:
+    path: '{{ jitsi_meet_old_nginx_config }}'
+    state: absent
+  tags:
+    - 'role::jitsi_meet'
+    - 'role::jits_meet:config'
+
+- name: create nginx main configuration
+  template:
+    src: etc/nginx/nginx.conf.j2
+    dest: '{{ jitsi_meet_nginx_cfg_base }}/nginx.conf'
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - 'role::jitsi_meet'
+    - 'role::jitsi_meet:config'
+  notify:
+    - 'jitsi_meet_nginx_check_config'
+
+- name: create vhost
+  template:
+    src: 'etc/nginx/conf.d/{{ item }}.conf.j2'
+    dest: '{{ jitsi_meet_nginx_vhosts_dir }}/{{ item }}.conf'
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - 'role::jitsi_meet'
+    - 'role::jitsi_meet:config'
+  with_items: '{{ jitsi_meet_nginx_vhosts }}'
+  notify:
+    - 'jitsi_meet_nginx_check_config'
+
+- name: enable and start nginx service
+  service:
+    name: '{{ jitsi_meet_nginx_service }}'
+    state: started
+    enabled: yes
+  tags:
+    - 'role::jitsi_meet'
+    - 'role::jitsi_meet:config'
