@@ -10,12 +10,7 @@
     - 'role::hw_vm_tools:install'
     - 'role::hw_vm_tools:config'
 
-- include: installation.yml
+- import_tasks: installation.yml
   tags:
     - 'role::hw_vm_tools'
     - 'role::hw_vm_tools:install'
-
-- include: configuration.yml
-  tags:
-    - 'role::hw_vm_tools'
-    - 'role::hw_vm_tools:config'
