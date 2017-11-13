@@ -7,4 +7,3 @@
     - '{{ ansible_os_family }}.yml'
 
 - import_tasks: installation.yml
-- import_tasks: configuration.yml

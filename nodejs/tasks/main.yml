@@ -14,8 +14,3 @@
   tags:
     - 'role::nodejs'
     - 'role::nodejs:install'
-
-- import_tasks: configuration.yml
-  tags:
-    - 'role::nodejs'
-    - 'role::nodejs:config'

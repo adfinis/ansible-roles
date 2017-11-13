@@ -10,11 +10,6 @@
     - 'role::hostname:install'
     - 'role::hostname:config'
 
-- import_tasks: installation.yml
-  tags:
-    - 'role::hostname'
-    - 'role::hostname:install'
-
 - import_tasks: configuration.yml
   tags:
     - 'role::hostname'
