@@ -68,6 +68,7 @@ mariadb_users: []
 # .. code-block:: YAML
 #
 #   mariadb_replicate_wild_do_table: ykksm.%
+#
 
 # Mariadb innodb_file_per_table
 #
@@ -84,3 +85,7 @@ mariadb_users: []
 # .. code-block:: YAML
 #
 #   mariadb_innodb_file_per_table: true
+#
+
+# Passphrase for SSL CA private key.
+mariadb_ca_privatekey_passphrase: ''

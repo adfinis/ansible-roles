@@ -6,15 +6,22 @@ mariadb_packages:
   - mysql-client
   - python-mysqldb
   - pwgen
+  - python-openssl
 
 # mariadb service name
 mariadb_service: mysql
+
+# mariadb user
+mariadb_user: mysql
 
 # mariadb server binary
 mariadb_server_bin: /usr/sbin/mysqld
 
 # global mariadb configuration file location
 mariadb_conf: /etc/my.cnf
+
+# global mariadb configuration directory
+mariadb_conf_dir: /etc/mysql/conf.d
 
 # roots my.cnf
 mariadb_root_mycnf: /root/.my.cnf
@@ -33,3 +40,6 @@ mariadb_socket: '{{ mariadb_run_dir }}/mysqld.sock'
 
 # mariadb anonymous users
 mariadb_anon_user_hosts: []
+
+# mariadb pki path
+mariadb_pki_path: /etc/mysql
