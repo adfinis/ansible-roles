@@ -71,6 +71,8 @@
     provider: selfsigned
   delegate_to: localhost
   register: mariadb_register_pem
+  tags:
+    - skip_ansible_lint
   when: mariadb_register_csr.changed
 
 - name: put the mariadb ssl certificate to the server
@@ -84,6 +86,8 @@
     serole: object_r
     setype: cert_t
     selevel: s0
+  tags:
+    - skip_ansible_lint
   when: mariadb_register_pem.changed
 
 - name: configure mysqld to use ssl
