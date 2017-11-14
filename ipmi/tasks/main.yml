@@ -10,23 +10,20 @@
     - 'role::ipmi:install'
     - 'role::ipmi:config'
 
-- name: check if an ipmi module is present
-  stat:
-    path: '{{ ipmi_device_path }}'
-  register: ipmi_register_device
+- import_tasks: kernelmod.yml
   tags:
     - 'role::ipmi'
     - 'role::ipmi:install'
     - 'role::ipmi:config'
 
 - import_tasks: installation.yml
-  when: ipmi_register_device.stat.exists
+  when: ipmi_register_device.stat.exists | default(False)
   tags:
     - 'role::ipmi'
     - 'role::ipmi:install'
 
 - import_tasks: configuration.yml
-  when: ipmi_register_device.stat.exists
+  when: ipmi_register_device.stat.exists | default(False)
   tags:
     - 'role::ipmi'
     - 'role::ipmi:config'

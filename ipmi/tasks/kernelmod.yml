@@ -1,0 +1,12 @@
+---
+
+- name: load ipmi kernel modules
+  modprobe:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ ipmi_kernel_modules }}'
+
+- name: check if an ipmi module is present
+  stat:
+    path: '{{ ipmi_device_path }}'
+  register: ipmi_register_device

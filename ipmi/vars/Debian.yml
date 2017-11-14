@@ -4,6 +4,12 @@
 ipmi_packages:
   - ipmitool
 
+# IPMI kernel modules
+ipmi_kernel_modules:
+  - ipmi_si
+  - ipmi_msghandler
+  - ipmi_devintf
+
 # Path to the kernel modules load path for the ipmi tools
 ipmi_kernel_modules_conf: /etc/modules-load.d/ipmi.conf
 
