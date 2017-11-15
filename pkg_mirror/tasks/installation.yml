@@ -3,6 +3,7 @@
 - name: update apt cache
   apt:
     update_cache: yes
+  changed_when: False
   when: ansible_os_family == 'Debian'
 
 - name: install pkg_mirror packages
