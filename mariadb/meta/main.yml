@@ -4,7 +4,7 @@ dependencies: []
 
 galaxy_info:
   author: 'Adfinis SyGroup AG'
-  description: 'Install and manage mariadb/mysql server'
+  description: 'Install and manage mariadb/mysql server. pyOpenSSL is locally also required.'
   company: 'Adfinis SyGroup AG'
   license: 'GNU General Public License v3'
   min_ansible_version: '2.3.0'
