@@ -2,46 +2,40 @@
 
 - name: remove unused tools
   package:
-    name: '{{ item }}'
+    name: '{{ hw_vm_tools_packages_remove }}'
     state: absent
-  with_items: '{{ hw_vm_tools_packages_remove }}'
   when: hw_vm_tools_packages_remove is defined
 
 - name: remove unused tools on virtual machines
   package:
-    name: '{{ item }}'
+    name: '{{ hw_vm_tools_vm_packages_remove }}'
     state: absent
-  with_items: '{{ hw_vm_tools_vm_packages_remove }}'
   when: hw_vm_tools_vm_packages_remove is defined and
         ansible_virtualization_role == 'guest'
 
 - name: install hardware management tools
   package:
-    name: '{{ item }}'
+    name: '{{ hw_vm_tools_hw_packages }}'
     state: present
-  with_items: '{{ hw_vm_tools_hw_packages }}'
   when: ansible_virtualization_role == 'host'
 
 - name: install rhv management tools
   package:
-    name: '{{ item }}'
+    name: '{{ hw_vm_tools_rhv_packages }}'
     state: present
-  with_items: '{{ hw_vm_tools_rhv_packages }}'
   when: ansible_virtualization_role == 'guest' and
         ansible_virtualization_type == 'RHEV'
 
 - name: install kvm management tools
   package:
-    name: '{{ item }}'
+    name: '{{ hw_vm_tools_kvm_packages }}'
     state: present
-  with_items: '{{ hw_vm_tools_kvm_packages }}'
   when: ansible_virtualization_role == 'guest' and
         ansible_virtualization_type == 'kvm'
 
 - name: install vmware management tools
   package:
-    name: '{{ item }}'
+    name: '{{ hw_vm_tools_vmware_packages }}'
     state: present
-  with_items: '{{ hw_vm_tools_vmware_packages }}'
   when: ansible_virtualization_role == 'guest' and
         ansible_virtualization_type == 'VMware'
