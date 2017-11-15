@@ -32,6 +32,7 @@
   when: ipmi_network is defined and
         ipmi_network.address is defined and
         ipmi_network.address and
+        ipmi_register_ip_source.rc is defined and
         ipmi_register_ip_source.rc != 0
 
 - name: ipmi ip address check
@@ -73,6 +74,7 @@
   when: ipmi_network is defined and
         ipmi_network.address is defined and
         ipmi_network.address and
+        ipmi_register_ip.rc is defined and
         ipmi_register_ip.rc != 0
 
 - name: ipmi netmask
@@ -80,6 +82,7 @@
   when: ipmi_network is defined and
         ipmi_network.netmask is defined and
         ipmi_network.netmask and
+        ipmi_register_netmask.rc is defined and
         ipmi_register_netmask.rc != 0
 
 - name: ipmi gateway
@@ -87,9 +90,11 @@
   when: ipmi_network is defined and
         ipmi_network.gateway is defined and
         ipmi_network.gateway and
+        ipmi_register_gateway.rc is defined and
         ipmi_register_gateway.rc != 0
 
 - name: ipmi snmp community
   command: ipmitool lan set {{ ipmi_channel }} snmp {{ ipmi_snmp_community }}
   when: ipmi_snmp_community is defined and ipmi_snmp_community and
+        ipmi_register_snmp.rc is defined and
         ipmi_register_snmp.rc != 0
