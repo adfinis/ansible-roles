@@ -25,3 +25,4 @@
   tags:
     - 'role::mariadb'
     - 'role::mariadb:ssl'
+  when: mariadb_ssl

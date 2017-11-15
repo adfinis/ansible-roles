@@ -89,3 +89,6 @@ mariadb_users: []
 
 # Passphrase for SSL CA private key.
 mariadb_ca_privatekey_passphrase: ''
+
+# Enable mariadb SSL encryption.
+mariadb_ssl: False
