@@ -14,6 +14,18 @@
   notify:
     - 'mariadb check config and restart'
 
+- name: create mariadb configuration directory
+  file:
+    path: '{{ mariadb_conf_dir }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+    seuser: system_u
+    serole: object_r
+    setype: mysqld_etc_t
+    selevel: s0
+
 - name: enable mariadb service
   service:
     name: '{{ mariadb_service }}'

@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+#
+# The MySQL database server configuration file.
+#
+# * Security Features
+#
+
+[mysqld]
+ssl-ca                  = {{ mariadb_pki_path }}/ca.pem
+ssl-cert                = {{ mariadb_pki_path }}/server.pem
+ssl-key                 = {{ mariadb_pki_path }}/server.key

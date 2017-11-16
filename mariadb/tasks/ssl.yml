@@ -1,0 +1,105 @@
+---
+
+- name: create mariadb pki path
+  file:
+    state: directory
+    path: '{{ mariadb_pki_path }}'
+    owner: '{{ mariadb_user }}'
+    group: '{{ mariadb_user }}'
+    mode: 0600
+    seuser: system_u
+    serole: object_r
+    setype: cert_t
+    selevel: s0
+
+- name: create mariadb ssl ca private key
+  openssl_privatekey:
+    path: tmp/mariadb_ssl_ca.key
+    type: RSA
+    cipher: aes256
+    size: 4096
+    passphrase: '{{ mariadb_ca_privatekey_passphrase }}'
+  delegate_to: localhost
+
+- name: create mariadb ssl ca public key
+  openssl_publickey:
+    path: tmp/mariadb_ssl_ca.pem
+    format: PEM
+    privatekey_path: tmp/mariadb_ssl_ca.key
+    privatekey_passphrase: '{{ mariadb_ca_privatekey_passphrase }}'
+  delegate_to: localhost
+
+- name: put the mariadb ssl ca public key to the server
+  copy:
+    src: tmp/mariadb_ssl_ca.pem
+    dest: '{{ mariadb_pki_path }}/ca.pem'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: cert_t
+    selevel: s0
+
+- name: create mariadb ssl private key
+  openssl_privatekey:
+    path: '{{ mariadb_pki_path }}/server.key'
+    type: RSA
+    cipher: aes256
+    size: 4096
+    passphrase: ''
+
+- name: create mariadb ssl certificate signing request
+  openssl_csr:
+    path: '{{ mariadb_pki_path }}/server.csr'
+    common_name: '{{ ansible_fqdn }}'
+    privatekey_path: '{{ mariadb_pki_path }}/server.key'
+    privatekey_passphrase: ''
+
+- name: fetch mariadb ssl certificate signing request
+  fetch:
+    src: '{{ mariadb_pki_path }}/server.csr'
+    dest: 'tmp/mariadb_{{ ansible_fqdn }}.csr'
+    flat: yes
+  register: mariadb_register_csr
+
+- name: sign mariadb ssl certificate signing request
+  openssl_certificate:
+    path: 'tmp/mariadb_{{ ansible_fqdn }}.pem'
+    privatekey_path: 'tmp/mariadb_ssl_ca.key'
+    csr_path: 'tmp/mariadb_{{ ansible_fqdn }}.csr'
+    provider: selfsigned
+  delegate_to: localhost
+  register: mariadb_register_pem
+  tags:
+    - skip_ansible_lint
+  when: mariadb_register_csr.changed
+
+- name: put the mariadb ssl certificate to the server
+  copy:
+    src: 'tmp/mariadb_{{ ansible_fqdn }}.pem'
+    dest: '{{ mariadb_pki_path }}/server.pem'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: cert_t
+    selevel: s0
+  tags:
+    - skip_ansible_lint
+  when: mariadb_register_pem.changed
+
+- name: configure mysqld to use ssl
+  template:
+    src: etc/mariadb/ssl.conf.j2
+    dest: '{{ mariadb_conf_dir }}/ssl.conf'
+    owner: root
+    group: root
+    mode: 0644
+    seuser: system_u
+    serole: object_r
+    setype: mariadb_etc_t
+    selevel: s0
+  notify:
+    - 'mariadb check config and restart'

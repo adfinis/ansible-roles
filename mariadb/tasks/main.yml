@@ -9,6 +9,7 @@
     - 'role::mariadb'
     - 'role::mariadb:install'
     - 'role::mariadb:config'
+    - 'role::mariadb:ssl'
 
 - import_tasks: installation.yml
   tags:
@@ -19,3 +20,9 @@
   tags:
     - 'role::mariadb'
     - 'role::mariadb:config'
+
+- import_tasks: ssl.yml
+  tags:
+    - 'role::mariadb'
+    - 'role::mariadb:ssl'
+  when: mariadb_ssl
