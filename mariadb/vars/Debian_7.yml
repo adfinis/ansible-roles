@@ -23,6 +23,13 @@ mariadb_conf: /etc/my.cnf
 # global mariadb configuration directory
 mariadb_conf_dir: /etc/mysql/conf.d
 
+# mariadb configuration files
+mariadb_conf_files:
+  - client
+  - server
+  - mysqld_safe
+  - mysqldump
+
 # roots my.cnf
 mariadb_root_mycnf: /root/.my.cnf
 
@@ -43,3 +50,6 @@ mariadb_anon_user_hosts: []
 
 # mariadb pki path
 mariadb_pki_path: /etc/mysql
+
+# MariaDB default character set.
+mariadb_character_set_default: utf8mb4

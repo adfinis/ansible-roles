@@ -1,0 +1,13 @@
+# {{ ansible_managed }}
+#
+
+[mysqldump]
+quick
+quote-names
+max_allowed_packet      = 16M
+
+{% if mariadb_innodb_file_per_table | d(False) %}
+# Use a separate InnoDB tablespace (the ibdata stuff in /var/lib/mysql)
+# for each database.
+innodb_file_per_table=1
+{% endif %}

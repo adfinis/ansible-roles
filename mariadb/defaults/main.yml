@@ -9,6 +9,13 @@ mariadb_bind_address: 127.0.0.1
 # mariadb bind port
 mariadb_bind_port: 3306
 
+# MariaDB default character set.
+#
+# .. code-block:: YAML
+#
+#   mariadb_character_set: utf8mb4
+#
+
 # Mariadb database list. Default is empty, no databases will be created.
 mariadb_databases: []
 

@@ -6,19 +6,15 @@ mariadb_packages:
   - mariadb-client
   - python-mysqldb
   - pwgen
-  - python-openssl
 
 # mariadb service name
-mariadb_service: mysqld
-
-# mariadb user
-mariadb_user: mysql
+mariadb_service: mysql
 
 # mariadb server binary
 mariadb_server_bin: /usr/sbin/mysqld
 
 # global mariadb configuration file location
-mariadb_conf: /etc/mysql/mariadb.cnf
+mariadb_conf: /etc/mysql/my.cnf
 
 # global mariadb configuration directory
 mariadb_conf_dir: /etc/mysql/conf.d
@@ -29,11 +25,6 @@ mariadb_conf_files:
   - server
   - mysqld_safe
   - mysqldump
-
-# configuration directories and files to remove
-mariadb_conf_remove:
-  - /etc/mysql/mariadb.conf.d
-  - /etc/mysql/my.cnf
 
 # roots my.cnf
 mariadb_root_mycnf: /root/.my.cnf
@@ -52,9 +43,6 @@ mariadb_socket: '{{ mariadb_run_dir }}/mysqld.sock'
 
 # mariadb anonymous users
 mariadb_anon_user_hosts: []
-
-# mariadb pki path
-mariadb_pki_path: /etc/mysql
 
 # MariaDB default character set.
 mariadb_character_set_default: utf8mb4
