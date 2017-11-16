@@ -4,10 +4,8 @@
 ipmi_packages:
   - ipmitool
 
-# IPMI kernel modules
-ipmi_kernel_modules:
-  - ipmi_si
-  - ipmi_msghandler
+# IPMI kernel module for device
+ipmi_kernel_modules_device:
   - ipmi_devintf
 
 # Path to the kernel modules load path for the ipmi tools
