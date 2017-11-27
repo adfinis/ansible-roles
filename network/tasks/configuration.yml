@@ -39,6 +39,7 @@
     serole: object_r
     setype: etc_t
     selevel: s0
+  when: network_interfaces is defined and network_interfaces
 
 - name: create network interface configuration directory
   file:
