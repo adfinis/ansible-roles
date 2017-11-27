@@ -11,9 +11,6 @@
     serole: object_r
     setype: etc_t
     selevel: s0
-  tags:
-    - 'role::network'
-    - 'role::network:config'
   notify:
     - 'network reload sysctl'
 
@@ -28,9 +25,6 @@
     serole: object_r
     setype: etc_t
     selevel: s0
-  tags:
-    - 'role::network'
-    - 'role::network:config'
   notify:
     - 'network reload sysctl'
 
@@ -45,9 +39,6 @@
     serole: object_r
     setype: etc_t
     selevel: s0
-  tags:
-    - 'role::network'
-    - 'role::network:config'
 
 - name: create network interface configuration directory
   file:
@@ -72,9 +63,6 @@
     serole: object_r
     setype: net_conf_t
     selevel: s0
-  tags:
-    - 'role::network'
-    - 'role::network:config'
   when: item.device is defined and item.device and
         item.tmpl is defined and item.tmpl and
         (item.device in ansible_interfaces or
@@ -92,6 +80,3 @@
     serole: object_r
     setype: net_conf_t
     selevel: s0
-  tags:
-    - 'role::network'
-    - 'role::network:config'
