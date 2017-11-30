@@ -92,8 +92,8 @@
 
 - name: configure mysqld to use ssl
   template:
-    src: etc/mariadb/ssl.conf.j2
-    dest: '{{ mariadb_conf_dir }}/ssl.conf'
+    src: etc/mariadb/ssl.cnf.j2
+    dest: '{{ mariadb_conf_dir }}/ssl.cnf'
     owner: root
     group: root
     mode: 0644

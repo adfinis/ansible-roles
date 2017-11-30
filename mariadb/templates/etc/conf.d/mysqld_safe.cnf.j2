@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+#
+# This was formally known as [safe_mysqld]. Both versions are currently parsed.
+
+[mysqld_safe]
+socket                  = {{ mariadb_socket }}
+nice                    = 0
+skip_log_error
+syslog

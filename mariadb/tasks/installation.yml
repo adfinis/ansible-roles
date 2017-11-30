@@ -8,3 +8,23 @@
     - 'mariadb restart daemon'
     - 'mariadb remove anonymous users'
     - 'mariadb remove test database'
+
+- name: create mariadb configuration directory
+  file:
+    path: '{{ mariadb_conf_dir }}'
+    recurse: yes
+    owner: root
+    group: root
+    mode: 0755
+    seuser: system_u
+    serole: object_r
+    setype: mysqld_etc_t
+    selevel: s0
+
+- name: remove stub configurations
+  file:
+    path: '{{ item }}'
+    state: absent
+  with_items: '{{ mariadb_conf_remove }}'
+  when: mariadb_conf_remove is defined and
+        item is defined and item

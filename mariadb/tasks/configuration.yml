@@ -1,6 +1,6 @@
 ---
 
-- name: configure mariadb server
+- name: create mariadb main configuration
   template:
     src: etc/my.cnf.j2
     dest: '{{ mariadb_conf }}'
@@ -14,17 +14,20 @@
   notify:
     - 'mariadb check config and restart'
 
-- name: create mariadb configuration directory
-  file:
-    path: '{{ mariadb_conf_dir }}'
-    state: directory
+- name: create mariadb component configurations
+  template:
+    src: etc/conf.d/{{ item }}.cnf.j2
+    dest: '{{ mariadb_conf_dir }}/{{ item }}.cnf'
     owner: root
     group: root
-    mode: 0755
+    mode: 0644
     seuser: system_u
     serole: object_r
     setype: mysqld_etc_t
     selevel: s0
+  with_items: '{{ mariadb_conf_files }}'
+  notify:
+    - 'mariadb check config and restart'
 
 - name: enable mariadb service
   service:
