@@ -9,7 +9,7 @@ mariadb_packages:
   - python-openssl
 
 # mariadb service name
-mariadb_service: mysqld
+mariadb_service: mysql
 
 # mariadb user
 mariadb_user: mysql
