@@ -52,7 +52,7 @@
     exclusive: '{{ item.exclusive | default(omit) }}'
     key_options: '{{ item.options | default(omit) }}'
     manage_dir: '{{ item.manage_dir | default("no") }}'
-    path: '{{ item.path | default(ssh_daemon_authorized_keys[0] + item.user) }}'
+    path: '{{ item.path | default("/etc/ssh/authorized_keys/" + item.user) }}'
     state: '{{ item.present | default(omit) }}'
   tags:
     - role::users
