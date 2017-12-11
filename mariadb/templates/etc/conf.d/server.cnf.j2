@@ -91,9 +91,9 @@ replicate-wild-do-table = {{ mariadb_replicate_wild_do_table }}
 #
 # Read the manual, too, if you want chroot!
 #chroot                  = /var/lib/mysql/
+{% if mariadb_ssl | default(False) %}
 
-# For generating SSL certificates I recommend the OpenSSL GUI "tinyca".
-#
-#ssl-ca                  = /etc/mysql/cacert.pem
-#ssl-cert                = /etc/mysql/server-cert.pem
-#ssl-key                 = /etc/mysql/server-key.pem
+ssl-ca                  = {{ mariadb_pki_path }}/ca.pem
+ssl-cert                = {{ mariadb_pki_path }}/server.pem
+ssl-key                 = {{ mariadb_pki_path }}/server.key
+{% endif %}
