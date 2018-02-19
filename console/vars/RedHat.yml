@@ -34,6 +34,7 @@ console_packages:
   - redhat-lsb-core
   - rsync
   - screen
+  - setools-console
   - strace
   - sysstat
   - tar
