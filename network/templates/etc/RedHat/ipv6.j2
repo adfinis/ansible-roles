@@ -1,0 +1,21 @@
+{% if item.ipv6_autoconf | default(False) -%}
+IPV6INIT=yes
+IPV6_AUTOCONF={{ item.ipv6_autoconf | default("yes") }}
+{% else -%}
+{% if item.ipv6 | default(False) -%}
+IPV6INIT=yes
+IPV6_AUTOCONF=no
+{% if item.ipv6.type == 'static' %}
+IPV6ADDR={{ item.ipv6.addr }}
+{% endif %}
+{% endif -%}
+IPV6FORWARDING={{ item.ipv6_forwarding | default("no") }}
+IPV6_FAILURE_FATAL=no
+IPV6_PEERDNS=no
+IPV6_PEERROUTES=no
+IPV6_PRIVACY={{ item.ipv6_privacy | default("no") }}
+{% if item.ipv6_gateway | default(False) -%}
+IPV6_DEFAULTGW={{ item.ipv6_gateway }}
+IPV6_DEFROUTE=yes
+{% endif -%}
+{% endif -%}

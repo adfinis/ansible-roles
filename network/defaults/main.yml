@@ -26,7 +26,7 @@ network_interfaces: []
 #
 # .. code-block:: YAML
 #
-#   netowrk_interfaces:
+#   network_interfaces:
 #     - device: eth0
 #       tmpl: ethernet
 #       hwaddress: 00:11:22:33:44:55
