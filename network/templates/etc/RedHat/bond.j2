@@ -1,0 +1,9 @@
+{% include "header.j2" %}
+
+BONDING_OPTS="{{ item.bonding_opts | default("mode=4") }}"
+{% if item.bridge is defined -%}
+BRIDGE={{ item.bridge }}
+{% endif -%}
+
+{% include "ipv4.j2" %}
+{% include "ipv6.j2" %}
