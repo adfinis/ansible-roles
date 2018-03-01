@@ -18,3 +18,7 @@ grub_timeout: 5
 
 # disable predictable network interface names
 grub_disable_network_predictable_interface_names: True
+
+# additional cmdline arguments
+# type: list
+grub_cmdline_linux_list: []
