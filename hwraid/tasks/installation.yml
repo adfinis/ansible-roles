@@ -6,6 +6,7 @@
     state: present
   with_items: '{{ hwraid_apt_hp_keys }}'
   when: ansible_os_family == 'Debian' and
+        ansible_devices.sda is defined and
         ansible_devices.sda.vendor is defined and
         ansible_devices.sda.vendor == 'HP'
 
@@ -16,6 +17,7 @@
     update_cache: yes
   when: ansible_os_family == 'Debian' and
         hwraid_apt_hp_repository is defined and hwraid_apt_hp_repository and
+        ansible_devices.sda is defined and
         ansible_devices.sda.vendor is defined and
         ansible_devices.sda.vendor == 'HP'
 
@@ -37,6 +39,7 @@
     selevel: s0
   with_items: '{{ hwraid_yum_hp_repository }}'
   when: ansible_os_family == 'RedHat' and
+        ansible_devices.sda is defined and
         ansible_devices.sda.vendor is defined and
         ansible_devices.sda.vendor == 'HP'
 
@@ -44,7 +47,8 @@
   package:
     name: '{{ hwraid_hp_raid_packages }}'
     state: present
-  when: ansible_devices.sda.vendor is defined and
+  when: ansible_devices.sda is defined and
+        ansible_devices.sda.vendor is defined and
         ansible_devices.sda.vendor == 'HP'
 
 - name: install the hwraid.le-vert.net gpg key
@@ -53,6 +57,7 @@
     state: present
   with_items: '{{ hwraid_apt_le_vert_keys }}'
   when: ansible_os_family == 'Debian' and
+        ansible_devices.sda is defined and
         ansible_devices.sda.vendor is defined and
         ansible_devices.sda.vendor == 'IBM'
 
@@ -63,6 +68,7 @@
     update_cache: yes
   when: ansible_os_family == 'Debian' and
         hwraid_apt_le_vert_repository is defined and hwraid_apt_le_vert_repository and
+        ansible_devices.sda is defined and
         ansible_devices.sda.vendor is defined and
         ansible_devices.sda.vendor == 'IBM'
 
@@ -70,7 +76,8 @@
   package:
     name: '{{ hwraid_ibm_raid_packages }}'
     state: present
-  when: ansible_devices.sda.vendor is defined and
+  when: ansible_devices.sda is defined and
+        ansible_devices.sda.vendor is defined and
         ansible_devices.sda.vendor == 'IBM'
 
 - name: check if nagios plugin check_raid is installed
