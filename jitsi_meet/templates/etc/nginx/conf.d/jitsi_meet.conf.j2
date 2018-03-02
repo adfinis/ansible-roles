@@ -12,9 +12,9 @@ server {
     listen 443 ssl;
     server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
 
-    ssl_protocols {{ jitsi_meet_nginx_ssl_protocols | join(' ') }};
+    ssl_protocols {{ nginx_ssl_protocols | join(' ') }};
     ssl_prefer_server_ciphers on;
-    ssl_ciphers {{ jitsi_meet_nginx_ssl_ciphers | join(':') }};
+    ssl_ciphers {{ nginx_ssl_ciphers | join(':') }};
 
     add_header Strict-Transport-Security {{ item.ssl_hsts_age | d('15768000') }};
 

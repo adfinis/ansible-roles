@@ -10,12 +10,12 @@
     - 'role::jitsi_meet:install'
     - 'role::jitsi_meet:config'
 
-- include: installation.yml
+- import_tasks: installation.yml
   tags:
     - 'role::jitsi_meet'
     - 'role::jitsi_meet:install'
 
-- include: configuration.yml
+- import_tasks: configuration.yml
   tags:
     - 'role::jitsi_meet'
     - 'role::jitsi_meet:config'

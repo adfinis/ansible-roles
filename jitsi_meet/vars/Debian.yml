@@ -12,32 +12,7 @@ jitsi_meet_related_packages:
 
 # jitsi_meet package
 jitsi_meet_packages:
-  - nginx
   - jitsi-meet
-
-# nginx service binary
-jitsi_meet_nginx_binary: /usr/sbin/nginx
 
 # old nginx vhost conf
 jitsi_meet_old_nginx_config: '{{ jitsi_meet_nginx_cfg_base }}/sites-available/ok.conf'
-
-# nginx service name
-jitsi_meet_nginx_service: nginx
-
-# nginx configuration directory base
-jitsi_meet_nginx_cfg_base: /etc/nginx
-
-# directory for vhosts
-jitsi_meet_nginx_vhosts_dir: '{{ jitsi_meet_nginx_cfg_base }}/conf.d'
-
-# file of default vhost
-jitsi_meet_nginx_default_vhost: '{{ jitsi_meet_nginx_vhosts_dir }}/default.conf'
-
-# jitsi_meet vhost name
-jitsi_meet_nginx_vhosts: 'jitsi_meet'
-
-# jitsi meet nginx process name
-jitsi_meet_jitsi_meet_web_process: nginx
-
-# jitsi meet nginx user
-jitsi_meet_nginx_user: www-data

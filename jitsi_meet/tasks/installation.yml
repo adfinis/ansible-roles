@@ -2,41 +2,22 @@
 
 - name: install jitsi-meet related packages
   package:
-    name: '{{ item }}'
+    name: '{{ jitsi_meet_related_packages }}'
     state: present
     update_cache: yes
-  tags:
-    - 'role::jitsi_meet'
-    - 'role::jitsi_meet:install'
-#  when: ansible_os_family == 'Debian'
-  with_items: '{{ jitsi_meet_related_packages }}'
 
 - name: get jitsi repository key
   apt_key:
     url: '{{ jitsi_meet_apt_key }}'
     state: present
-  tags:
-    - 'role::jitsi_meet'
-    - 'role::jitsi_meet:install'
-  when: ansible_os_family == 'Debian'
 
 - name: add jitsi repository
   apt_repository:
     repo: '{{ jitsi_meet_apt_repository }}'
     state: present
-  tags:
-    - 'role::jitsi_meet'
-    - 'role::jitsi_meet:install'
-  when: ansible_os_family == 'Debian'
-  notify:
-    - 'jitsi_meet_update_repo_cache'
+    update_cache: yes
 
 - name: install jitsi meet
   package:
-    name: '{{ item }}'
+    name: '{{ jitsi_meet_packages }}'
     state: present
-  with_items: '{{ jitsi_meet_packages }}'
-  tags:
-    - 'role::jitsi_meet'
-    - 'role::jitsi_meet:install'
-  when: ansible_os_family == 'Debian'

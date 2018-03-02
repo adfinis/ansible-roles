@@ -1,5 +1,8 @@
 ---
 
+dependencies:
+  - role: nginx
+
 galaxy_info:
   author: 'Adfinis SyGroup AG'
   description: 'Install Jitsi Meet on a Debian Based Server'
