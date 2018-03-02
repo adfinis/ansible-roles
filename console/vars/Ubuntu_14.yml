@@ -4,7 +4,6 @@
 # a list of default packages for every system
 console_packages:
   - acl
-  - apticron
   - aptitude
   - bash-completion
   - bsd-mailx
