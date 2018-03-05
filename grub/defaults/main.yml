@@ -18,3 +18,16 @@ grub_timeout: 5
 
 # disable predictable network interface names
 grub_disable_network_predictable_interface_names: True
+
+# additional cmdline arguments
+# type: list
+grub_cmdline_linux_list: []
+
+# An example how to add additional parameters to the kernel:
+#
+# .. code-block:: YAML
+#
+#   grub_cmdline_linux_list:
+#     - ip=192.0.2.2::192.0.2.1:255.255.255.0:host.example.com:eth0:off
+#     - vnc
+#     - vncpassword=password

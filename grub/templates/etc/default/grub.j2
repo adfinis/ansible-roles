@@ -1,7 +1,7 @@
 {% if grub_consoles | d(False) %}
 {%   set grub_console = "console=" + grub_consoles | join(' console=') %}
 {% endif %}
-{% set grub_cmdline_linux = [] %}
+{% set grub_cmdline_linux = [] + grub_cmdline_linux_list %}
 {% if ansible_cmdline['rd.auto'] | d(False) %}
 {%   set grub_cmdline_linux = grub_cmdline_linux + ['rd.auto'] %}
 {% endif %}
