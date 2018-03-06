@@ -1,0 +1,15 @@
+{% if item.ipv4_dhcp | default(False) -%}
+BOOTPROTO=dhcp
+{% else -%}
+{% if item.ipv4 | default(False) -%}
+BOOTPROTO=static
+IPADDR={{ item.ipv4.addr }}
+PREFIX={{ item.ipv4.mask }}
+IPV4_FAILURE_FATAL=no
+PEERDNS=no
+{% endif -%}
+{% if item.ipv4_gateway | default(False) -%}
+GATEWAY={{ item.ipv4_gateway }}
+DEFROUTE=yes
+{% endif -%}
+{% endif -%}

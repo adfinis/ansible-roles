@@ -26,18 +26,18 @@ network_interfaces: []
 #
 # .. code-block:: YAML
 #
-#   netowrk_interfaces:
+#   network_interfaces:
 #     - device: eth0
 #       tmpl: ethernet
 #       hwaddress: 00:11:22:33:44:55
 #       force: True  # enforce that the configuration will be written
 #       ipv4:
 #         type: static
-#         address: 192.0.2.10
-#         netmask: 255.255.255.0
-#         gateway: 192.0.2.1
+#         addr: 192.0.2.10
+#         mask: 255.255.255.0
 #       ipv6:
 #         type: static
-#         address: 2001:db8::10
-#         netmask: 64
-#         gateway: 2001:db8::1
+#         addr: 2001:db8::10
+#         mask: 64
+#       ipv4_gateway: 192.0.2.1
+#       ipv6_gateway: 2001:db8::1

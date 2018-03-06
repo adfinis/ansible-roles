@@ -1,0 +1,8 @@
+TYPE={{ item.tmpl | capitalize }}
+DEVICE="{{ item.device }}"
+NAME="{{ item.device }}"
+{% if item.vlan is defined -%}
+VLAN={{ item.vlan }}
+{% endif -%}
+ONBOOT=yes
+USERCTL=no

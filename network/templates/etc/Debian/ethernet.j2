@@ -6,10 +6,10 @@ allow-hotplug {{ item.device }}
 {% if item.ipv4 is defined %}
 iface {{ item.device }} inet {{ item.ipv4.type }}
 {% if item.ipv4.type == 'static' %}
-    address     {{ item.ipv4.address }}
-    netmask     {{ item.ipv4.netmask | d("255.255.255.0") }}
-{% if item.ipv4.gateway is defined %}
-    gateway     {{ item.ipv4.gateway }}
+    address     {{ item.ipv4.addr }}
+    netmask     {{ item.ipv4.mask | d("255.255.255.0") }}
+{% if item.ipv4_gateway is defined %}
+    gateway     {{ item.ipv4_gateway }}
 {% endif %}
 {% endif %}
 {% if item.hwaddress | d(False) %}
@@ -40,10 +40,10 @@ iface {{ item.device }} inet manual
 {% if item.ipv6 is defined %}
 iface {{ item.device }} inet6 {{ item.ipv6.type }}
 {% if item.ipv6.type == 'static' %}
-    address     {{ item.ipv6.address }}
-    netmask     {{ item.ipv6.netmask | d("64") }}
-{% if item.ipv6.gateway is defined %}
-    gateway     {{ item.ipv6.gateway }}
+    address     {{ item.ipv6.addr }}
+    netmask     {{ item.ipv6.mask | d("64") }}
+{% if item.ipv6_gateway is defined %}
+    gateway     {{ item.ipv6_gateway }}
 {% endif %}
 {% endif %}
 {% if item.hwaddress | d(False) %}
