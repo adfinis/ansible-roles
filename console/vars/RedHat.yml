@@ -5,6 +5,7 @@
 console_packages:
   - acl
   - at
+  - bash-completion
   - bind-utils
   - bzip2
   - dmidecode
