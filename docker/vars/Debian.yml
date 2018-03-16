@@ -1,0 +1,18 @@
+---
+
+docker_package_dependencies:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg2
+  - software-properties-common
+
+docker_apt_key: 'https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg'
+docker_apt_url: 'https://download.docker.com/linux/{{ ansible_distribution | lower }}'
+
+docker_packages:
+  - docker-ce
+
+docker_service: docker
+
+docker_daemon_configuration: /etc/docker/daemon.json

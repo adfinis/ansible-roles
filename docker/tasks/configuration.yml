@@ -1,0 +1,19 @@
+---
+
+- name: set docker daemon configuration
+  template:
+    src: etc/docker/daemon.json.j2
+    dest: '{{ docker_daemon_configuration }}'
+    owner: root
+    group: root
+    mode: 0600
+    seuser: system_u
+    serole: object_r
+    setype: etc_t
+    selevel: s0
+
+- name: start and enable docker service
+  service:
+    name: '{{ docker_service }}'
+    enabled: yes
+    state: started

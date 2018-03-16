@@ -1,0 +1,16 @@
+---
+
+docker_package_dependencies:
+  - yum-utils
+  - device-mapper-persistent-data
+  - lvm2
+
+docker_rpm_key: 'https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg'
+docker_rpm_repo: 'https://download.docker.com/linux/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version }}/$basearch/stable'
+
+docker_packages:
+  - docker-ce
+
+docker_service: docker
+
+docker_daemon_configuration: /etc/docker/daemon.json
