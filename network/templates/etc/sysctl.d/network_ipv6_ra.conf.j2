@@ -1,9 +1,12 @@
+{% set interfaces_all       = ansible_interfaces | sort %}
+{% set interfaces_unwanted  = interfaces_all | map('regex_search', '^vnet[0-9]+') | list | difference([None]) %}
+{% set interfaces           = interfaces_all | difference(interfaces_unwanted) %}
 # {{ ansible_managed }}
 # Do not accept IPv6 default routes on external interfaces
 # Setting "all" and "default" does not help, you need to list
 # all interfaces here!
 
-{% for interface in ansible_interfaces | sort %}
+{% for interface in interfaces %}
 net.ipv6.conf.{{ interface }}.accept_ra=0
 net.ipv6.conf.{{ interface }}.autoconf=0
 
