@@ -2,6 +2,8 @@
 ANSIBLE ROLES
 =============
 
+# This repository is deprectated. There is a repository per role on our GitHub page.
+
 .. image:: https://img.shields.io/github/license/adfinis-sygroup/ansible-roles.svg?style=flat-square
   :target: https://github.com/adfinis-sygroup/ansible-roles/blob/master/LICENSE
 
