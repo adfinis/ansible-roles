@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 
 language: python
-sudo: false
+sudo: required
 cache: pip
 python:
   - "2.7"
+services:
+  - docker
 
 install:
-  - pip install --upgrade ansible ansible-lint yamllint
+  - pip install --upgrade ansible ansible-lint ansible-test yamllint
 
 before_script:
   - ansible --version
@@ -27,6 +29,19 @@ script:
       if [ -d "$dir" ]; then
         echo "$dir";
         yamllint -c .testenv/yamllint.yml "$dir" || let ERRORS+=1 ;
+      fi ;
+    done
+  - if [ $ERRORS -ne 0 ]; then exit $ERRORS; fi
+  - for dir in *; do
+      if [ -d "$dir" ]; then
+        echo "$dir";
+        ansible-test --image debian:9 "$dir" || let ERRORS+=1 ;
+        ansible-test --image debian:8 "$dir" || let ERRORS+=1 ;
+        ansible-test --image debian:7 "$dir" || let ERRORS+=1 ;
+        ansible-test --image ubuntu:16 "$dir" || let ERRORS+=1 ;
+        ansible-test --image ubuntu:14 "$dir" || let ERRORS+=1 ;
+        ansible-test --image centos:7 "$dir" || let ERRORS+=1 ;
+        ansible-test --image centos:6 "$dir" || let ERRORS+=1 ;
       fi ;
     done
   - exit $ERRORS
