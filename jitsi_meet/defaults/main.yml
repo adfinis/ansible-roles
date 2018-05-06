@@ -1,0 +1,8 @@
+---
+
+# jitsi meet webroot location:
+jitsi_meet_webroot_location: /usr/share/jitsi-meet
+
+# domain of the jitsi meet page
+jitsi_meet_domains:
+  - jitsi.example.com

@@ -1,0 +1,18 @@
+---
+
+# apt repository for /etc/apt/sources/sources.list.d/jitsi-stable.list
+jitsi_meet_apt_repository: 'deb https://download.jitsi.org stable/'
+
+# apt key for key verification
+jitsi_meet_apt_key: 'https://download.jitsi.org/jitsi-key.gpg.key'
+
+# needed packages to install
+jitsi_meet_related_packages:
+  - apt-transport-https
+
+# jitsi_meet package
+jitsi_meet_packages:
+  - jitsi-meet
+
+# old nginx vhost conf
+jitsi_meet_old_nginx_config: '{{ jitsi_meet_nginx_cfg_base }}/sites-available/ok.conf'

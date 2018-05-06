@@ -88,6 +88,8 @@ Currently the repository features the following roles:
 | iptables      | install iptables persistent services and configure        |
 |               | iptables rules                                            |
 +---------------+-----------------------------------------------------------+
+| jitsi_meet    | install Jitsi Meet                                        |
++---------------+-----------------------------------------------------------+
 | mariadb       | manage a mariadb server and client (if mariadb is not     |
 |               | available, mysql will be installed instead)               |
 +---------------+-----------------------------------------------------------+

@@ -1,0 +1,51 @@
+# {{ ansible_managed }}
+# vhost for {{ item.name | d(ansible_hostname+'.'+ansible_domain) }}
+
+server_names_hash_bucket_size 64;
+
+server {
+    listen 80;
+    server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
+    return 301 https://$host$request_uri;
+}
+server {
+    listen 443 ssl;
+    server_name {{ item.name | d(ansible_hostname+'.'+ansible_domain) }};
+
+    ssl_protocols {{ nginx_ssl_protocols | join(' ') }};
+    ssl_prefer_server_ciphers on;
+    ssl_ciphers {{ nginx_ssl_ciphers | join(':') }};
+
+    add_header Strict-Transport-Security {{ item.ssl_hsts_age | d('15768000') }};
+
+    ssl_certificate {{ item.ssl_crt | d(pki_snakeoil.cert) }};
+    ssl_certificate_key {{ item.ssl_key | d(pki_snakeoil.pkey) }};
+
+    root {{ jitsi_meet_webroot_location }};
+    index index.html index.htm;
+    error_page 404 /static/404.html;
+
+    location /config.js {
+        alias /etc/jitsi/meet/ok-config.js;
+    }
+
+    location ~ ^/([a-zA-Z0-9=\?]+)$ {
+        rewrite ^/(.*)$ / break;
+    }
+
+    location / {
+        ssi on;
+    }
+
+    # Backward compatibility
+    location ~ /external_api.* {
+        root /usr/share/jitsi-meet/libs;
+    }
+
+    # BOSH
+    location /http-bind {
+        proxy_pass      http://localhost:5280/http-bind;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $http_host;
+    }
+}

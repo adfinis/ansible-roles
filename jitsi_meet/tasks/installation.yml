@@ -1,0 +1,23 @@
+---
+
+- name: install jitsi-meet related packages
+  package:
+    name: '{{ jitsi_meet_related_packages }}'
+    state: present
+    update_cache: yes
+
+- name: get jitsi repository key
+  apt_key:
+    url: '{{ jitsi_meet_apt_key }}'
+    state: present
+
+- name: add jitsi repository
+  apt_repository:
+    repo: '{{ jitsi_meet_apt_repository }}'
+    state: present
+    update_cache: yes
+
+- name: install jitsi meet
+  package:
+    name: '{{ jitsi_meet_packages }}'
+    state: present
