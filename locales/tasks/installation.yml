@@ -1,0 +1,10 @@
+---
+
+- name: install locales packages
+  package:
+    name: '{{ item }}'
+    state: present
+  tags:
+    - 'role::locales'
+    - 'role::locales:install'
+  with_items: '{{ locales_packages }}'

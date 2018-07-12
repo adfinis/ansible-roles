@@ -1,0 +1,5 @@
+---
+
+# packages for locales
+locales_packages:
+  - glibc-common

@@ -1,0 +1,8 @@
+---
+
+# packages for locales
+locales_packages:
+  - locales
+  - keyboard-configuration
+
+locales_keyboard_config: /etc/default/keyboard
