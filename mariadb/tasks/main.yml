@@ -10,6 +10,7 @@
     - 'role::mariadb:install'
     - 'role::mariadb:config'
     - 'role::mariadb:ssl'
+    - 'role::mariadb:replication'
 
 - import_tasks: installation.yml
   tags:
@@ -26,3 +27,10 @@
     - 'role::mariadb'
     - 'role::mariadb:ssl'
   when: mariadb_ssl
+
+- import_tasks: replication.yml
+  tags:
+    - 'role::mariadb'
+    - 'role::mariadb:replication'
+  when: mariadb_replication is defined and
+        mariadb_replication.role is defined

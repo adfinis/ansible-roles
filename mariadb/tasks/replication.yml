@@ -1,0 +1,64 @@
+---
+
+- name: get slave status
+  mysql_replication:
+    mode: getslave
+  ignore_errors: True
+  register: mariadb_register_slave
+  when: mariadb_replication.role == 'slave'
+
+- name: get the current master data
+  shell: mysqldump --single-transaction --master-data --databases {{ mariadb_replication.databases | join(" ") }} | gzip -c > /tmp/mariadb_dump.sql.gz
+  when: mariadb_replication.role == 'master'
+
+- name: fetch the master data from the master
+  fetch:
+    src: /tmp/mariadb_dump.sql.gz
+    dest: tmp/mariadb_dump.sql.gz
+    flat: yes
+  when: mariadb_replication.role == 'master'
+
+- name: put the master data to the slaves
+  copy:
+    src: tmp/mariadb_dump.sql.gz
+    dest: /tmp/mariadb_dump.sql.gz
+    owner: '{{ mariadb_user }}'
+    group: '{{ mariadb_user }}'
+    mode: 0600
+    seuser: system_u
+    serole: object_r
+    setype: mysqld_db_t
+    selevel: s0
+  when: mariadb_replication.role == 'slave'
+
+- name: show mariadb replication slave status
+  debug:
+    msg: '{{ mariadb_register_slave }}'
+
+- name: stop slave
+  mysql_replication:
+    mode: stopslave
+  when: mariadb_replication.role == 'slave' and
+        not mariadb_register_slave.Is_Slave
+
+- name: import the master data
+  shell: zcat /tmp/mariadb_dump.sql.gz | mysql
+  when: mariadb_replication.role == 'slave' and
+        not mariadb_register_slave.Is_Slave
+
+- name: start slave
+  mysql_replication:
+    mode: startslave
+  when: mariadb_replication.role == 'slave' and
+        not mariadb_register_slave.Is_Slave
+
+- name: get slave status
+  mysql_replication:
+    mode: getslave
+  ignore_errors: True
+  register: mariadb_register_slave_end
+  when: mariadb_replication.role == 'slave'
+
+- name: show mariadb replication slave status
+  debug:
+    msg: '{{ mariadb_register_slave_end }}'
