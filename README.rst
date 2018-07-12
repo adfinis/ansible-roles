@@ -88,6 +88,9 @@ Currently the repository features the following roles:
 | iptables      | install iptables persistent services and configure        |
 |               | iptables rules                                            |
 +---------------+-----------------------------------------------------------+
+| logwatch      | Logwatch is a customizable, pluggable log-monitoring      |
+|               | system.                                                   |
++---------------+-----------------------------------------------------------+
 | mariadb       | manage a mariadb server and client (if mariadb is not     |
 |               | available, mysql will be installed instead)               |
 +---------------+-----------------------------------------------------------+
