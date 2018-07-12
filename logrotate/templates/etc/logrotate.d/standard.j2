@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+
+{% for file in item.files | default(['/var/log/'+item.name+'.log']) %}
+{{ file }}
+{% endfor %}
+{
+{% for option in item.options | default([]) %}
+    {{ option }}
+{% endfor %}
+}
